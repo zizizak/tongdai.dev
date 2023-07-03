@@ -12,4 +12,19 @@ jQuery(document).ready(function($){
         return false;
     })
 
+
+
+    $(".open-modal").click(function(){
+        var idx = $(this).attr('data-id');
+        console.log(" Open id: " + idx);
+        $("#" + idx).show();
+    })
+
+
+    $(".close-modal").click(function(){
+        var idx = $(this).attr('data-id');
+        console.log(" Close id: " + idx);
+        $("#" + idx).hide();
+    })
+
 });

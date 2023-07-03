@@ -5,9 +5,9 @@
     </div>
     <div class="fl-right">
         <ul class="window-control-nav">
-            <li><a href="Minimum">_</a></li>
-            <li><a href="Maximum">#</a></li>
-            <li><a href="Close">X</a></li>
+            <li><a href="#Minimum">_</a></li>
+            <li><a href="#Maximum">#</a></li>
+            <li class="form-button close-modal" data-id="modal-cauhinhluongE1"><a href="#Close">X</a></li>
         </ul>
     </div>
     <div class="clear clearfix"></div>
@@ -97,7 +97,7 @@
             </div>
 
             <div class="row row-last">
-                <input class="form-button" type="button" value="Thoát"/>
+                <input class="form-button close-modal" data-id="modal-cauhinhluongE1" type="button" value="Thoát"/>
             </div>
         </form>
     </div>

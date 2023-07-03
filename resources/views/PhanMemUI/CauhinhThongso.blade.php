@@ -1,10 +1,10 @@
-<h2>Khai báo tham số & danh bạ tổng đài</h2>
+<p style="padding: 0;margin-top: -10px;margin-bottom: 2px;">Khai báo tham số & danh bạ tổng đài</p>
 <div style="width:500px;float:left;">
     <div class="khaibao-group">
-        <button>Khai báo TB</button>
-        <button>Khai báo Class</button>
-        <button>Khai báo hướng</button>
-        <button>Khai báo số Quay</button>
+        <button class="open-modal" data-id="modal-khaibaothuebao" >Khai báo TB</button>
+        <button class="open-modal" data-id="modal-khaibaoclass" >Khai báo Class</button>
+        <button class="open-modal" data-id="modal-khaibaohuong" >Khai báo hướng</button>
+        <button class="open-modal" data-id="modal-bangsoquay" >Khai báo số Quay</button>
     </div>
     <div class="ma-vung">
         <fieldset>
@@ -110,7 +110,7 @@
         <div id="jqxgrid_DS_SoDB"></div>
     </div>
     <div class="row row-last">
-        <input class="form-button" type="button" value="Thay đổi SDB"/>
+        <input  class="open-modal" data-id="modal-thaydoiSBD" class="form-button" type="button" value="Thay đổi SDB"/>
     </div>
     </fieldset>
 </div>

@@ -34,8 +34,11 @@ ul.window-control-nav li {
     background: #c1c1c1;
     color: #000;
     float: left;
-    margin-right: 0px;
     display: block;
+    width: 20px;
+    margin: 1px;
+    border-radius: 1px;
+    margin-left: 0;
 }
 
 .window-content {
@@ -216,6 +219,44 @@ input[type="text"], select, button {
     padding: 5px;
 }
 
-button {
+button, input[type="button"] {
     cursor: pointer;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #000;
+    background: #d4d0c7;
+}
+
+.window-modal {
+    display: none;
+    position: fixed;
+    top: 100px;
+    left: 29%;
+    border: 1px solid #8b8b8bcc;
+    z-index: 99;
+    border-radius: 4px;
+}
+.window-modal .window-control {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, #03A9F4 0%, #03A9F4 35%, #2196F3 100%);
+}
+.form-button-clear {
+    background: #eb3800 !important;
+}
+
+.window-modal ul.window-control-nav li {
+    border: 1px solid #71c1f3;
+    padding: 2px 5px;
+    font-size: 11px;
+    background: #129ff3;
+    color: #000;
+    float: left;
+    margin-right: 0px;
+    display: block;
+    color: #fff;
+    border-radius: 3px;
+    width: 20px;
+    margin: 1px;
+    margin-left: 0;
 }

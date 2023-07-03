@@ -1,13 +1,13 @@
-<div class="window-modal" id="modal-cauhinhluongE1">
+<div class="window-modal" id="modal-thamsothuebao">
 <div class="window-control">
     <div class="fl-left">
         <p class="app-name">Tham số thuê bao</p>
     </div>
     <div class="fl-right">
         <ul class="window-control-nav">
-            <li><a href="Minimum">_</a></li>
-            <li><a href="Maximum">#</a></li>
-            <li><a href="Close">X</a></li>
+            <li><a href="#Minimum">_</a></li>
+            <li><a href="#Maximum">#</a></li>
+            <li class="close-modal" data-id="modal-thamsothuebao"><a href="#Close">X</a></li>
         </ul>
     </div>
     <div class="clear clearfix"></div>
@@ -117,7 +117,7 @@
         </div>
         <div class="clear clearfix"></div>
         <div class="row row-last">
-            <input class="form-button" type="button" value="Thoát"/>
+            <input type="button" class="form-button close-modal" data-id="modal-thamsothuebao" value="Thoát"/>
         </div>
 
 

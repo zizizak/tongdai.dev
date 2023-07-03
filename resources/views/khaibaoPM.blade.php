@@ -56,7 +56,7 @@
                     <h2>THỰC HÀNH KHAI BÁO BẰNG PHẦN MỀM</h2>
                 </div>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div class="mt-1 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
 
                     <!-- Giao diện phần mềm -->
                     @include('PhanmemUI.main')

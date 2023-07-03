@@ -5,9 +5,9 @@
         </div>
         <div class="fl-right">
             <ul class="window-control-nav">
-                <li><a href="Minimum">_</a></li>
-                <li><a href="Maximum">#</a></li>
-                <li><a href="Close">X</a></li>
+                <li><a href="#Minimum">_</a></li>
+                <li><a href="#Maximum">#</a></li>
+                <li><a href="#Close">X</a></li>
             </ul>
         </div>
         <div class="clear clearfix"></div>
@@ -52,4 +52,10 @@
 @include('PhanMemUI.Form.cauhinhluongE1')
 @include('PhanMemUI.Form.thamsothuebao')
 @include('PhanMemUI.Form.thamsotrungke')
+@include('PhanMemUI.Form.khaibaothuebao')
+@include('PhanMemUI.Form.thaydoiSBD')
+@include('PhanMemUI.Form.khaibaoclass')
+@include('PhanMemUI.Form.khaibaohuong')
+@include('PhanMemUI.Form.thanhphanhuong')
+@include('PhanMemUI.Form.bangsoquay')
 
