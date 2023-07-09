@@ -27,4 +27,40 @@ jQuery(document).ready(function($){
         $("#" + idx).hide();
     })
 
+
+
+    $(".form-e1").submit(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var modal_id = $(this).attr('data-modal-id');
+        $.ajax({
+            type: 'post',
+            url: '/admin/ajax',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $("#" + modal_id).hide();
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+        return false;
+    })
+
+
+
+
+
+
+
+
+
+
+
+
 });

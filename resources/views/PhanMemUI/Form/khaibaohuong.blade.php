@@ -18,7 +18,7 @@
 
             <div style="width:480px;float:left;overflow:hidden;margin: 10px;">
                 <fieldset style="padding:10px;">
-                    <legend><strong> Hướng</strong></legend>
+                    <legend><strong> Mã Hướng</strong></legend>
                     <div style="font-size: 13px; font-family: Verdana; float: left;">
                         <div id="jqxgridHuong"></div>
                     </div>
@@ -84,7 +84,7 @@
 
             <div style="width:320px;float:left;margin-left:5px;">
                 <fieldset style="padding:10px;">
-                    <legend ><strong> Mã hướng</strong></legend>
+                    <legend ><strong> Hướng</strong></legend>
 
                     <div style="font-size: 13px; font-family: Verdana; float: left;">
                         <div id="jqxgridMaHuong"></div>

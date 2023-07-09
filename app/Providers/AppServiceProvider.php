@@ -4,6 +4,13 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+
+use TCG\Voyager\Actions\DeleteAction;
+use TCG\Voyager\Actions\EditAction;
+use TCG\Voyager\Actions\ViewAction;
+use TCG\Voyager\Facades\Voyager;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Voyager::addAction(\App\Actions\UserInitDataAction::class);
     }
 }

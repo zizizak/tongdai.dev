@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 
+use App\Http\Controllers\VoyagerUserController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/thongsokythuat', [ClientController::class, 'thongsokythuat']);
-Route::get('/sodokhoi', [ClientController::class, 'sodokhoi']);
-Route::get('/cautruc', [ClientController::class, 'cautruc']);
 
-Route::get('/khaibaoPO', [ClientController::class, 'khaibaoPO']);
-Route::get('/khaibaoPM', [ClientController::class, 'khaibaoPM']);
 
 
 Route::get('/', function () {
@@ -33,4 +31,21 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    Route::group(['middleware' => 'admin.user'], function () {
+
+        Route::get('/init_data/{id}', [VoyagerUserController::class, 'init_data'])->name('voyager.users.init_data');
+
+        Route::get('/thongsokythuat', [ClientController::class, 'thongsokythuat']);
+        Route::get('/sodokhoi', [ClientController::class, 'sodokhoi']);
+        Route::get('/cautruc', [ClientController::class, 'cautruc']);
+
+        Route::get('/khaibaoPO', [ClientController::class, 'khaibaoPO']);
+        Route::get('/khaibaoPM', [ClientController::class, 'khaibaoPM']);
+        Route::post('/ajax', [ClientController::class, 'ajax']);
+
+    });
+
+
+
 });
