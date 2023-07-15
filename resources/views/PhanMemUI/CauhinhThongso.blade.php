@@ -98,10 +98,10 @@
     <div class="tim-kiem-thong-so">
         <div class="row">
             <div class="element">
-                <input type="text" style="width:70px" />
+                <input type="text" style="width:70px" id="tim_thuebao" name="tim_thuebao" />
             </div>
             <div class="element">
-                <button>Tìm SDB</button>
+                <button id="btn_timSDB">Tìm SDB</button>
             </div>
         </div>
     </div>
@@ -110,7 +110,8 @@
         <div id="jqxgrid_DS_SoDB"></div>
     </div>
     <div class="row row-last">
-        <input  class="open-modal" data-id="modal-thaydoiSBD" class="form-button" type="button" value="Thay đổi SDB"/>
+        <input type="hidden" name="thaydoiSBD_id" id="thaydoiSBD_id" />
+        <input  class="open-modal" data-id="modal-thaydoiSDB" class="form-button" type="button" value="Thay đổi SDB"/>
     </div>
     </fieldset>
 </div>
@@ -121,6 +122,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // prepare the data
+        /*
         var data = new Array();
 
         var cards = [
@@ -153,11 +155,29 @@
         $("#jqxgrid_DS_SoDB").jqxGrid(
         {
             source: dataAdapter,
+            width:200,
             columns: [
               { text: 'cards', datafield: 'cards', width: 50 },
               { text: 'STT T.bao', datafield: 'soTTTbao', width: 75 },
               { text: 'Số danh bạ', datafield: 'soDanhba', width: 100 },
             ]
         });
+        */
+
+
+        $("#jqxgrid_DS_SoDB").on('rowselect', function (event) {
+            //$("#selectrowindex").text(event.args.rowindex);
+            var args = event.args;
+            var rowData = args.row;
+
+            $("#thaydoiSDB_sohientai").html(rowData.sodienthoai);
+            $("#thaydoiSDB_id").val(rowData.id);
+
+            console.log(rowData);
+
+        });
+
+
+
     });
 </script>

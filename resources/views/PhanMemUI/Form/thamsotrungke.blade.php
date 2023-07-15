@@ -22,7 +22,7 @@
 
             <div style="width:480px;float:left;margin-left:5px;">
 
-                <form class="form-fix-width">
+                <form class="form-fix-width" id="form-thamsotrungkeCO">
                     <fieldset>
                         <legend>Thuê bao</legend>
                     <div class="row">
@@ -30,7 +30,7 @@
                             T.Kế đang chọn
                         </div>
                         <div class="element">
-                            <strong>1</strong>
+                            <strong id="tke_dangchon_text">1</strong>
                         </div>
                     </div>
                     <div class="row">
@@ -38,7 +38,7 @@
                             Trung kế điều khiển từ xa
                         </div>
                         <div class="element">
-                            <input type="checkbox" /> Có
+                            <input type="checkbox" name="tke_dieukhienxa" /> Có
                         </div>
                     </div>
                     <div class="row">
@@ -46,9 +46,16 @@
                             Loại TK
                         </div>
                         <div class="element">
-                            <select  class="form-select">
-                                <option>Gọi vào & gọi ra</option>
-                                <option>....</option>
+                            <select  class="form-select" name="loai_tk" id="loai_tk" >
+                                <?php
+                                    $arTmp = array(
+                                        '0' => 'Chỉ gọi vào',
+                                        '1' => 'Gọi vào/ra',
+                                    );
+                                ?>
+                                <?php foreach ($arTmp as $key => $value) {
+                                    echo sprintf('<option value="%s" >%s</option>', $key, $value);
+                                } ?>
                             </select>
                         </div>
                     </div>
@@ -57,9 +64,16 @@
                             Mở khóa
                         </div>
                         <div class="element">
-                            <select  class="form-select">
-                                <option>Mở</option>
-                                <option>....</option>
+                            <select  class="form-select" name="mo_khoa" id="mo_khoa">
+                                <?php
+                                    $arTmp = array(
+                                        '0' => 'Khóa',
+                                        '1' => 'Mở',
+                                    );
+                                ?>
+                                <?php foreach ($arTmp as $key => $value) {
+                                    echo sprintf('<option value="%s" >%s</option>', $key, $value);
+                                } ?>
                             </select>
                         </div>
                     </div>
@@ -68,9 +82,16 @@
                             Tính cước
                         </div>
                         <div class="element">
-                            <select  class="form-select">
-                                <option>Quy định thời gian</option>
-                                <option>...</option>
+                            <select  class="form-select" name="tinhcuoc" id="tinhcuoc">
+                                <?php
+                                    $arTmp = array(
+                                        '0' => 'Thời gian',
+                                        '1' => 'Đảo cực',
+                                    );
+                                ?>
+                                <?php foreach ($arTmp as $key => $value) {
+                                    echo sprintf('<option value="%s" >%s</option>', $key, $value);
+                                } ?>
                             </select>
                         </div>
                     </div>
@@ -79,14 +100,23 @@
                             Kiểu gọi vào
                         </div>
                         <div class="element">
-                            <select  class="form-select">
-                                <option>Qua PO</option>
-                                <option>...</option>
+                            <select  class="form-select" name="kieugoivao" id="kieugoivao">
+                                <?php
+                                    $arTmp = array(
+                                        '0' => 'DISA',
+                                        '1' => 'PO',
+                                    );
+                                ?>
+                                <?php foreach ($arTmp as $key => $value) {
+                                    echo sprintf('<option value="%s" >%s</option>', $key, $value);
+                                } ?>
                             </select>
                         </div>
                     </div>
                     <div class="row row-last">
-                        <input class="form-button" type="button" value="Cập nhật"/>
+                        <input class="form-button" type="submit" value="Cập nhật"/>
+                        <input type="hidden" name="task" value="UpdateThamsotrungkeCO" />
+                        <input type="hidden" name="thamsotrungke_id" id="thamsotrungke_id" value="" />
                     </div>
                 </fieldset>
                 </form>
@@ -138,5 +168,29 @@
                   { text: 'STT T.Kế', datafield: 'soTTTKe', width: 100 },
                 ]
             });
+
+
+            $("#jqxgridTrungke").on('rowselect', function (event) {
+                //$("#selectrowindex").text(event.args.rowindex);
+                var args = event.args;
+                var rowData = args.row;
+
+                $("#thamsotrungke_id").val(rowData.id);
+                $("#tke_dangchon_text").html(rowData.id_stt);
+                $("#loai_tk").val(rowData.loai);
+                $("#mo_khoa").val(rowData.mo_khoa);
+                $("#tinhcuoc").val(rowData.tinhcuoc);
+                $("#kieugoivao").val(rowData.kieu_goivao);
+
+
+
+                console.log(rowData);
+
+            });
+
+
+
+
+
         });
     </script>

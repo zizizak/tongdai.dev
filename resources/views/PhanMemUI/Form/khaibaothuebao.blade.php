@@ -16,7 +16,7 @@
         <div class="window-content-detail">
             <div style="width:480px;float:left;margin-left:5px;">
 
-                <form class="form-fix-width">
+                <form class="form-fix-width" id="form-Khaibaothuebao">
                     <fieldset>
                         <legend>Cấu hình thuê bao</legend>
                     <div class="row">
@@ -24,7 +24,7 @@
                             Số prefix
                         </div>
                         <div class="element">
-                            <input type="text" style="width:70px" />
+                            <input type="text" style="width:70px" name="prefix" id="prefix" />
                         </div>
                     </div>
                     <div class="row">
@@ -32,14 +32,30 @@
                             Số danh bạ bắt đầu
                         </div>
                         <div class="element">
-                            <select  class="form-select">
-                                <option> </option>
-                                <option>...</option>
+                            <select  class="form-select" name="sobatdau" id="sobatdau">
+                                <?php
+                                    $arTmp = array(
+                                        '100' => '100',
+                                        '200' => '200',
+                                        '300' => '300',
+                                        '400' => '400',
+                                        '500' => '500',
+                                        '600' => '600',
+                                        '700' => '700',
+                                        '800' => '800',
+                                        '900' => '900',
+                                    );
+                                ?>
+                                <?php foreach ($arTmp as $key => $value) {
+                                    echo sprintf('<option value="%s" >%s</option>', $key, $value);
+                                } ?>
                             </select>
                         </div>
                     </div>
                     <div class="row row-last">
-                        <input class="form-button  close-modal" data-id="modal-khaibaothuebao" type="button" value="Thay đổi"/>
+                        <input class="form-button" data-id="modal-khaibaothuebao" type="submit" value="Thay đổi"/>
+                        <input type="hidden" name="task" value="UpdateKhaibaoThuebao" />
+                        <input type="hidden" name="khaibaothuebao_id" id="khaibaothuebao_id" value="0" />
                     </div>
                 </fieldset>
                 </form>

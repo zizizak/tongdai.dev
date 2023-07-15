@@ -41,7 +41,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green open-modal" data-id="modal-cauhinhluongE1"></div>
+                    <div class="block-item green open-modal" data-id="modal-cauhinhluongE1" ></div>
                     <div class="block-item blank"></div>
                     <div class="block-item blank"></div>
                     <div class="block-item blank"></div>
@@ -55,7 +55,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="1"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
@@ -70,7 +70,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="2"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
@@ -85,7 +85,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="3"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
@@ -100,7 +100,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="4"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
@@ -115,7 +115,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="5"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
@@ -130,7 +130,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="6"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
@@ -145,7 +145,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="7"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
@@ -160,7 +160,7 @@
             </div>
             <div class="block-info">
                 <fieldset>
-                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao"></div>
+                    <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="8"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>
                     <div class="block-item green thuebao"></div>

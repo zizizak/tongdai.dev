@@ -248,7 +248,7 @@ class VoyagerUserController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCon
         $deleted = MaHuong::where('user_id', $user_id)->delete();
         foreach($arCauhinh as $cauhinh_id) {
             foreach($arData as $item) {
-                Huong::create([
+                MaHuong::create([
                     'user_id' => $user_id,
                     'cauhinh_id' => $cauhinh_id,
                     'mahuong_id' => $item['mahuong_id'],

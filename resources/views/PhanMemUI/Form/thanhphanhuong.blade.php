@@ -21,18 +21,18 @@
                         <p>(Gõ thành phần, ngăn cách nhau bằng dấu phẩy , hoặc dấu "-") <br> Ví dụ: (1,2,3 hay 1-3)</p>
                         <div class="row">
                             <div class="element">
-                                <input type="checkbox" />Trung kế (Trung kế DKX)
+                                <input type="checkbox" class="loai_thanhphan_huong" id="thanhphan_dkx" />Trung kế (Trung kế DKX)
                             </div>
                             <div class="element">
-                                <input type="checkbox" />Luồng E1
+                                <input type="checkbox" class="loai_thanhphan_huong" id="thanhphan_E1" />Luồng E1
                             </div>
                         </div>
                         <div class="row">
                         <div class="element">
-                            <input type="text" style="width:100px" />
+                            <input type="text" style="width:100px" class="loai_thanhphan_text" id="thanhphan_dkx_giatri" />
                         </div>
                         <div class="element">
-                            <input type="text" style="width:100px" />
+                            <input type="text" style="width:100px" class="loai_thanhphan_text"  id="thanhphan_E1_giatri"  />
                         </div>
                     </div>
                     <div class="row row-last">

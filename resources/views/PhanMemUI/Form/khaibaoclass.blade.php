@@ -20,22 +20,32 @@
                         ID Class
                     </div>
                     <div class="element">
-                        <select  class="form-select">
-                            <option>1</option>
-                            <option>....</option>
+                        <select  class="form-select" id="khaibaoClass_id_class" name="khaibaoClass_id_class">
+                            <?php
+                                $arTmp = array(
+                                    '1' => '1',
+                                    '2' => '2',
+                                    '3' => '3',
+                                    '4' => '4',
+                                    '5' => '5',
+                                );
+                            ?>
+                            <?php foreach ($arTmp as $key => $value) {
+                                echo sprintf('<option value="%s" >%s</option>', $key, $value);
+                            } ?>
                         </select>
                     </div>
                 </div>
             </div>
-            <div style="width:320px;float:left;overflow:hidden;margin: 10px;">
+            <div style="width:300px;float:left;overflow:hidden;margin: 10px;">
                 <div id='' style="font-size: 13px; font-family: Verdana; float: left;">
                     <div id="jqxgridClass"></div>
                 </div>
             </div>
 
-            <div style="width:480px;float:left;margin-left:5px;">
+            <div style="width:400px;float:left;margin-left:5px;">
 
-                <form class="form-fix-width">
+                <form class="form-fix-width" id="form-KhaibaoClass">
                     <fieldset>
                         <legend><strong> Thêm mới thành phần (tối đa 20)</strong></legend>
 
@@ -44,7 +54,7 @@
                             Các Digits
                         </div>
                         <div class="element">
-                            <input type="text" style="width:100px" />
+                            <input type="text" id="khaibaoClass_digits" name="khaibaoClass_digits" style="width:100px" />
                         </div>
                     </div>
                     <div class="row">
@@ -52,23 +62,32 @@
                             Quyền
                         </div>
                         <div class="element">
-                            <select  class="form-select">
-                                <option></option>
-                                <option>Được gọi</option>
-                                <option>Không được</option>
+                            <select  class="form-select" name="khaibaoClass_quyen"  id="khaibaoClass_quyen">
+                                <?php
+                                    $arTmp = array(
+                                        '0' => 'Cấm',
+                                        '1' => 'Cho phép',
+                                    );
+                                ?>
+                                <?php foreach ($arTmp as $key => $value) {
+                                    echo sprintf('<option value="%s" >%s</option>', $key, $value);
+                                } ?>
                             </select>
                         </div>
                     </div>
                     <div class="row row-last">
-                        <input class="form-button" type="button" value="Thêm"/>
+                        <input class="form-button" type="submit" value="Thêm"/>
+                        <input type="hidden" name="khaibao_class_id_class_update" id="khaibao_class_id_class_update" value="1" />
+                        <input type="hidden" name="task" value="UpdateKhaibaoClass" />
                     </div>
                 </fieldset>
                 </form>
             </div>
             <div class="clear clearfix"></div>
             <div class="row row-last">
-                <input class="form-button form-button-clear" type="button" value="Xóa"/>
-                <input class="form-button form-button-clear" type="button" value="Xóa toàn bộ"/>
+                <input type="hidden" value="0" id="khaibaoClass_xoa_id" />
+                <input class="form-button form-button-clear" id="khaibaoClass_xoa" type="button" value="Xóa"/>
+                <input class="form-button form-button-clear" id="khaibaoClass_xoa_toanbo" type="button" value="Xóa toàn bộ"/>
                 <input class="form-button close-modal" data-id="modal-khaibaoclass" type="button" value="Thoát"/>
             </div>
 
@@ -119,5 +138,21 @@
                   { text: 'Quyền', datafield: 'Quyens', width: 100 },
                 ]
             });
+
+
+            $("#jqxgridClass").on('rowselect', function (event) {
+                //$("#selectrowindex").text(event.args.rowindex);
+                var args = event.args;
+                var rowData = args.row;
+
+                $("#khaibaoClass_xoa_id").val(rowData.id);
+
+                console.log(rowData);
+
+            });
+
+
+
+
         });
     </script>
