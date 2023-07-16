@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Khai bao PO</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -19,6 +19,16 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+
+
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <script src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
+        <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/js/tippy-bundle.min.js') }}"></script>
+
+
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -42,75 +52,46 @@
                     <h2>THỰC HÀNH KHAI BÁO BẰNG MÁY TRỰC PO</h2>
                 </div>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="/thongsokythuat" class="underline text-gray-900 dark:text-white">Phần 1. Tính năng và thông số kỹ thuật</a></div>
-                            </div>
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" style="width:800px;">
+                    <div class="grid grid-cols-1 md:grid-cols-1" style="padding:20px;">
+                        <div class="tong-dai-top">
+                            <form method="get">
+                                <div>
+                                    <span style="color: red;">Cấu hình hiện thời: <?php echo $cauhinh_active ?></span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="margin-left:100px;">
+                                        <select name="cauhinh_active" style="border:1px solid #ccc;padding:5px 10px">
+                                            <option value="0" <?php echo ($cauhinh_active == 0) ? 'selected="selected"' : ''; ?> >0</option>
+                                            <option value="1" <?php echo ($cauhinh_active == 1) ? 'selected="selected"' : ''; ?> >1</option>
+                                            <option value="2" <?php echo ($cauhinh_active == 2) ? 'selected="selected"' : ''; ?> >2</option>
+                                        </select>
+                                    </span>
+                                    <span>
+                                        <input  type="radio" name="cauhinh_type" checked="checked" value="kichhoat"/> Kích hoạt
+                                        <input  type="radio" name="cauhinh_type" value="luu"  /> Lưu
+                                    </span>
+                                    <span>
+                                        <input type="submit" value="OK" style="border:1px solid #ccc;padding:5px 10px" />
+                                    </span>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    <ul>
-                                        <li>Giới thiệu chung</li>
-                                        <li>Các tính năng kỹ chiến thuật</li>
-                                        <li>Thông số kỹ thuật</li>
-                                    </ul>
                                 </div>
+                            </form>
+                        </div>
+
+                        <div id="po-input-wrap">
+                            <h4>Nhập chuỗi khai báo PO </h4>
+                            <input type="text" id="po-input" name="po-input"  style="width:200px;font-size:20px;border:1px solid #ccc;" />
+                        </div>
+                        <div id="po-output-wrap">
+                            <h4>Kết quả thực hiện </h4>
+                            <input type="text" id="po-output" name="po-output"  style="width:200px;font-size:20px;border:1px solid #ccc;"  disabled />
+                            <div>
+                                <br/>
+                                <div id="po-output-text"></div>
                             </div>
                         </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="/sodokhoi" class="underline text-gray-900 dark:text-white">Phần 2. Sơ đồ khối và chức năng các khối</a></div>
-                            </div>
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    <ul>
-                                        <li>Sơ đồ khối</li>
-                                        <li>Chức năng khối</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="/cautruc" class="underline text-gray-900 dark:text-white">Phần 3. Cấu trúc phần cứng</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    <ul>
-                                        <li>Cấu trúc chung</li>
-                                        <li>Mặt trước</li>
-                                        <li>Mặt sau</li>
-                                        <li>Các loại Card</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Phần 4: Khai thác sử dụng</div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    <ul>
-                                        <li>Triển khai, thu hồi</li>
-                                        <li>Khai báo tổng đài bằng máy trực PO</li>
-                                        <li>Khai báo tổng đài bằng phần mềm</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -125,5 +106,96 @@
                 </div>
             </div>
         </div>
+
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                console.log("PO ready");
+
+                $("#po-input").change(function(){
+                    var cmd = $(this).val();
+                    var isValidCmd = checkCommandValid(cmd);
+                    console.log(isValidCmd);
+                    if(isValidCmd) {
+                        processCommand(cmd);
+                    }else {
+                        console.log("Câu lệnh không đúng cú pháp, chưa thực hiện gửi tới tổng đài");
+                    }
+
+                })
+
+
+
+                function processCommand(cmd) {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'post',
+                        url: '/admin/ajaxPO',
+                        data: { 'task': 'ajaxPO', 'po_input': cmd },
+                        dataType: 'json',
+                        beforeSend: function(){
+                            $("#po-output-text").html("...");
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            $("#po-output-text").html(data.message);
+                            if(cmd.indexOf("*50") >= 0) {
+                                location.href="/admin/khaibaoPO?cauhinh_active=" + data.thamso + "&cauhinh_type=kichhoat";
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    });
+
+                }
+
+
+                function checkCommandValid(cmd) {
+                    const regex = /^\*([0-9]{2})\*?([0-9]*)\#/gm;
+
+                    // Alternative syntax using RegExp constructor
+                    // const regex = new RegExp('^\\*([0-9]{2})\\*?([0-9]*)\\#', 'gm')
+                    let m;
+                    var count = 0;
+                    while ((m = regex.exec(cmd)) !== null) {
+                        /*
+                        // This is necessary to avoid infinite loops with zero-width matches
+                        if (m.index === regex.lastIndex) {
+                            regex.lastIndex++;
+                        }
+
+                        // The result can be accessed through the `m`-variable.
+                        m.forEach((match, groupIndex) => {
+                            console.log(`Found match, group ${groupIndex}: ${match}`);
+                        });
+                        */
+                       count = 1;
+                    }
+
+                    return count;
+                }
+
+
+
+
+
+            });
+        </script>
+
+
+
+
+
+
+
+
     </body>
 </html>

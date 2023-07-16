@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\POController;
 
 use App\Http\Controllers\VoyagerUserController;
 
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/khaibaoPO', [ClientController::class, 'khaibaoPO']);
         Route::get('/khaibaoPM', [ClientController::class, 'khaibaoPM']);
         Route::post('/ajax', [ClientController::class, 'ajax']);
+        Route::post('/ajaxPO', [POController::class, 'ajaxPO']);
 
     });
 

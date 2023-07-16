@@ -44,10 +44,33 @@ class ClientController extends Controller
         ]);
     }
 
-    public function khaibaoPO(){
-        return view('khaibaoPO', [
+    public function khaibaoPO(Request $request){
+        $current_user_id = Auth::user()->getKey();
+        $cauhinhs = $this->getCauhinh($current_user_id);
+        $arCauhinh = [];
+        foreach ($cauhinhs as $cauhinh) {
+            $arCauhinh[] = $cauhinh->stt;
+        }
 
-        ]);
+        if(session('cauhinh_active') == NULL) {
+            session(['cauhinh_active' => '0']);
+        }
+        if ($request->has('cauhinh_active')) {
+            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+        }
+        $cauhinh_active = session('cauhinh_active');
+
+        return view('khaibaoPO', compact(
+            'arCauhinh',
+            'cauhinh_active',
+            //'bangsoquay',
+            //'trungkeCOs',
+            //'trungkeE1s',
+            //'huongs',
+            //'mahuongs',
+            //'tongdaiClass',
+           //'thuebaos',
+        ));
     }
 
     public function khaibaoPM(Request $request){
@@ -545,6 +568,18 @@ class ClientController extends Controller
 
 
     private function resetThuebao($user_id, $cauhinh_id, $prefix, $sobatdau){
+        $records = Thuebao::where([
+            ['user_id', $user_id],
+            ['cauhinh_id', $cauhinh_id],
+        ])->get();
+
+        $socuoi = $prefix;
+        foreach($records as $record) {
+            $record->socuoi = $socuoi;
+            $record->save();
+            $socuoi += 1;
+        }
+        /*
         $deleted = Thuebao::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id],
@@ -571,6 +606,7 @@ class ClientController extends Controller
                 $socuoi += 1;
             }
         }
+        **/
 
     }
 

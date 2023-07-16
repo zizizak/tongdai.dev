@@ -468,11 +468,11 @@ jQuery(document).ready(function($){
             {
                 source: newAdapter,
                 columns: [
-                    { text: 'ID', datafield: 'huong_id', width: 50 },
+                    { text: 'ID', datafield: 'mahuong_id', width: 50 },
                     { text: 'maHuong', datafield: 'mahuong_dinhtuyen', width: 70 },
                     { text: 'SoChan', datafield: 'sochan', width: 70 },
                     { text: 'SoQuayT', datafield: 'min_soquay', width: 70 },
-                    { text: 'Huong', datafield: 'mahuong_id', width: 70 },
+                    { text: 'Huong', datafield: 'huong_id', width: 70 },
                   ]
             });
 
