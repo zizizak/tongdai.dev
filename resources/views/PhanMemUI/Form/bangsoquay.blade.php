@@ -101,6 +101,7 @@
             });
             $("#jqxgridBangsoquay").jqxGrid(
             {
+                width:300,
                 source: dataAdapter,
                 columns: [
                   { text: 'ID', datafield: 'ids', width: 100 },

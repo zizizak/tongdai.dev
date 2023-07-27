@@ -54,10 +54,29 @@
                 </div>
             @endif
 
+
+
+
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+
+                <div class="nav-menu-wrap">
+                    <div class="nav nav-menu">
+                        <ul>
+                            <li><a href="/">Trang chủ</a></li>
+                            <!-- <li><a href="/admin/thongsokythuat">Tính năng và thông số kỹ thuật</a></li>
+                            <li><a href="/admin/sodokhoi">Sơ đồ khối và chức năng các khối</a></li>
+                            <li><a href="/admin/cautruc">Cấu trúc phần cứng</a></li> -->
+                            <li><a href="/admin/khaibaoPM">Khai báo bằng phần mềm</a></li>
+                            <li><a href="/admin/khaibaoPO">Khai báo bằng máy trực PO</a></li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <h2>THỰC HÀNH KHAI BÁO BẰNG PHẦN MỀM</h2>
                 </div>
+
+
 
                 <div class="mt-1 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
 

@@ -162,6 +162,7 @@
             });
             $("#jqxgridTrungke").jqxGrid(
             {
+                width: 300,
                 source: dataAdapter,
                 columns: [
                   { text: 'cards', datafield: 'cards', width: 100 },

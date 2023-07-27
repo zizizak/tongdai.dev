@@ -573,7 +573,7 @@ class ClientController extends Controller
             ['cauhinh_id', $cauhinh_id],
         ])->get();
 
-        $socuoi = $prefix;
+        $socuoi = $sobatdau;
         foreach($records as $record) {
             $record->socuoi = $socuoi;
             $record->save();

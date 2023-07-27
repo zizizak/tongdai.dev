@@ -270,12 +270,47 @@
                 if(loai_thanhphan == 1) { //E1
                     $("#thanhphan_E1" ).prop( "checked", true );
                     $("#thanhphan_E1_giatri").val(rowData.thanhphan);
+                    $("#thanhphan_E1_giatri").prop('disabled', false);
+                    $("#thanhphan_dkx_giatri").prop('disabled', true);
                 }else {
                     $("#thanhphan_dkx" ).prop( "checked", true );
                     $("#thanhphan_dkx_giatri").val(rowData.thanhphan);
+                    $("#thanhphan_dkx_giatri").prop('disabled', false);
+                    $("#thanhphan_E1_giatri").prop('disabled', true);
                 }
                 console.log(rowData);
             });
+
+
+            $(".loai_thanhphan_huong").click(function(){
+                var idx = $(this).attr('id');
+                console.log(idx);
+
+                if(idx == "thanhphan_E1") {
+                    $("#thanhphan_dkx" ).prop( "checked", false );
+                    $("#thanhphan_E1_giatri").prop('disabled', false);
+                    $("#thanhphan_dkx_giatri").prop('disabled', true);
+                }else {
+                    $("#thanhphan_E1" ).prop( "checked", false );
+                    $("#thanhphan_dkx_giatri").prop('disabled', false);
+                    $("#thanhphan_E1_giatri").prop('disabled', true);
+                }
+
+
+
+
+            })
+
+
+
+
+
+
+
+
+
+
+
 
 
             $("#jqxgridMaHuong").on('rowselect', function (event) {
@@ -290,18 +325,6 @@
                 $("#Mahuong_huong").val(rowData.huong_id);
                 $("#Mahuong_xoa_id").val(rowData.id);
 
-                var loai_thanhphan = rowData.loai_thanhphan;
-
-                $(".loai_thanhphan_huong").prop( "checked", false );
-                $(".loai_thanhphan_text").val("");
-
-                if(loai_thanhphan == 1) { //E1
-                    $("#thanhphan_E1" ).prop( "checked", true );
-                    $("#thanhphan_E1_giatri").val(rowData.thanhphan);
-                }else {
-                    $("#thanhphan_dkx" ).prop( "checked", true );
-                    $("#thanhphan_dkx_giatri").val(rowData.thanhphan);
-                }
                 console.log(rowData);
             });
 

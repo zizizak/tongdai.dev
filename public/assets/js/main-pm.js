@@ -198,6 +198,7 @@ jQuery(document).ready(function($){
             dataType: 'json',
             success: function (data) {
                 console.log(data);
+                bindDanhba();
             },
             error: function (data) {
                 console.log(data);
