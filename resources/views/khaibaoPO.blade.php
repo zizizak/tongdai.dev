@@ -67,7 +67,7 @@
 
 
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" style="width:800px;">
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" style="width:800px; text-align:center;">
                     <div class="grid grid-cols-1 md:grid-cols-1" style="padding:20px;">
                         <div class="tong-dai-top">
                             <form method="get">
@@ -95,14 +95,17 @@
 
                         <div id="po-input-wrap">
                             <h4>Nhập chuỗi khai báo PO </h4>
-                            <input type="text" id="po-input" name="po-input"  style="width:200px;font-size:20px;border:1px solid #ccc;" />
+                            <input type="text" id="po-input" name="po-input"  style="width:200px;font-size:24px;border:1px solid #ccc;text-align:center;" />
                         </div>
                         <div id="po-output-wrap">
-                            <h4>Kết quả thực hiện </h4>
-                            <input type="text" id="po-output" name="po-output"  style="width:200px;font-size:20px;border:1px solid #ccc;"  disabled />
+                            <br/>
                             <div>
-                                <br/>
-                                <div id="po-output-text"></div>
+                                <h4>Led </h4>
+                                <input type="text" id="po-output" name="po-output"  style="width:200px;font-size:24px;border:1px solid #ccc;text-align:center;;color:red"  disabled />
+                            </div>
+                            <div>
+                                <h4>Kết quả thực hiện </h4>
+                                <div id="po-output-text">...</div>
                             </div>
                         </div>
 
@@ -161,6 +164,7 @@
                         success: function (data) {
                             console.log(data);
                             $("#po-output-text").html(data.message);
+                            $("#po-output").val(data.output);
                             if(cmd.indexOf("*50") >= 0) {
                                 location.href="/admin/khaibaoPO?cauhinh_active=" + data.thamso + "&cauhinh_type=kichhoat";
                             }

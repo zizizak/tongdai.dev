@@ -61,16 +61,8 @@
                         <select  class="form-select" id="do_uu_tien" name="do_uu_tien">
                             <?php
                                 $arTSTB_uutien = array(
-                                    '0' => '0',
-                                    '1' => '1',
-                                    '2' => '2',
-                                    '3' => '3',
-                                    '4' => '4',
-                                    '5' => '5',
-                                    '6' => '6',
-                                    '7' => '7',
-                                    '8' => '8',
-                                    '9' => '9',
+                                    '0' => 'Không ưu tiên',
+                                    '1' => 'Ưu tiên',
                                 );
                             ?>
                             <?php foreach ($arTSTB_uutien as $key => $value) {
@@ -108,14 +100,8 @@
                         <select  class="form-select" id="quyen_thiet_lap" name="quyen_thiet_lap">
                             <?php
                                 $arTSTB_QuyenThietLap = array(
-                                    '0' => '0',
-                                    '1' => '1',
-                                    '2' => '2',
-                                    '3' => '3',
-                                    '4' => '4',
-                                    '5' => '5',
-                                    '6' => '6',
-                                    '7' => '7',
+                                    '0' => 'Không được phép',
+                                    '1' => 'Có được phép',
                                 );
                             ?>
                             <?php foreach ($arTSTB_QuyenThietLap as $key => $value) {
@@ -132,14 +118,8 @@
                         <select  class="form-select" name="quyen_nghe_xen" id="quyen_nghe_xen">
                             <?php
                                 $arTSTB_QuyenNgheXen = array(
-                                    '0' => '0',
-                                    '1' => '1',
-                                    '2' => '2',
-                                    '3' => '3',
-                                    '4' => '4',
-                                    '5' => '5',
-                                    '6' => '6',
-                                    '7' => '7',
+                                    '0' => 'Không được phép',
+                                    '1' => 'Có được phép',
                                 );
                             ?>
                             <?php foreach ($arTSTB_QuyenNgheXen as $key => $value) {
@@ -156,14 +136,8 @@
                         <select  class="form-select" id="quyen_thietlap_hoinghi"  name="quyen_thietlap_hoinghi">
                             <?php
                                 $arTSTB_QuyenThietLapHoiNghi = array(
-                                    '0' => '0',
-                                    '1' => '1',
-                                    '2' => '2',
-                                    '3' => '3',
-                                    '4' => '4',
-                                    '5' => '5',
-                                    '6' => '6',
-                                    '7' => '7',
+                                    '0' => 'Không được phép',
+                                    '1' => 'Có được phép',
                                 );
                             ?>
                             <?php foreach ($arTSTB_QuyenThietLapHoiNghi as $key => $value) {
@@ -248,26 +222,58 @@
             var args = event.args;
             var rowData = args.row;
 
+            var _quyen = rowData.quyen;
+            var _quyen2 = '000';
+            switch(_quyen)  {
+                case 0:
+                    _quyen2 = "000";
+                    break;
+                case 1:
+                    _quyen2 = "001";
+                    break;
+                case 2:
+                    _quyen2 = "010";
+                    break;
+                case 3:
+                    _quyen2 = "011";
+                    break;
+                case 4:
+                    _quyen2 = "100";
+                    break;
+                case 5:
+                    _quyen2 = "101";
+                    break;
+                case 6:
+                    _quyen2 = "110";
+                    break;
+                case 7:
+                    _quyen2 = "111";
+                    break;
+                default:
+                    _quyen2 = "000";
+            }
 
+            console.log(_quyen2);
+            var arQuyen = _quyen2.split("");
 
-            $("#tb_dangchon_text").html(prefix + rowData.socuoi);
+            $("#tb_dangchon_text").html(rowData.sodienthoai);
             $("#tstb_id").val(rowData.id);
             $("#tudong_tuthach").val(rowData.loai);
             $("#do_uu_tien").val(rowData.uutien);
             $("#class_id").val(rowData.class_id);
-            $("#quyen_thiet_lap").val(rowData.quyen);
-            $("#quyen_nghe_xen").val(rowData.quyen);
-            $("#quyen_thietlap_hoinghi").val(rowData.quyen);
+            $("#quyen_thiet_lap").val(arQuyen[0]);
+            $("#quyen_nghe_xen").val(arQuyen[1]);
+            $("#quyen_thietlap_hoinghi").val(arQuyen[2]);
             $("#card").val(rowData.card);
             $("#mota").val(rowData.mota);
-
-
-            console.log(rowData);
 
         });
 
 
 
-
     });
+
+
+
+
 </script>

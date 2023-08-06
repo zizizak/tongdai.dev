@@ -325,7 +325,7 @@ class VoyagerUserController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCon
                         'class_id' => 3,
                         'card' => $card,
                         'quyen' => 3,
-                        'uutien' => 3,
+                        'uutien' => 0,
                         'loai' => 0,
                         'created_at' => now()
                     ]);

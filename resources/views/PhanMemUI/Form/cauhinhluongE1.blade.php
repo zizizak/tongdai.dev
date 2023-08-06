@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     <div class="element">
-                        <input type="hidden" name="task" value="trungkeE1" />
+                        <input type="hidden" name="task" value="UpdateTrungkeE1" />
                         <input class="form-button" type="submit" value="Chọn xong"/>
                     </div>
                 </form>

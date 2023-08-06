@@ -171,10 +171,17 @@ class ClientController extends Controller
         if($task == 'UpdateThamsothuebao') {
             $id = $request->tstb_id;
             $class_id = $request->class_id;
-            $quyen = $request->quyen_thiet_lap;
+
             $uutien = $request->do_uu_tien;
             $loai = $request->tudong_tuthach;
             $mota = $request->mota;
+
+            $quyen_thiet_lap = $request->quyen_thiet_lap;
+            $quyen_nghe_xen = $request->quyen_nghe_xen;
+            $quyen_thietlap_hoinghi = $request->quyen_thietlap_hoinghi;
+
+            $quyen = $this->__parseInputQuyenThuebao($quyen_thiet_lap, $quyen_nghe_xen, $quyen_thietlap_hoinghi);
+
 
             $data = $this->UpdateThuebao($id, $class_id, $quyen, $uutien, $loai, $mota);
             $result = array(
@@ -190,8 +197,12 @@ class ClientController extends Controller
             $mo_khoa = $request->mo_khoa;
             $tinhcuoc = $request->tinhcuoc;
             $kieugoivao = $request->kieugoivao;
+            $dieukhienxa = 0;
+            if ( $request->has('tke_dieukhienxa')) {
+                $dieukhienxa = $request->tke_dieukhienxa;
+             }
 
-            $data = $this->UpdateTrungkeCO($id, $loai_tk, $mo_khoa, $tinhcuoc, $kieugoivao);
+            $data = $this->UpdateTrungkeCO($id, $loai_tk, $mo_khoa, $tinhcuoc, $kieugoivao, $dieukhienxa);
             $result = array(
                 'result' => 'sucess',
                 'data'   => $data,
@@ -259,12 +270,23 @@ class ClientController extends Controller
 
         if($task == 'delKhaibaoHuong') {
             $id = $request->id;
-            $data = $this->delKhaibaoHuong($id);
-            $result = array(
-                'result' => 'sucess',
-                'data'   => $data,
-                'message' => 'Lưu thành công'
-            );
+
+            $count_huong_sudung = $this->kiemtraHuongdangsudung($current_user_id, $cauhinh_active, $id);
+            if($count_huong_sudung > 0) {
+                $data =  $count_huong_sudung;
+                $result = array(
+                    'result' => 'sucess',
+                    'data'   => $data,
+                    'message' => 'Xóa không thành công, hướng đang được sử dụng'
+                );
+            }else {
+                $data = $this->delKhaibaoHuong($id);
+                $result = array(
+                    'result' => 'sucess',
+                    'data'   => $data,
+                    'message' => 'Xóa thành công'
+                );
+            }
         }
 
 
@@ -415,6 +437,17 @@ class ClientController extends Controller
             );
         }
 
+        if($task == 'getQuickInfo') {
+            $stt_id = $request->stt_id;
+            $card_id = $request->card_id;
+            $data = $this->getQuickInfo($current_user_id, $cauhinh_active, $card_id, $stt_id);
+            $result = array(
+                'result' => 'sucess',
+                'data'   => $data,
+                'message' => ''
+            );
+        }
+
 
         return Response::json($result);
     }
@@ -497,12 +530,26 @@ class ClientController extends Controller
     }
 
     private function getThuebaoByCard($user_id, $cauhinh_id, $card) {
+        /*
         $records = Thuebao::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id],
             ['card', $card]
         ])->get();
         return $records;
+        */
+
+        $query = sprintf("SELECT a.*, CONCAT(b.prefix, a.socuoi) sodienthoai from thuebao a, cauhinh b WHERE a.cauhinh_id = b.stt and a.user_id = b.user_id  AND b.stt = %s AND b.user_id = %s", $cauhinh_id, $user_id);
+
+        if($card != "") {
+            $query .= " And a.card = " . $card . "";
+        }
+
+        $records = DB::select($query);
+
+        return $records;
+
+
     }
 
 
@@ -536,7 +583,7 @@ class ClientController extends Controller
         return $record;
     }
 
-    private function UpdateTrungkeCO($id, $loai, $mo_khoa, $tinhcuoc, $kieu_goivao) {
+    private function UpdateTrungkeCO($id, $loai, $mo_khoa, $tinhcuoc, $kieu_goivao, $dieukhienxa) {
         $record = TrungkeCO::where([
             ['id', $id]
         ])->first();
@@ -545,6 +592,7 @@ class ClientController extends Controller
         $record->mo_khoa = $mo_khoa;
         $record->tinhcuoc = $tinhcuoc;
         $record->kieu_goivao = $kieu_goivao;
+        $record->dieukhienxa = $dieukhienxa;
         $record->save();
 
         return $record;
@@ -651,6 +699,23 @@ class ClientController extends Controller
 
     }
 
+    private function kiemtraHuongdangsudung($user_id, $cauhinh_id, $id) {
+        $huong = Huong::where(
+            [
+                ['user_id', $user_id],
+                ['cauhinh_id', $cauhinh_id],
+                ['id', $id],
+            ])->first();
+
+        $result = MaHuong::where(
+            [
+                ['user_id', $user_id],
+                ['cauhinh_id', $cauhinh_id],
+                ['huong_id', $huong->huong_id],
+            ])->count();
+
+        return $result;
+    }
 
     private function delKhaibaoHuong($id){
         $result = Huong::where('id', $id)->delete();
@@ -703,12 +768,130 @@ class ClientController extends Controller
         $prefix = $cauhinh->prefix;
         $socuoi = str_replace($prefix, "", $somoi);
 
+        //Kiểm tra số DB đã được khai báo chưa
+        $record0 = Thuebao::where([
+            ['user_id', $user_id],
+            ['cauhinh_id', $cauhinh_id],
+            ['socuoi', $socuoi],
+        ])->first();
+
         $record = Thuebao::where([
             ['id', $id]
         ])->first();
+
+        if($record0 != null) {
+            //Nếu tồn tại giá trị bằng số mới thì đổi vị trí của 2 số
+            //Lưu giá trị của số cũ
+            $tmp_socuoi = $record->socuoi;
+            $record0->socuoi = $tmp_socuoi;
+            $record0->save();
+
+        }
+
+        //Lưu giá trị mới
         $record->socuoi = $socuoi;
         $record->save();
+
         return $record;
+    }
+
+    function getQuickInfo($user_id, $cauhinh_id, $card_id, $stt_id) {
+        $record = Thuebao::where([
+            ['user_id', $user_id],
+            ['cauhinh_id', $cauhinh_id],
+            ['card', $card_id],
+            ['thuebao_id', $stt_id],
+        ])->first();
+
+        //var_dump($record);
+        $str = "";
+        if($record != null){
+            //Build response
+            $str = '------  Thông số thuê bao ------ <br/> IdThuebao: {IdThuebao} <br/> IdCard: {IdCard}  <br/> Số danh bạ: {soDanhba} <br/> Loại: {Loai} <br/> Độ ưu tiên: {DoUutien}  <br/> Id Class: {IdClass} <br/> Quyền thiết lập hotline: {Q_hotline} <br/> Quyền nghe xen: {Q_nghexen} <br/> Quyền thiết lập hội nghị: {Q_hoinghi}  <br/><br/> ------ Mô tả thuê bao ------  <br/>Mô tả: {Mota}  <br/>';
+            $str = str_replace("{IdThuebao}", $record->thuebao_id, $str);
+            $str = str_replace("{IdCard}", $record->card, $str);
+            $str = str_replace("{soDanhba}", $record->socuoi, $str);
+            $str = str_replace("{Loai}", $record->loai, $str);
+            $str = str_replace("{DoUutien}", $record->uutien, $str);
+            $str = str_replace("{IdClass}", $record->class_id, $str);
+            $str = str_replace("{Q_hotline}", $record->quyen, $str);
+            $str = str_replace("{Q_nghexen}", $record->quyen, $str);
+            $str = str_replace("{Q_hoinghi}", $record->quyen, $str);
+            $str = str_replace("{Mota}", $record->mota, $str);
+        }else {
+            $str = "Không có dữ liệu";
+        }
+        return $str;
+    }
+
+
+    function __parseOuutputQuyenThuebao($q){
+        $return= "000";
+        switch($q)  {
+            case 0:
+                $return = "000";
+                break;
+            case 1:
+                $return = "001";
+                break;
+            case 2:
+                $return = "010";
+                break;
+            case 3:
+                $return = "011";
+                break;
+            case 4:
+                $return = "100";
+                break;
+            case 5:
+                $return = "101";
+                break;
+            case 6:
+                $return = "110";
+                break;
+            case 7:
+                $return = "111";
+                break;
+            default:
+              $return = "000";
+        }
+        return str_split($return);
+    }
+
+
+    function __parseInputQuyenThuebao($q_Online, $q_Nghexen, $q_Hoinghi){
+        $return = 3;
+        $tmp = $q_Online.$q_Nghexen.$q_Hoinghi;
+
+        switch($tmp)  {
+            case "000":
+                $return = 0;
+                break;
+            case "001":
+                $return = 1;
+                break;
+            case "010":
+                $return = 2;
+                break;
+            case "011":
+                $return = 3;
+                break;
+            case "100":
+                $return = 4;
+                break;
+            case "101":
+                $return = 5;
+                break;
+            case "110":
+                $return = 6;
+                break;
+            case "111":
+                $return = 7;
+                break;
+            default:
+              $return = 3;
+        }
+        return $return;
     }
 
 

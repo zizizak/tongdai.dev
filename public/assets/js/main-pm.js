@@ -437,6 +437,7 @@ jQuery(document).ready(function($){
             data: { 'task': 'delKhaibaoHuong', 'id': id_delelte },
             dataType: 'json',
             success: function (data) {
+                alert(data.message);
                 loadHuong(1);
             },
             error: function (data) {
@@ -601,7 +602,7 @@ jQuery(document).ready(function($){
 
 
 
-    function bindDanhba(sothuebao) {
+    function bindDanhba() {
         var sothuebao = $("#tim_thuebao").val();
         url = "/publicajax/?task=getDanhba&sothuebao=" + sothuebao;
         var source =
@@ -668,6 +669,8 @@ jQuery(document).ready(function($){
             success: function (data) {
                 console.log(data);
                 //loadBangsoquay(1);
+                console.log("Bin danh ba thay doi SDB");
+                bindDanhba();
             },
             error: function (data) {
                 console.log(data);

@@ -38,7 +38,7 @@
                             Trung kế điều khiển từ xa
                         </div>
                         <div class="element">
-                            <input type="checkbox" name="tke_dieukhienxa" /> Có
+                            <input type="checkbox" name="tke_dieukhienxa" id="tke_dieukhienxa" value="1" /> Có
                         </div>
                     </div>
                     <div class="row">
@@ -183,7 +183,11 @@
                 $("#tinhcuoc").val(rowData.tinhcuoc);
                 $("#kieugoivao").val(rowData.kieu_goivao);
 
-
+                if(rowData.dieukhienxa == 1) {
+                    $("#tke_dieukhienxa").prop( "checked", true );
+                }else {
+                    $("#tke_dieukhienxa").prop( "checked", false );
+                }
 
                 console.log(rowData);
 

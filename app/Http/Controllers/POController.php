@@ -86,7 +86,8 @@ class POController extends Controller
                 'data'   => '',
                 'message' => 'Sai cú pháp',
                 'play_sound' => 1,
-                'sound'     => 'miss'
+                'sound'     => 'miss',
+                'output'    => ''
             );
         }
     }
@@ -99,6 +100,7 @@ class POController extends Controller
 
     }
 
+    //Đã có code xử lý
     private function execCmd38($thamso) { //Ma huong
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
@@ -138,7 +140,7 @@ class POController extends Controller
                 'min_soquay' => $min_soquay,
                 'huong_id' => $huong_id,
                 'tongso_chuso_mahuong' => $tongsochuso,
-                'created_at' => now()
+                'created_at' => now(),
             ]);
 
             $mesage = "Thực thi thành công, đã thêm mã hướng.";
@@ -152,11 +154,13 @@ class POController extends Controller
             'data'   => $record,
             'message' => $mesage,
             'play_sound' => 1,
-            'sound'     => $sound
+            'sound'     => $sound,
+            'output'     => ''
         );
         return $result;
     }
 
+    //Đã có code xử lý
     private function execCmd39($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
@@ -204,7 +208,8 @@ class POController extends Controller
             'data'   => $record,
             'message' => $mesage,
             'play_sound' => 1,
-            'sound'     => $sound
+            'sound'     => $sound,
+            'output'     => ''
         );
         return $result;
     }
@@ -213,6 +218,7 @@ class POController extends Controller
 
     }
 
+    //Đã có code xử lý
     private function execCmd41($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
@@ -238,11 +244,13 @@ class POController extends Controller
             'data'   => $record,
             'message' => $mesage,
             'play_sound' => 1,
-            'sound'     => $sound
+            'sound'     => $sound,
+            'output'     => ''
         );
         return $result;
     }
 
+    //Đã có code xử lý
     private function execCmd42($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
@@ -272,7 +280,8 @@ class POController extends Controller
             'data'   => $record,
             'message' => $mesage,
             'play_sound' => 1,
-            'sound'     => $sound
+            'sound'     => $sound,
+            'output'     => ''
         );
         return $result;
     }
@@ -285,6 +294,7 @@ class POController extends Controller
 
     }
 
+    //Đã có code xử lý
     private function execCmd50($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
@@ -304,11 +314,13 @@ class POController extends Controller
             'data'   => $record,
             'message' => $mesage,
             'play_sound' => 1,
-            'sound'     => $sound
+            'sound'     => $sound,
+            'output'     => ''
         );
         return $result;
     }
 
+    //Đã có code xử lý
     private function execCmd55($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
@@ -338,19 +350,159 @@ class POController extends Controller
             'data'   => $record,
             'message' => $mesage,
             'play_sound' => 1,
-            'sound'     => $sound
+            'sound'     => $sound,
+            'output'     => ''
         );
         return $result;
     }
 
     private function execCmd60($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *60*X1X2 #
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';
+
+        $thamso = (int)$thamso;
+
+        if($thamso_length == 2){ //Số thứ tự luồng E1
+            $record = TrungkeCO::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['id_stt', $thamso],
+            ])->first();
+
+            $output = "";
+            $led1 = "1";
+            $led2 = $record->loai;
+            if($record->mo_khoa=0) $led2 = 2;
+            $led3 = $record->dieukhienxa;
+            $led4 = "";
+
+
+            /*
+            kieu_goivao 0 DISA / 1 PO
+            tinhcuoc 0 thời gian / 1 đảo cực
+            0: Gọi vào qua PO, tính cước theo thời gian
+            1: Gọi vào qua PO, tính cước theo đảo cực
+            2: Gọi vào qua DISA, tính cước theo thời gian
+            3: Gọi vào qua DISA, tính cước theo đảo cực
+            */
+
+
+            if($record->kieu_goivao == 1 && $record->tinhcuoc = 0) {
+                $led4 = '0';
+            }elseif($record->kieu_goivao == 1 && $record->tinhcuoc = 1) {
+                $led4 = '1';
+            }elseif($record->kieu_goivao == 0 && $record->tinhcuoc = 0) {
+                $led4 = '2';
+            }elseif($record->kieu_goivao == 0 && $record->tinhcuoc = 1) {
+                $led4 = '3';
+            }
+
+            $output = $led1 . $led2 . $led3 . $led4;
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
 
     }
+
     private function execCmd61($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *61*X#
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';
+
+        if($thamso_length == 1){ //Số thứ tự luồng E1
+            $record = TrungkeE1::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['id_stt', $thamso],
+            ])->first();
+
+            $output = '1' . $record->clock;
+            if($record->vitri_batdau_goi_ra == 1) {
+                $output .= '0' . $record->vitri_batdau_goi_ra;
+            }else {
+                $output .= $record->vitri_batdau_goi_ra;
+            }
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
 
     }
     private function execCmd62($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *62*X1X2X3 #
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';
 
+        $thamso = (int)$thamso;
+
+        if($thamso_length == 3){ //Số thứ tự luồng E1
+            $record = Thuebao::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['socuoi', $thamso],
+            ])->first();
+
+            $output = "";
+            $led1 = $record->class_id;
+            $led2 = $record->quyen;
+            $led3 = $record->uutien;
+            $led4 = $record->loai;
+
+            $output = $led1 . $led2 . $led3 . $led4;
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
     }
 
     private function execCmd63($thamso) {
