@@ -56,7 +56,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="1"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=1&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=1&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>
@@ -72,7 +72,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="2"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=2&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=2&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>
@@ -88,7 +88,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="3"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=3&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=3&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>
@@ -104,7 +104,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="4"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=4&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=4&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>
@@ -120,7 +120,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="5"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=5&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=5&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>
@@ -136,7 +136,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="6"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=6&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=6&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>
@@ -152,7 +152,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="7"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=7&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=7&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>
@@ -168,7 +168,7 @@
                     <div class="block-item green large open-modal" data-id="modal-thamsothuebao" data-card-id="8"></div>
                     <?php
                     for($i=1;$i<=8;$i++) {
-                        $ajax_link = "http://tongdai.dev.test:8090/publicajax?task=getQuickInfo&card_id=8&stt_id=" . $i;
+                        $ajax_link = "/publicajax?task=getQuickInfo&card_id=8&stt_id=" . $i;
                         ?>
                         <div class="block-item green thuebao" >
                             <a href="<?php echo $ajax_link ?>" class="ajax_link"><?php echo $i; ?></a>

@@ -376,7 +376,7 @@ class POController extends Controller
             ])->first();
 
             $output = "";
-            $led1 = "1";
+            $led1 = "0";
             $led2 = $record->loai;
             if($record->mo_khoa=0) $led2 = 2;
             $led3 = $record->dieukhienxa;
