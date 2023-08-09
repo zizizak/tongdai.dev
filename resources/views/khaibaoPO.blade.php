@@ -31,7 +31,7 @@
 
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="relative  items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -48,26 +48,16 @@
             @endif
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="nav-menu-wrap">
-                    <div class="nav nav-menu">
-                        <ul>
-                            <li><a href="/">Trang chủ</a></li>
-                            <!-- <li><a href="/admin/thongsokythuat">Tính năng và thông số kỹ thuật</a></li>
-                            <li><a href="/admin/sodokhoi">Sơ đồ khối và chức năng các khối</a></li>
-                            <li><a href="/admin/cautruc">Cấu trúc phần cứng</a></li>-->
-                            <li><a href="/admin/khaibaoPO">Khai báo bằng máy trực PO</a></li>
-                            <li><a href="/admin/khaibaoPM">Khai báo bằng phần mềm</a></li>
-                        </ul>
-                    </div>
-                </div>
+
+                @include('mainMenu')
 
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h2>THỰC HÀNH KHAI BÁO BẰNG MÁY TRỰC PO</h2>
+                    <h2 class="title">THỰC HÀNH KHAI BÁO BẰNG MÁY TRỰC PO</h2>
                 </div>
 
 
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" style="width:800px; text-align:center;">
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" style="width:100%; margin:0;padding:40px 0; text-align:center;">
                     <div class="grid grid-cols-1 md:grid-cols-1" style="padding:20px;">
                         <div class="tong-dai-top">
                             <form method="get">
@@ -115,7 +105,7 @@
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
-                       Đơn vị:
+                       Đơn vị:Trường Cao Đẳng Kỹ thuật thông tin
                     </div>
 
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">

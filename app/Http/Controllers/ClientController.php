@@ -811,13 +811,24 @@ class ClientController extends Controller
             $str = str_replace("{IdThuebao}", $record->thuebao_id, $str);
             $str = str_replace("{IdCard}", $record->card, $str);
             $str = str_replace("{soDanhba}", $record->socuoi, $str);
-            $str = str_replace("{Loai}", $record->loai, $str);
-            $str = str_replace("{DoUutien}", $record->uutien, $str);
             $str = str_replace("{IdClass}", $record->class_id, $str);
-            $str = str_replace("{Q_hotline}", $record->quyen, $str);
-            $str = str_replace("{Q_nghexen}", $record->quyen, $str);
-            $str = str_replace("{Q_hoinghi}", $record->quyen, $str);
             $str = str_replace("{Mota}", $record->mota, $str);
+
+            $loai = ($record->loai == 0) ? "Tự động" : "Từ thạch";
+            $str = str_replace("{Loai}", $loai, $str);
+
+            $uutien = ($record->uutien == 0) ? "Không ưu tiên" : "Ưu tiên";
+            $str = str_replace("{DoUutien}", $uutien, $str);
+
+            $arQuyen = $this->__parseOuutputQuyenThuebao($record->quyen);
+            $q_Hotline = ($arQuyen[0] == 0) ? "Không được phép" : "Có được phép";
+            $q_Nghexen = ($arQuyen[0] == 0) ? "Không được phép" : "Có được phép";
+            $q_Hoinghi = ($arQuyen[0] == 0) ? "Không được phép" : "Có được phép";
+
+            $str = str_replace("{Q_hotline}", $q_Hotline, $str);
+            $str = str_replace("{Q_nghexen}", $q_Nghexen, $str);
+            $str = str_replace("{Q_hoinghi}", $q_Hoinghi, $str);
+
         }else {
             $str = "Không có dữ liệu";
         }

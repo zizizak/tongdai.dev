@@ -37,7 +37,7 @@
                 <div class="tab-content" id="cauhing-thongso">
                     @include('PhanMemUI.CauhinhThongso')
                 </div>
-                <div class="tab-content" id="quanly-cuoc">
+                <div class="tab-content" id="quanly-cuoc" style="min-height: 500px;" >
                     @include('PhanMemUI.QuanlyCuoc')
                 </div>
             </div>
