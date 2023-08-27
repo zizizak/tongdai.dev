@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Khai bao bằng PO</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -397,32 +397,199 @@
         }
     </style>
 
-    <link rel="stylesheet" href="{{ asset('assets/css/main-pm.css') }}">
-
     <style>
         body {
             font-family: 'Nunito', sans-serif;
         }
     </style>
+
+    <link rel="stylesheet" href="{{ asset('assets/css/main-pm.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <script src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/tippy-bundle.min.js') }}"></script>
+
+
 </head>
 
 <body class="antialiased">
     <div
         class="relative  items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 
+        @if (Route::has('login'))
+            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                @auth
+                    <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                @else
+                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}"
+                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                    @endif
+                @endauth
+            </div>
+        @endif
+
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 
             @include('mainMenu')
 
-            <h2 class="title">{{ $pageObj->title }}</h2>
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
-                style="padding:10px 20px;margin:0;">
-                <div>
-                    {!! $pageObj->body !!}
+            <div class="left-column">
+                <div class="l-navbar" id="navbar">
+                    <h4>Khai báo khối IPU</h4>
+                    <div class="nav">
+
+                        <div>
+                            <div class="nav__toggle" id="nav-togger">
+                                <box-icon name='chevron-right'></box-icon>
+                            </div>
+                            <ul class="nav__list">
+                                <a href="/admin/thuebaoipu" class="nav__link active">
+                                    <span class="nav__text">Thuê bao IP</span>
+                                </a>
+                                <a href="/admin/dialplan" class="nav__link active">
+                                    <span class="nav__text">Dial Pland</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Trung kế IP/E1</span>
+                                </a>
+                                <a href="/admin/huonggoiraipu" class="nav__link active">
+                                    <span class="nav__text">Hướng gọi ra</span>
+                                </a>
+                                <a href="/admin/huonggoivaoipu" class="nav__link active">
+                                    <span class="nav__text">Hướng gọi vào</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Dịch vụ trượt cuộc gọi</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Dịch vụ nghe hộ</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Dịch vụ gọi hàng đợi</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Dịch vụ gọi hội nghị</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Dịch vụ Voice Menu</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Dịch vụ hộp thư thoại</span>
+                                </a>
+                                <a href="#" class="nav__link active">
+                                    <span class="nav__text">Hệ thống</span>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            {{-- <div class="right-column">
+    </div> --}}
         </div>
     </div>
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log("PO ready");
+
+            $("#po-input").change(function() {
+                var cmd = $(this).val();
+                var isValidCmd = checkCommandValid(cmd);
+                console.log(isValidCmd);
+                if (isValidCmd) {
+                    processCommand(cmd);
+                } else {
+                    console.log("Câu lệnh không đúng cú pháp, chưa thực hiện gửi tới tổng đài");
+                }
+
+            })
+
+
+
+            function processCommand(cmd) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/ajaxPO',
+                    data: {
+                        'task': 'ajaxPO',
+                        'po_input': cmd
+                    },
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $("#po-output-text").html("...");
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $("#po-output-text").html(data.message);
+                        $("#po-output").val(data.output);
+                        if (cmd.indexOf("*50") >= 0) {
+                            location.href = "/admin/khaibaoPO?cauhinh_active=" + data.thamso +
+                                "&cauhinh_type=kichhoat";
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+
+            }
+
+
+            function checkCommandValid(cmd) {
+                const regex = /^\*([0-9]{2})\*?([0-9]*)\#/gm;
+
+                // Alternative syntax using RegExp constructor
+                // const regex = new RegExp('^\\*([0-9]{2})\\*?([0-9]*)\\#', 'gm')
+                let m;
+                var count = 0;
+                while ((m = regex.exec(cmd)) !== null) {
+                    /*
+                    // This is necessary to avoid infinite loops with zero-width matches
+                    if (m.index === regex.lastIndex) {
+                        regex.lastIndex++;
+                    }
+
+                    // The result can be accessed through the `m`-variable.
+                    m.forEach((match, groupIndex) => {
+                        console.log(`Found match, group ${groupIndex}: ${match}`);
+                    });
+                    */
+                    count = 1;
+                }
+
+                return count;
+            }
+
+
+
+
+
+        });
+    </script>
+
+
+
+
+
+
+
+
 </body>
 
 </html>

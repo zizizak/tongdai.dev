@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Khai bao PO</title>
+        <title>Khai bao bằng PO</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -52,12 +52,12 @@
                 @include('mainMenu')
 
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h2 class="title">THỰC HÀNH KHAI BÁO BẰNG MÁY TRỰC PO</h2>
+                    <h2 style="margin:10px 300PX;"class="title">THỰC HÀNH KHAI BÁO BẰNG MÁY TRỰC PO</h2>
                 </div>
 
 
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" style="width:100%; margin:0;padding:40px 0; text-align:center;">
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg" style="width:100%; margin:0;padding:0px 0; text-align:center;">
                     <div class="grid grid-cols-1 md:grid-cols-1" style="padding:20px;">
                         <div class="tong-dai-top">
                             <form method="get">
@@ -84,18 +84,33 @@
                         </div>
 
                         <div id="po-input-wrap">
-                            <h4>Nhập chuỗi khai báo PO </h4>
-                            <input type="text" id="po-input" name="po-input"  style="width:200px;font-size:24px;border:1px solid #ccc;text-align:center;" />
+                            <h4 style="margin-bottom:5px;">Nhập chuỗi khai báo PO </h4>
+                            <input type="text" id="po-input" name="po-input"  style="width:200px;font-size:24px;border:1px solid #ccc;text-align:center;" placeholder="*60*01#" />
                         </div>
                         <div id="po-output-wrap">
                             <br/>
                             <div>
-                                <h4>Led </h4>
-                                <input type="text" id="po-output" name="po-output"  style="width:200px;font-size:24px;border:1px solid #ccc;text-align:center;;color:red"  disabled />
+                                <div class="anh-tong-dai-po" style="background:#fff;width:800px;height:576px;margin:-20px auto 0; position: relative;overflow:hidden;">
+                                    <img src="/storage/images/anh-tong-dai-PO.jpg" class="img" />
+                                    <input type="text" id="po-output" name="po-output"  style="width: 100px;
+                                    font-size: 24px;
+                                    border: 1px solid #ccc;
+                                    text-align: center;
+                                    color: red;
+                                    position: absolute;
+                                    top: 84px;
+                                    right: 159px;
+                                    background: #e3e3e3;
+                                    border: 1px solid #313131;" value="0000"  disabled />
+                                </div>
+
+
+
+
                             </div>
                             <div>
-                                <h4>Kết quả thực hiện </h4>
-                                <div id="po-output-text">...</div>
+                                <p style="margin-bottom:0">Kết quả thực hiện: <span id="po-output-text" style="color:red; font-style:italic;">...</span> </p>
+
                             </div>
                         </div>
 

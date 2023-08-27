@@ -16,9 +16,9 @@
     <div class="window-content">
         <div class="main-links">
             <ul>
-                <li><a href="#">Chưa đăng nhập</a></li>
+                <li><a href="#">Đã đăng nhập</a></li>
                 <li><a href="#">Thoát đăng nhập</a></li>
-                <li><a href="#">Đăng nhập</a></li>
+                <li><a href="#"></a></li>
                 <li><a href="#">Thay đổi mật khẩu</a></li>
                 <li><a href="#">Trợ giúp</a></li>
             </ul>

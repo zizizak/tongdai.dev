@@ -64,7 +64,7 @@
                 @include('mainMenu')
 
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <h2>THỰC HÀNH KHAI BÁO BẰNG PHẦN MỀM</h2>
+                    <h2 style="margin:10px 330PX;">THỰC HÀNH KHAI BÁO BẰNG PHẦN MỀM</h2>
                 </div>
 
 

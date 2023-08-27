@@ -2,7 +2,7 @@
     background: #d3d0c7;
     margin: 10px auto;
     border: 2px solid #bcbcbb;
-    width: 820px;
+    width: 1020px;
 }
 
 .fl-left {
@@ -348,11 +348,11 @@ a.ajax_link {
   }
   .tutorial ul li {
     font-family: "Open Sans", sans-serif;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 400;
     color: #333;
     display: inline-block;
-    padding: 10px;
+    padding: 10px 5px 10px;
     position: relative;
   }
   .tutorial ul li ul {
@@ -397,4 +397,9 @@ a.ajax_link {
 
   .title {
     padding:10px 0;
+  }
+
+  .form-logout button {
+    border: none;
+    background: transparent;
   }

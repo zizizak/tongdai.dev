@@ -1,0 +1,35 @@
+*,::before,::after{
+    box-sizing: border-box;
+}
+body{
+    position: relative;
+    margin: 0;
+    padding: 1rem 0 0 5rem;
+    background: var(--white-color);
+    transition: 0.5s;
+}
+h1{
+    margin: 0;
+}
+ul,li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.l-navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 58px;
+    height: 100vh;
+    background: var(--first-color);
+    padding: 1.25rem 0.5rem 2rem;
+    transition: 0.5s;
+    z-index: var(--z-fixed);
+}
+h4{
+    color: blue;
+}

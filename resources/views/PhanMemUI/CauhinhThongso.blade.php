@@ -24,7 +24,7 @@
                     Thời gian chờ T.Bao quay số
                 </div>
                 <div class="element">
-                    <select  class="form-select" disabled>
+                    <select  class="form-select"enaabled>
                         <option>15s</option>
                         <option>20s</option>
                     </select>
@@ -35,7 +35,7 @@
                     Thời gian chờ giữa 2 số quay
                 </div>
                 <div class="element">
-                    <select  class="form-select" disabled>
+                    <select  class="form-select" enaabled>
                         <option>15s</option>
                         <option>20s</option>
                     </select>
@@ -46,7 +46,7 @@
                     Thời gian chờ T.Bao nhấc máy/Thời gian cấp ring-back tối đa
                 </div>
                 <div class="element">
-                    <select  class="form-select" disabled>
+                    <select  class="form-select" enaabled>
                         <option>15s</option>
                         <option>20s</option>
                     </select>
@@ -57,7 +57,7 @@
                     Thời gian chờ T.Bao gác máy/Thời gian cấp busy tone tối đa
                 </div>
                 <div class="element">
-                    <select  class="form-select" disabled>
+                    <select  class="form-select" enaabled>
                         <option>15s</option>
                         <option>20s</option>
                     </select>
@@ -68,7 +68,7 @@
                     Thời gian chờ T.Bao bên ngoài quay số (Gọi trực tiếp vào tổng đài qua T.K CO-DID)
                 </div>
                 <div class="element">
-                    <select  class="form-select" disabled>
+                    <select  class="form-select" enaabled>
                         <option>15s</option>
                         <option>20s</option>
                     </select>
@@ -79,7 +79,7 @@
                     Thời gian chờ phản hồi trên luồng sau khi quay số
                 </div>
                 <div class="element">
-                    <select  class="form-select" disabled>
+                    <select  class="form-select" enaabled>
                         <option>15s</option>
                         <option>20s</option>
                     </select>

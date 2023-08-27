@@ -439,7 +439,7 @@ class POController extends Controller
                 ['id_stt', $thamso],
             ])->first();
 
-            $output = '1' . $record->clock;
+            $output = '0' . $record->clock;
             if($record->vitri_batdau_goi_ra == 1) {
                 $output .= '0' . $record->vitri_batdau_goi_ra;
             }else {
@@ -474,7 +474,7 @@ class POController extends Controller
 
         $thamso = (int)$thamso;
 
-        if($thamso_length == 3){ //Số thứ tự luồng E1
+        if($thamso_length == 3){ //3 số cuối tb
             $record = Thuebao::where([
                 ['user_id', $current_user_id],
                 ['cauhinh_id', $cauhinh_active],
@@ -512,16 +512,192 @@ class POController extends Controller
 
     }
     private function execCmd65($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *65 #
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';
+
+        $thamso = (int)$thamso;
+
+        if($thamso_length == 0){ //không tham số
+
+            $output = "";
+            $led1 = "0";
+            $led2 = "0";
+            $led3 = "0";
+            $led4 = $cauhinh_active;
+
+            $output = $led1 . $led2 . $led3 . $led4;
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => null,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
 
     }
-    private function execCmd66($thamso) {
+    private function execCmd66($thamso) { //3 số đầu danh bạ
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *66 #
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';
 
+        $thamso = (int)$thamso;
+
+        if($thamso_length == 0){ //không tham số
+
+            $record = Cauhinh::where([
+                ['user_id', $current_user_id],
+                ['stt', $cauhinh_active],
+            ])->first();
+
+            $prefix = $record->prefix;
+
+            $arPrefix = str_split($prefix);
+
+            $output = "";
+            $led1 = "0";
+            $led2 = $arPrefix[0];
+            $led3 = $arPrefix[1];
+            $led4 = $arPrefix[2];
+
+            $output = $led1 . $led2 . $led3 . $led4;
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => null,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
     }
     private function execCmd67($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *66 #
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';
 
+        $thamso = (int)$thamso;
+
+        if($thamso_length == 0){ //không tham số
+
+            $record = Cauhinh::where([
+                ['user_id', $current_user_id],
+                ['stt', $cauhinh_active],
+            ])->first();
+
+            $sobatdau = $record->sobatdau;
+
+            $arTmp = str_split($sobatdau);
+
+            $output = "";
+            $led1 = "0";
+            $led2 = $arTmp[0];
+            $led3 = $arTmp[1];
+            $led4 = $arTmp[2];
+
+            $output = $led1 . $led2 . $led3 . $led4;
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => null,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
     }
     private function execCmd68($thamso) {
+        //Kiểm tra danh bạ bất kỳ (3 số sau)
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        //  *68*X1X2#
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';
 
+        $thamso = (int)$thamso;
+
+        if($thamso_length == 2){ //không tham số
+            $arThamso = str_split($thamso);
+            $card = $arThamso[0];
+            $thuebao_id = $arThamso[1];
+
+            $record = Thuebao::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['thuebao_id', $thuebao_id],
+                ['card', $card],
+            ])->first();
+
+            if($record == null) {
+                $output = "0000";
+                $mesage = "Tham số không chính xác";
+            }else {
+                $socuoi = $record->socuoi;
+                $arTmp = str_split($socuoi);
+
+                $output = "";
+                $led1 = "0";
+                $led2 = $arTmp[0];
+                $led3 = $arTmp[1];
+                $led4 = $arTmp[2];
+
+                $output = $led1 . $led2 . $led3 . $led4;
+
+                $mesage = "Lấy số liệu thành công";
+            }
+
+
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => null,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
     }
     private function execCmd69($thamso) {
 

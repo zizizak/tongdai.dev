@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use TCG\Voyager\Models\Page;
 
+use TCG\Voyager\Models\User;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Response;
@@ -23,28 +25,81 @@ use App\Models\Thuebao;
 
 class ClientController extends Controller
 {
-    public function thongsokythuat(){
+    public function thongsokythuat()
+    {
         $id = 2;
         return view('view-page', [
             'pageObj' => Page::findOrFail($id)
         ]);
     }
 
-    public function sodokhoi(){
+    public function sodokhoi()
+    {
         $id = 3;
         return view('view-page', [
             'pageObj' => Page::findOrFail($id)
         ]);
     }
 
-    public function cautruc(){
+    public function cautruc()
+    {
         $id = 4;
         return view('view-page', [
             'pageObj' => Page::findOrFail($id)
         ]);
     }
+    public function trienkhaithuhoi()
+    {
+        $id = 1;
+        return view('view-page', [
+            'pageObj' => Page::findOrFail($id)
+        ]);
+    }
+    public function cacloaicard()
+    {
+        $id = 6;
+        return view('view-page', [
+            'pageObj' => Page::findOrFail($id)
+        ]);
+    }
+    public function khaibaokhoiIPU()
+    {
+        $id = 9;
+        return view('view-page', [
+            'pageObj' => Page::findOrFail($id)
+        ]);
+    }
+    public function pan()
+    {
+        $id = 10;
+        return view('view-page', [
+            'pageObj' => Page::findOrFail($id)
+        ]);
+    }
+    public function bq()
+    {
+        $id = 11;
+        return view('view-page', [
+            'pageObj' => Page::findOrFail($id)
+        ]);
+    }
+    public function bd1()
+    {
+        $id = 13;
+        return view('view-page', [
+            'pageObj' => Page::findOrFail($id)
+        ]);
+    }
+    public function bd2()
+    {
+        $id = 12;
+        return view('view-page', [
+            'pageObj' => Page::findOrFail($id)
+        ]);
+    }
 
-    public function khaibaoPO(Request $request){
+    public function khaibaoPO(Request $request)
+    {
         $current_user_id = Auth::user()->getKey();
         $cauhinhs = $this->getCauhinh($current_user_id);
         $arCauhinh = [];
@@ -52,7 +107,7 @@ class ClientController extends Controller
             $arCauhinh[] = $cauhinh->stt;
         }
 
-        if(session('cauhinh_active') == NULL) {
+        if (session('cauhinh_active') == NULL) {
             session(['cauhinh_active' => '0']);
         }
         if ($request->has('cauhinh_active')) {
@@ -69,11 +124,12 @@ class ClientController extends Controller
             //'huongs',
             //'mahuongs',
             //'tongdaiClass',
-           //'thuebaos',
+            //'thuebaos',
         ));
     }
 
-    public function khaibaoPM(Request $request){
+    public function khaibaoPM(Request $request)
+    {
 
         $current_user_id = Auth::user()->getKey();
         $cauhinhs = $this->getCauhinh($current_user_id);
@@ -82,7 +138,7 @@ class ClientController extends Controller
             $arCauhinh[] = $cauhinh->stt;
         }
 
-        if(session('cauhinh_active') == NULL) {
+        if (session('cauhinh_active') == NULL) {
             session(['cauhinh_active' => '0']);
         }
         if ($request->has('cauhinh_active')) {
@@ -109,10 +165,161 @@ class ClientController extends Controller
             //'huongs',
             //'mahuongs',
             //'tongdaiClass',
-           //'thuebaos',
+            //'thuebaos',
         ));
     }
 
+    public function ipu(Request $request)
+    {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinhs = $this->getCauhinh($current_user_id);
+        $arCauhinh = [];
+        foreach ($cauhinhs as $cauhinh) {
+            $arCauhinh[] = $cauhinh->stt;
+        }
+
+        if (session('cauhinh_active') == NULL) {
+            session(['cauhinh_active' => '0']);
+        }
+        if ($request->has('cauhinh_active')) {
+            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+        }
+        $cauhinh_active = session('cauhinh_active');
+
+        return view('ipu', compact(
+            'arCauhinh',
+            'cauhinh_active',
+            //'bangsoquay',
+            //'trungkeCOs',
+            //'trungkeE1s',
+            //'huongs',
+            //'mahuongs',
+            //'tongdaiClass',
+            //'thuebaos',
+        ));
+    }
+
+
+    public function thuebaoipu(Request $request)
+    {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinhs = $this->getCauhinh($current_user_id);
+        $arCauhinh = [];
+        foreach ($cauhinhs as $cauhinh) {
+            $arCauhinh[] = $cauhinh->stt;
+        }
+
+        if (session('cauhinh_active') == NULL) {
+            session(['cauhinh_active' => '0']);
+        }
+        if ($request->has('cauhinh_active')) {
+            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+        }
+        $cauhinh_active = session('cauhinh_active');
+
+        return view('thuebaoipu', compact(
+            'arCauhinh',
+            'cauhinh_active',
+            //'bangsoquay',
+            //'trungkeCOs',
+            //'trungkeE1s',
+            //'huongs',
+            //'mahuongs',
+            //'tongdaiClass',
+            //'thuebaos',
+        ));
+    }
+
+
+    public function dialplan(Request $request)
+    {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinhs = $this->getCauhinh($current_user_id);
+        $arCauhinh = [];
+        foreach ($cauhinhs as $cauhinh) {
+            $arCauhinh[] = $cauhinh->stt;
+        }
+
+        if (session('cauhinh_active') == NULL) {
+            session(['cauhinh_active' => '0']);
+        }
+        if ($request->has('cauhinh_active')) {
+            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+        }
+        $cauhinh_active = session('cauhinh_active');
+
+        return view('dialplan', compact(
+            'arCauhinh',
+            'cauhinh_active',
+            //'bangsoquay',
+            //'trungkeCOs',
+            //'trungkeE1s',
+            //'huongs',
+            //'mahuongs',
+            //'tongdaiClass',
+            //'thuebaos',
+        ));
+    }
+
+    public function huonggoivaoipu(Request $request)
+    {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinhs = $this->getCauhinh($current_user_id);
+        $arCauhinh = [];
+        foreach ($cauhinhs as $cauhinh) {
+            $arCauhinh[] = $cauhinh->stt;
+        }
+
+        if (session('cauhinh_active') == NULL) {
+            session(['cauhinh_active' => '0']);
+        }
+        if ($request->has('cauhinh_active')) {
+            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+        }
+        $cauhinh_active = session('cauhinh_active');
+
+        return view('huonggoivaoipu', compact(
+            'arCauhinh',
+            'cauhinh_active',
+            //'bangsoquay',
+            //'trungkeCOs',
+            //'trungkeE1s',
+            //'huongs',
+            //'mahuongs',
+            //'tongdaiClass',
+            //'thuebaos',
+        ));
+    }
+
+    public function huonggoiraipu(Request $request)
+    {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinhs = $this->getCauhinh($current_user_id);
+        $arCauhinh = [];
+        foreach ($cauhinhs as $cauhinh) {
+            $arCauhinh[] = $cauhinh->stt;
+        }
+
+        if (session('cauhinh_active') == NULL) {
+            session(['cauhinh_active' => '0']);
+        }
+        if ($request->has('cauhinh_active')) {
+            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+        }
+        $cauhinh_active = session('cauhinh_active');
+
+        return view('huonggoiraipu', compact(
+            'arCauhinh',
+            'cauhinh_active',
+            //'bangsoquay',
+            //'trungkeCOs',
+            //'trungkeE1s',
+            //'huongs',
+            //'mahuongs',
+            //'tongdaiClass',
+            //'thuebaos',
+        ));
+    }
 
     public function ajax(Request $request)
     {
@@ -126,7 +333,7 @@ class ClientController extends Controller
 
         $task = $request->task;
 
-        if(strpos($task, "Update") >= 0 && $cauhinh_active == 0) {
+        if (strpos($task, "Update") >= 0 && $cauhinh_active == 0) {
             $result = array(
                 'result' => 'error',
                 'data'   => '',
@@ -135,7 +342,7 @@ class ClientController extends Controller
             return $result;
         }
 
-        if(strpos(strtolower($task), "del") >= 0 && $cauhinh_active == 0) {
+        if (strpos(strtolower($task), "del") >= 0 && $cauhinh_active == 0) {
             $result = array(
                 'result' => 'error',
                 'data'   => '',
@@ -145,7 +352,7 @@ class ClientController extends Controller
         }
 
 
-        if($task == 'UpdateTrungkeE1') {
+        if ($task == 'UpdateTrungkeE1') {
             $luong = $request->luong;
             $vitri_batdau_goi_ra = $request->vitri_batdau_goi_ra;
             $vitri_batdau_goi_ra = $request->vitri_batdau_goi_ra;
@@ -159,7 +366,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'getTrungkeE1') {
+        if ($task == 'getTrungkeE1') {
             $data = $this->getTrungkeE1($current_user_id, $cauhinh_active);
             $result = array(
                 'result' => 'sucess',
@@ -168,7 +375,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'UpdateThamsothuebao') {
+        if ($task == 'UpdateThamsothuebao') {
             $id = $request->tstb_id;
             $class_id = $request->class_id;
 
@@ -191,16 +398,16 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'UpdateThamsotrungkeCO') {
+        if ($task == 'UpdateThamsotrungkeCO') {
             $id = $request->thamsotrungke_id;
             $loai_tk = $request->loai_tk;
             $mo_khoa = $request->mo_khoa;
             $tinhcuoc = $request->tinhcuoc;
             $kieugoivao = $request->kieugoivao;
             $dieukhienxa = 0;
-            if ( $request->has('tke_dieukhienxa')) {
+            if ($request->has('tke_dieukhienxa')) {
                 $dieukhienxa = $request->tke_dieukhienxa;
-             }
+            }
 
             $data = $this->UpdateTrungkeCO($id, $loai_tk, $mo_khoa, $tinhcuoc, $kieugoivao, $dieukhienxa);
             $result = array(
@@ -209,7 +416,7 @@ class ClientController extends Controller
                 'message' => 'Lưu thành công'
             );
         }
-        if($task == 'UpdateKhaibaoThuebao') {
+        if ($task == 'UpdateKhaibaoThuebao') {
             $id = $request->khaibaothuebao_id;
             $prefix = $request->prefix;
             $sobatdau = $request->sobatdau;
@@ -221,7 +428,7 @@ class ClientController extends Controller
                 'message' => 'Lưu thành công'
             );
         }
-        if($task == 'UpdateKhaibaoClass') {
+        if ($task == 'UpdateKhaibaoClass') {
             $class_id = $request->khaibao_class_id_class_update;
             $digits = $request->khaibaoClass_digits;
             $quyen = $request->khaibaoClass_quyen;
@@ -235,7 +442,7 @@ class ClientController extends Controller
         }
 
 
-        if($task == 'delKhaibaoThuebao') {
+        if ($task == 'delKhaibaoThuebao') {
             $id = $request->id;
             $data = $this->delClass($id);
             $result = array(
@@ -245,7 +452,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'delAllKhaibaoThuebao') {
+        if ($task == 'delAllKhaibaoThuebao') {
             $class_id = $request->class_id;
             $data = $this->delAllKhaibaoThuebao($current_user_id, $cauhinh_active, $class_id);
             $result = array(
@@ -255,7 +462,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'UpdateHuong') {
+        if ($task == 'UpdateHuong') {
             $huong_id = $request->khaibaoHuong_id_huong;
             $loai = $request->khaibaoHuong_loai;
             $thanhphan = $request->khaibaoHHuong_thanhphan;
@@ -268,18 +475,18 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'delKhaibaoHuong') {
+        if ($task == 'delKhaibaoHuong') {
             $id = $request->id;
 
             $count_huong_sudung = $this->kiemtraHuongdangsudung($current_user_id, $cauhinh_active, $id);
-            if($count_huong_sudung > 0) {
+            if ($count_huong_sudung > 0) {
                 $data =  $count_huong_sudung;
                 $result = array(
                     'result' => 'sucess',
                     'data'   => $data,
                     'message' => 'Xóa không thành công, hướng đang được sử dụng'
                 );
-            }else {
+            } else {
                 $data = $this->delKhaibaoHuong($id);
                 $result = array(
                     'result' => 'sucess',
@@ -290,7 +497,7 @@ class ClientController extends Controller
         }
 
 
-        if($task == 'UpdateMaHuong') {
+        if ($task == 'UpdateMaHuong') {
             $mahuong_id = $request->Mahuong_mahuong_id;
             $mahuong_dinhtuyen = $request->Mahuong_huong_dinhtuyen;
             $sochan = $request->Mahuong_sochan;
@@ -304,7 +511,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'delMaHuong') {
+        if ($task == 'delMaHuong') {
             $id = $request->id;
             $data = $this->delMaHuong($id);
             $result = array(
@@ -315,7 +522,7 @@ class ClientController extends Controller
         }
 
 
-        if($task == 'UpdateBangsoquay') {
+        if ($task == 'UpdateBangsoquay') {
             $dauso = $request->bangsoquay_dauso;
             $so_digits = $request->bangsoquay_digit;
             $data = $this->UpdateBangsoquay($current_user_id, $cauhinh_active, $dauso, $so_digits);
@@ -326,7 +533,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'delBangsoquay') {
+        if ($task == 'delBangsoquay') {
             $id = $request->id;
             $data = $this->delBangsoquay($id);
             $result = array(
@@ -336,7 +543,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'UpdateSoDanhba') {
+        if ($task == 'UpdateSoDanhba') {
             $id = $request->thaydoiSDB_id;
             $somoi = $request->thaydoiSDB_somoi;
             $data = $this->UpdateSoDanhba($current_user_id, $cauhinh_active, $id, $somoi);
@@ -364,7 +571,7 @@ class ClientController extends Controller
 
         $task = $request->task;
 
-        if($task == 'getThuebao') {
+        if ($task == 'getThuebao') {
             $card = $request->card;
             $data = $this->getThuebaoByCard($current_user_id, $cauhinh_active, $card);
             $result = array(
@@ -374,7 +581,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'getTrungkeCO') {
+        if ($task == 'getTrungkeCO') {
             $data = $this->getTrungkeCO($current_user_id, $cauhinh_active);
             $result = array(
                 'result' => 'sucess',
@@ -383,7 +590,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'getKhaibaoThuebao') {
+        if ($task == 'getKhaibaoThuebao') {
             $data = $this->getCauhinhDetail($current_user_id, $cauhinh_active);
             $result = array(
                 'result' => 'sucess',
@@ -391,7 +598,7 @@ class ClientController extends Controller
                 'message' => ''
             );
         }
-        if($task == 'getKhaibaoClass') {
+        if ($task == 'getKhaibaoClass') {
 
             $idClass = $request->idClass;
             $data = $this->getTongdaiClass($current_user_id, $cauhinh_active, $idClass);
@@ -401,7 +608,7 @@ class ClientController extends Controller
                 'message' => ''
             );
         }
-        if($task == 'getHuong') {
+        if ($task == 'getHuong') {
             $data = $this->getHuong($current_user_id, $cauhinh_active);
             $result = array(
                 'result' => 'sucess',
@@ -409,7 +616,7 @@ class ClientController extends Controller
                 'message' => ''
             );
         }
-        if($task == 'getMaHuong') {
+        if ($task == 'getMaHuong') {
             $data = $this->getMahuong($current_user_id, $cauhinh_active);
             $result = array(
                 'result' => 'sucess',
@@ -417,7 +624,7 @@ class ClientController extends Controller
                 'message' => ''
             );
         }
-        if($task == 'getBangsoquay') {
+        if ($task == 'getBangsoquay') {
             $data = $this->getBangsoquay($current_user_id, $cauhinh_active);
             $result = array(
                 'result' => 'sucess',
@@ -427,7 +634,7 @@ class ClientController extends Controller
         }
 
 
-        if($task == 'getDanhba') {
+        if ($task == 'getDanhba') {
             $sothuebao = $request->sothuebao;
             $data = $this->getDanhba($current_user_id, $cauhinh_active, $sothuebao);
             $result = array(
@@ -437,7 +644,7 @@ class ClientController extends Controller
             );
         }
 
-        if($task == 'getQuickInfo') {
+        if ($task == 'getQuickInfo') {
             $stt_id = $request->stt_id;
             $card_id = $request->card_id;
             $data = $this->getQuickInfo($current_user_id, $cauhinh_active, $card_id, $stt_id);
@@ -453,12 +660,14 @@ class ClientController extends Controller
     }
 
 
-    private function getCauhinh($user_id) {
+    private function getCauhinh($user_id)
+    {
         $cauhinhs = Cauhinh::where('user_id', $user_id)->get();
         return $cauhinhs;
     }
 
-    private function getCauhinhDetail($user_id, $cauhinh_id) {
+    private function getCauhinhDetail($user_id, $cauhinh_id)
+    {
         $records = Cauhinh::where([
             ['user_id', $user_id],
             ['stt', $cauhinh_id]
@@ -466,7 +675,8 @@ class ClientController extends Controller
         return $records;
     }
 
-    private function getBangsoquay($user_id, $cauhinh_id) {
+    private function getBangsoquay($user_id, $cauhinh_id)
+    {
         $records = Bangsoquay::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id]
@@ -474,7 +684,8 @@ class ClientController extends Controller
         return $records;
     }
 
-    private function getTrungkeCO($user_id, $cauhinh_id) {
+    private function getTrungkeCO($user_id, $cauhinh_id)
+    {
         $records = TrungkeCO::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id]
@@ -482,7 +693,8 @@ class ClientController extends Controller
         return $records;
     }
 
-    private function getTrungkeE1($user_id, $cauhinh_id) {
+    private function getTrungkeE1($user_id, $cauhinh_id)
+    {
         $records = TrungkeE1::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id]
@@ -490,7 +702,8 @@ class ClientController extends Controller
         return $records;
     }
 
-    private function getHuong($user_id, $cauhinh_id) {
+    private function getHuong($user_id, $cauhinh_id)
+    {
         $records = Huong::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id]
@@ -498,7 +711,8 @@ class ClientController extends Controller
         return $records;
     }
 
-    private function getMahuong($user_id, $cauhinh_id) {
+    private function getMahuong($user_id, $cauhinh_id)
+    {
         $records = MaHuong::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id]
@@ -506,21 +720,22 @@ class ClientController extends Controller
         return $records;
     }
 
-    private function getTongdaiClass($user_id, $cauhinh_id, $idClass) {
+    private function getTongdaiClass($user_id, $cauhinh_id, $idClass)
+    {
         $records = TongdaiClass::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id],
             ['class_id', $idClass]
         ])->get();
         return $records;
-
     }
 
-    private function getDanhba($user_id, $cauhinh_id, $sothuebao) {
+    private function getDanhba($user_id, $cauhinh_id, $sothuebao)
+    {
 
         $query = sprintf("SELECT a.*, CONCAT(b.prefix, a.socuoi) sodienthoai from thuebao a, cauhinh b WHERE a.cauhinh_id = b.stt and a.user_id = b.user_id  AND b.stt = %s AND b.user_id = %s", $cauhinh_id, $user_id);
 
-        if($sothuebao != "") {
+        if ($sothuebao != "") {
             $query .= " And a.socuoi like '%" . $sothuebao . "%'";
         }
 
@@ -529,7 +744,8 @@ class ClientController extends Controller
         return $records;
     }
 
-    private function getThuebaoByCard($user_id, $cauhinh_id, $card) {
+    private function getThuebaoByCard($user_id, $cauhinh_id, $card)
+    {
         /*
         $records = Thuebao::where([
             ['user_id', $user_id],
@@ -541,22 +757,21 @@ class ClientController extends Controller
 
         $query = sprintf("SELECT a.*, CONCAT(b.prefix, a.socuoi) sodienthoai from thuebao a, cauhinh b WHERE a.cauhinh_id = b.stt and a.user_id = b.user_id  AND b.stt = %s AND b.user_id = %s", $cauhinh_id, $user_id);
 
-        if($card != "") {
+        if ($card != "") {
             $query .= " And a.card = " . $card . "";
         }
 
         $records = DB::select($query);
 
         return $records;
-
-
     }
 
 
 
     /** Ajax function */
 
-    private function UpdateCauhinhE1($user_id, $cauhinh_id, $stt, $vitri_batdau_goi_ra, $vitri_batdau_goi_vao, $clock) {
+    private function UpdateCauhinhE1($user_id, $cauhinh_id, $stt, $vitri_batdau_goi_ra, $vitri_batdau_goi_vao, $clock)
+    {
         $record = TrungkeE1::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id],
@@ -569,7 +784,8 @@ class ClientController extends Controller
         $record->save();
     }
 
-    private function UpdateThuebao($id, $class_id, $quyen, $uutien, $loai, $mota) {
+    private function UpdateThuebao($id, $class_id, $quyen, $uutien, $loai, $mota)
+    {
         $record = Thuebao::where([
             ['id', $id]
         ])->first();
@@ -583,7 +799,8 @@ class ClientController extends Controller
         return $record;
     }
 
-    private function UpdateTrungkeCO($id, $loai, $mo_khoa, $tinhcuoc, $kieu_goivao, $dieukhienxa) {
+    private function UpdateTrungkeCO($id, $loai, $mo_khoa, $tinhcuoc, $kieu_goivao, $dieukhienxa)
+    {
         $record = TrungkeCO::where([
             ['id', $id]
         ])->first();
@@ -598,7 +815,8 @@ class ClientController extends Controller
         return $record;
     }
 
-    private function UpdateKhaibaoThuebao($id, $user_id, $cauhinh_id, $prefix, $sobatdau) {
+    private function UpdateKhaibaoThuebao($id, $user_id, $cauhinh_id, $prefix, $sobatdau)
+    {
         $record = Cauhinh::where([
             ['id', $id]
         ])->first();
@@ -615,14 +833,15 @@ class ClientController extends Controller
 
 
 
-    private function resetThuebao($user_id, $cauhinh_id, $prefix, $sobatdau){
+    private function resetThuebao($user_id, $cauhinh_id, $prefix, $sobatdau)
+    {
         $records = Thuebao::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id],
         ])->get();
 
         $socuoi = $sobatdau;
-        foreach($records as $record) {
+        foreach ($records as $record) {
             $record->socuoi = $socuoi;
             $record->save();
             $socuoi += 1;
@@ -655,11 +874,11 @@ class ClientController extends Controller
             }
         }
         **/
-
     }
 
 
-    private function addClass($user_id, $cauhinh_id, $class_id, $digits, $quyen){
+    private function addClass($user_id, $cauhinh_id, $class_id, $digits, $quyen)
+    {
         $result = TongdaiClass::create([
             'user_id' => $user_id,
             'cauhinh_id' => $cauhinh_id,
@@ -671,12 +890,14 @@ class ClientController extends Controller
         return $result;
     }
 
-    private function delClass($id){
+    private function delClass($id)
+    {
         $result = TongdaiClass::where('id', $id)->delete();
         return $result;
     }
 
-    private function delAllKhaibaoThuebao($user_id, $cauhinh_id, $class_id){
+    private function delAllKhaibaoThuebao($user_id, $cauhinh_id, $class_id)
+    {
         $result = TongdaiClass::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id],
@@ -685,7 +906,8 @@ class ClientController extends Controller
         return $result;
     }
 
-    private function UpdateHuong($user_id, $cauhinh_id, $huong_id, $loai, $thanhphan, $loai_thanhphan){
+    private function UpdateHuong($user_id, $cauhinh_id, $huong_id, $loai, $thanhphan, $loai_thanhphan)
+    {
         $result = Huong::create([
             'user_id' => $user_id,
             'cauhinh_id' => $cauhinh_id,
@@ -696,34 +918,38 @@ class ClientController extends Controller
             'created_at' => now()
         ]);
         return $result;
-
     }
 
-    private function kiemtraHuongdangsudung($user_id, $cauhinh_id, $id) {
+    private function kiemtraHuongdangsudung($user_id, $cauhinh_id, $id)
+    {
         $huong = Huong::where(
             [
                 ['user_id', $user_id],
                 ['cauhinh_id', $cauhinh_id],
                 ['id', $id],
-            ])->first();
+            ]
+        )->first();
 
         $result = MaHuong::where(
             [
                 ['user_id', $user_id],
                 ['cauhinh_id', $cauhinh_id],
                 ['huong_id', $huong->huong_id],
-            ])->count();
+            ]
+        )->count();
 
         return $result;
     }
 
-    private function delKhaibaoHuong($id){
+    private function delKhaibaoHuong($id)
+    {
         $result = Huong::where('id', $id)->delete();
         return $result;
     }
 
 
-    private function UpdateMaHuong($user_id, $cauhinh_id, $mahuong_id, $mahuong_dinhtuyen, $sochan, $min_soquay, $huong_id){
+    private function UpdateMaHuong($user_id, $cauhinh_id, $mahuong_id, $mahuong_dinhtuyen, $sochan, $min_soquay, $huong_id)
+    {
         $result = MaHuong::create([
             'user_id' => $user_id,
             'cauhinh_id' => $cauhinh_id,
@@ -737,13 +963,15 @@ class ClientController extends Controller
         return $result;
     }
 
-    private function delMaHuong($id){
+    private function delMaHuong($id)
+    {
         $result = MaHuong::where('id', $id)->delete();
         return $result;
     }
 
 
-    private function UpdateBangsoquay($user_id, $cauhinh_id, $dauso, $so_digits){
+    private function UpdateBangsoquay($user_id, $cauhinh_id, $dauso, $so_digits)
+    {
         $result = Bangsoquay::create([
             'user_id' => $user_id,
             'cauhinh_id' => $cauhinh_id,
@@ -754,12 +982,14 @@ class ClientController extends Controller
         return $result;
     }
 
-    private function delBangsoquay($id){
+    private function delBangsoquay($id)
+    {
         $result = Bangsoquay::where('id', $id)->delete();
         return $result;
     }
 
-    private function UpdateSoDanhba($user_id, $cauhinh_id, $id, $somoi){
+    private function UpdateSoDanhba($user_id, $cauhinh_id, $id, $somoi)
+    {
         $cauhinh = Cauhinh::where([
             ['user_id', $user_id],
             ['stt', $cauhinh_id],
@@ -779,13 +1009,12 @@ class ClientController extends Controller
             ['id', $id]
         ])->first();
 
-        if($record0 != null) {
+        if ($record0 != null) {
             //Nếu tồn tại giá trị bằng số mới thì đổi vị trí của 2 số
             //Lưu giá trị của số cũ
             $tmp_socuoi = $record->socuoi;
             $record0->socuoi = $tmp_socuoi;
             $record0->save();
-
         }
 
         //Lưu giá trị mới
@@ -795,7 +1024,8 @@ class ClientController extends Controller
         return $record;
     }
 
-    function getQuickInfo($user_id, $cauhinh_id, $card_id, $stt_id) {
+    function getQuickInfo($user_id, $cauhinh_id, $card_id, $stt_id)
+    {
         $record = Thuebao::where([
             ['user_id', $user_id],
             ['cauhinh_id', $cauhinh_id],
@@ -805,7 +1035,7 @@ class ClientController extends Controller
 
         //var_dump($record);
         $str = "";
-        if($record != null){
+        if ($record != null) {
             //Build response
             $str = '------  Thông số thuê bao ------ <br/> IdThuebao: {IdThuebao} <br/> IdCard: {IdCard}  <br/> Số danh bạ: {soDanhba} <br/> Loại: {Loai} <br/> Độ ưu tiên: {DoUutien}  <br/> Id Class: {IdClass} <br/> Quyền thiết lập hotline: {Q_hotline} <br/> Quyền nghe xen: {Q_nghexen} <br/> Quyền thiết lập hội nghị: {Q_hoinghi}  <br/><br/> ------ Mô tả thuê bao ------  <br/>Mô tả: {Mota}  <br/>';
             $str = str_replace("{IdThuebao}", $record->thuebao_id, $str);
@@ -828,17 +1058,17 @@ class ClientController extends Controller
             $str = str_replace("{Q_hotline}", $q_Hotline, $str);
             $str = str_replace("{Q_nghexen}", $q_Nghexen, $str);
             $str = str_replace("{Q_hoinghi}", $q_Hoinghi, $str);
-
-        }else {
+        } else {
             $str = "Không có dữ liệu";
         }
         return $str;
     }
 
 
-    function __parseOuutputQuyenThuebao($q){
-        $return= "000";
-        switch($q)  {
+    function __parseOuutputQuyenThuebao($q)
+    {
+        $return = "000";
+        switch ($q) {
             case 0:
                 $return = "000";
                 break;
@@ -864,17 +1094,18 @@ class ClientController extends Controller
                 $return = "111";
                 break;
             default:
-              $return = "000";
+                $return = "000";
         }
         return str_split($return);
     }
 
 
-    function __parseInputQuyenThuebao($q_Online, $q_Nghexen, $q_Hoinghi){
+    function __parseInputQuyenThuebao($q_Online, $q_Nghexen, $q_Hoinghi)
+    {
         $return = 3;
-        $tmp = $q_Online.$q_Nghexen.$q_Hoinghi;
+        $tmp = $q_Online . $q_Nghexen . $q_Hoinghi;
 
-        switch($tmp)  {
+        switch ($tmp) {
             case "000":
                 $return = 0;
                 break;
@@ -900,27 +1131,8 @@ class ClientController extends Controller
                 $return = 7;
                 break;
             default:
-              $return = 3;
+                $return = 3;
         }
         return $return;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
