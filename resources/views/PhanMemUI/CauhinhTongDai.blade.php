@@ -1,13 +1,13 @@
 <div class="tong-dai-top">
     <form method="get">
         <div>
-            <span style="color: red;">Cấu hình hiện thời: <?php echo $cauhinh_active ?></span>
+            <span style="color: red;">Cấu hình hiện thời: <?php echo $cauhinh_active_real ?></span>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span style="margin-left:100px;">
                 <select name="cauhinh_active">
-                    <option value="0" <?php echo ($cauhinh_active == 0) ? 'selected="selected"' : ''; ?> >0</option>
-                    <option value="1" <?php echo ($cauhinh_active == 1) ? 'selected="selected"' : ''; ?> >1</option>
-                    <option value="2" <?php echo ($cauhinh_active == 2) ? 'selected="selected"' : ''; ?> >2</option>
+                    <option value="0" <?php echo ($cauhinh_active_real == 0) ? 'selected="selected"' : ''; ?> >0</option>
+                    <option value="1" <?php echo ($cauhinh_active_real == 1) ? 'selected="selected"' : ''; ?> >1</option>
+                    <option value="2" <?php echo ($cauhinh_active_real == 2) ? 'selected="selected"' : ''; ?> >2</option>
                 </select>
             </span>
             <span>

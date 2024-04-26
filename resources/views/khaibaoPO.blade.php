@@ -62,18 +62,17 @@
                         <div class="tong-dai-top">
                             <form method="get">
                                 <div>
-                                    <span style="color: red;">Cấu hình hiện thời: <?php echo $cauhinh_active ?></span>
+                                    <span style="color: red;">Cấu hình hiện thời: <?php echo $cauhinh_active_real ?></span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span style="margin-left:100px;">
                                         <select name="cauhinh_active" style="border:1px solid #ccc;padding:5px 10px">
-                                            <option value="0" <?php echo ($cauhinh_active == 0) ? 'selected="selected"' : ''; ?> >0</option>
-                                            <option value="1" <?php echo ($cauhinh_active == 1) ? 'selected="selected"' : ''; ?> >1</option>
-                                            <option value="2" <?php echo ($cauhinh_active == 2) ? 'selected="selected"' : ''; ?> >2</option>
+                                            <option value="0" <?php echo ($cauhinh_active_real == 0) ? 'selected="selected"' : ''; ?> >0</option>
+                                            <option value="1" <?php echo ($cauhinh_active_real == 1) ? 'selected="selected"' : ''; ?> >1</option>
+                                            <option value="2" <?php echo ($cauhinh_active_real == 2) ? 'selected="selected"' : ''; ?> >2</option>
                                         </select>
                                     </span>
                                     <span>
-                                        <input  type="radio" name="cauhinh_type" checked="checked" value="kichhoat"/> Kích hoạt
-                                        <input  type="radio" name="cauhinh_type" value="luu"  /> Lưu
+                                        <input  type="radio" name="cauhinh_type" checked="checked" value="kichhoat"/> Kích hoạt                                        
                                     </span>
                                     <span>
                                         <input type="submit" value="OK" style="border:1px solid #ccc;padding:5px 10px" />
@@ -83,34 +82,106 @@
                             </form>
                         </div>
 
-                        <div id="po-input-wrap">
-                            <h4 style="margin-bottom:5px;">Nhập chuỗi khai báo PO </h4>
-                            <input type="text" id="po-input" name="po-input"  style="width:200px;font-size:24px;border:1px solid #ccc;text-align:center;" placeholder="*60*01#" />
+                        <div>
+                                <div style="width:50%; float:left;">
+                                    
+                                    <h4 style="margin-bottom:0px; margin-top:20px;">Tổng đài 1: <span id="tong-dai-1-text">{{ $thuebao_1->sodienthoai }}</span> </h4>
+                                    <div id="po-output-wrap">
+                                        <br/>
+                                        <div>
+                                            <div class="anh-tong-dai-po" style="background:#fff;width:100%;height:auto;margin:-20px auto 0; position: relative;overflow:hidden;">
+                                                <img src="/storage/images/anh-tong-dai-PO.jpg" class="img img-100" />
+                                                <input type="text" id="po-output" name="po-output"  value="0000"  disabled />
+                                            </div>
+                                        </div>
+
+                                        <div class="phone-list phone-list-td-1">
+                                            <div class="phone-item">
+                                                <a href="javascript:void(0)" id="td-1-phone-2" data-phone-number="{{ $thuebao_2->sodienthoai }}" data-phone-td="1" data-phone-stt="2">
+                                                <img src="/storage/images/phone.png" class="img img-100" />
+                                                    TB2: <span class="phone-number-text">{{ $thuebao_2->sodienthoai }}</span>
+                                                </a>
+                                            </div>
+                                            <div class="phone-item">
+                                                <a href="javascript:void(0)" id="td-1-phone-3"  data-phone-number="{{ $thuebao_3->sodienthoai }}" data-phone-td="1" data-phone-stt="3">
+                                                <img src="/storage/images/phone.png" class="img img-100" />
+                                                    TB3: <span class="phone-number-text">{{ $thuebao_3->sodienthoai }}</span>
+                                                </a>
+                                            </div>
+                                            <div class="phone-item">
+                                                <a href="javascript:void(0)" id="td-1-phone-po" data-phone-number="{{ $thuebao_1->sodienthoai }}" data-phone-td="1" data-phone-stt="1">
+                                                <img src="/storage/images/phone.png" class="img img-100" />
+                                                    PO1: <span class="phone-number-text">{{ $thuebao_1->sodienthoai }}</span>
+                                                </a>
+                                            </div>
+                                            <div class="clear clearfix"></div>
+                                        </div>
+
+
+                                        
+                                    </div>
+                                    <div id="po-input-wrap" style="display: none;" >
+                                        <h4 style="margin-bottom:5px;">Nhập chuỗi khai báo PO </h4>
+                                        <input type="text" id="po-input" name="po-input"  style="width:200px;font-size:24px;border:1px solid #ccc;text-align:center;" placeholder="*60*01#" />
+                                    </div>
+                                </div>
+                                <div style="width:50%; float:left;">
+                                        <h4 style="margin-bottom:24px; margin-top:20px;">Tổng đài 2: 659100 </h4>
+                                        <div class="anh-tong-dai-po" style="background:#fff;width:100%;height:auto;margin:-20px auto 0; position: relative;overflow:hidden;">
+                                            <img src="/storage/images/anh-tong-dai-PO.jpg" class="img img-100" />
+                                        </div>
+                                        <div class="phone-list phone-list-td-2">                                            
+                                            <div class="phone-item">
+                                                <a href="javascript:void(0)" id="td-2-phone-po" data-phone-number="659100" data-phone-td="2" data-phone-stt="1">
+                                                <img src="/storage/images/phone.png" class="img img-100" />
+                                                    PO1: <span class="phone-number-text">659100</span>
+                                                </a>
+                                            </div>
+                                            <div class="clear clearfix"></div>
+                                        </div>
+                                </div>
+                                <div class="clear clearfix"></div>
                         </div>
-                        <div id="po-output-wrap">
-                            <br/>
-                            <div>
-                                <div class="anh-tong-dai-po" style="background:#fff;width:800px;height:576px;margin:-20px auto 0; position: relative;overflow:hidden;">
-                                    <img src="/storage/images/anh-tong-dai-PO.jpg" class="img" />
-                                    <input type="text" id="po-output" name="po-output"  style="width: 100px;
-                                    font-size: 24px;
-                                    border: 1px solid #ccc;
-                                    text-align: center;
-                                    color: red;
-                                    position: absolute;
-                                    top: 84px;
-                                    right: 159px;
-                                    background: #e3e3e3;
-                                    border: 1px solid #313131;" value="0000"  disabled />
+
+                        <div class="keyboard-wrap">
+                            <div class="btn-group-vertical ml-4 mt-4" id="keyboard">
+                                <span class="close close-keyboard">x</span>
+                                <div class="btn-group">
+                                    <h3 id="active-phone">PO1</h3>
+                                    <input type="hidden" id="active_phone_number" value=""/>
+                                    <input type="hidden" id="active_tong_dai" value=""/>
+                                    <input type="hidden" id="active_stt" value=""/>
+                                    <input class="text-center form-control-lg mb-2 keyboard-output" id="code" autocomplete="off" >
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '1';">1</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '2';">2</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '3';">3</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '4';">4</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '5';">5</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '6';">6</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '7';">7</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '8';">8</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '9';">9</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '*';">*</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value + '0';">0</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" id="enter-cmd" onclick="document.getElementById('code').value=document.getElementById('code').value + '#';">#</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value = '';">C</button>                                   
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value.slice(0, -1);">&lt;</button>                        
+                                    <button type="button" class="btn btn-outline-secondary py-3" id="action-call">Go</button>                                              
                                 </div>
 
-
-
-
-                            </div>
-                            <div>
-                                <p style="margin-bottom:0">Kết quả thực hiện: <span id="po-output-text" style="color:red; font-style:italic;">...</span> </p>
-
+                                <div>
+                                    <p style="margin-bottom:0">CMD output: <span id="po-output-text" style="color:red; font-style:italic;">...</span> </p>
+                                </div>
                             </div>
                         </div>
 
@@ -206,6 +277,46 @@
 
                     return count;
                 }
+
+                $(".phone-item a").click(function(){
+                    var phone_number = $(this).attr('data-phone-number');
+                    var tong_dai = $(this).attr('data-phone-td');
+                    var stt = $(this).attr('data-phone-stt');
+                    $("#active_phone_number").val(phone_number);
+                    $("#active_tong_dai").val(tong_dai);
+                    $("#active_stt").val(stt);
+                    $("#active-phone").html("TĐ " + tong_dai + ": " + phone_number);
+                    $(".keyboard-wrap ").show();
+                })
+
+                $("#enter-cmd").click(function(){
+                    var cmd = $("#code").val();
+                    var phone_number = $("#active_phone_number").val();
+                    var tong_dai = $("#active_tong_dai").val();
+                    var stt = $("#active_stt").val();
+                    console.log(cmd);
+                    var isValidCmd = checkCommandValid(cmd);
+                    console.log(isValidCmd);
+                    if(isValidCmd) {
+                        if(tong_dai == 1 && stt == 1) {
+                            processCommand(cmd);
+                        }else {
+                            alert("Hàm gọi máy " + phone_number + " - Tổng đài " + tong_dai + " chưa được lập trình");
+                        }
+                    }else {
+                        alert("Câu lệnh không đúng cú pháp, chưa thực hiện gửi tới tổng đài");
+                    }
+                })
+
+
+
+
+                $(".close-keyboard ").click(function(){
+                    $(".keyboard-wrap ").hide();
+                })
+
+               
+
 
 
 

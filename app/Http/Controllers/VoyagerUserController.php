@@ -60,7 +60,7 @@ class VoyagerUserController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCon
     private function _taoDulieuMau($user_id) {
         //1. Cấu hình - cauhinh
         $deleted = Cauhinh::where('user_id', $user_id)->delete();
-        $arCauhinh = [0, 1, 2];
+        $arCauhinh = [-1, 0, 1, 2];
         foreach($arCauhinh as $item) {
             Cauhinh::create([
                 'user_id' => $user_id,

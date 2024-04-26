@@ -287,11 +287,128 @@ class POController extends Controller
     }
 
     private function execCmd44($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *44*YX1X2#
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
 
+        if($thamso_length == 3){
+            //Lưu dữ liệu
+            $arTmp = str_split($thamso);
+            $id_stt = $arTmp[0];
+            $x1 = $arTmp[1]; //Hướng gọi của kênh Nếu X1 = 0: 15 kênh đầu gọi ra, 15 kênh cuối gọi vào; X1 = 1: 15 kênh đầu gọi vào, 15 kênh cuối gọi ra        
+            $clock = $arTmp[2]; //Chọn Clock Master hay Slave (0:Slave, 1: Master)
+           
+            $vitri_batdau_goi_ra = 16;
+            $vitri_batdau_goi_vao = 1;
+            if($x1 = 1) {
+                $vitri_batdau_goi_ra = 1;
+                $vitri_batdau_goi_vao = 16;
+            }
+            $record = TrungkeE1::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['id_stt', $id_stt]
+            ])->first();
+    
+            $record->vitri_batdau_goi_ra = $vitri_batdau_goi_ra;
+            $record->vitri_batdau_goi_vao = $vitri_batdau_goi_vao;
+            $record->clock = $clock;
+            $record->save();
+
+            $mesage = "Thực thi thành công, đã cập nhật cấu hình theo tham số " . $thamso;
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => ''
+        );
+        return $result;
     }
 
     private function execCmd45($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *45*Y1Y2 X1X2X3#
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
 
+        if($thamso_length == 5){
+            //Lưu dữ liệu
+            $arTmp = str_split($thamso);
+            $id_stt = $arTmp[1];
+            if($arTmp[0] != 0) {
+                $id_stt = $arTmp[0] . $arTmp[1];
+            }
+
+            $kieu_goi = $arTmp[2]; //Kiểu gọi (0: chỉ gọi vào; 1: gọi vào/ra, 2: khoá)
+            $trungke_dieukhienxa = $arTmp[3]; //Loại trung kế (0: Trung kế CO; 1: Trung kế ĐKX)
+            $dac_tinh = $arTmp[4];  //Đặc tíng trung kế (có 4 giá trị với 4 đặc tính khác nhau)
+            $kieu_goi_vao = 1; //0 DISA - 1 PO
+            $kieu_goi_trung_ke = 0;
+            $tinh_cuoc = 0; //thoigian = 0 - dao cuc = 1
+            $mo_khoa = 1;
+
+            $record = TrungkeCO::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['id_stt', $id_stt]
+            ])->first();
+
+            //var_dump($id_stt);
+            
+
+           
+            if($kieu_goi == 2) {
+                $mo_khoa = 0;
+                $kieu_goi_trung_ke = 0;
+            }else {
+                $kieu_goi_trung_ke = $kieu_goi;
+            }
+
+            if($dac_tinh == 0) {
+                $kieu_goi_vao = 1;
+                $tinh_cuoc = 0;
+            }else if($dac_tinh == 1) {
+                $kieu_goi_vao = 1;
+                $tinh_cuoc = 1;
+            }else if($dac_tinh == 2) {
+                $kieu_goi_vao = 0;
+                $tinh_cuoc = 0;
+            }else if($dac_tinh == 3) {
+                $kieu_goi_vao = 0;
+                $tinh_cuoc = 1;
+            }
+
+            $record->kieu_goivao = $kieu_goi_vao;
+            $record->dieukhienxa = $trungke_dieukhienxa;
+            $record->loai = $kieu_goi_trung_ke;
+            $record->mo_khoa = $mo_khoa;
+            $record->tinhcuoc = $tinh_cuoc;
+            //var_dump($trungke_dieukhienxa); die('x');
+            $record->save();
+
+            $mesage = "Thực thi thành công, đã cập nhật cấu hình theo tham số " . $thamso;
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => ''
+        );
+        return $result;
     }
 
     //Đã có code xử lý
@@ -506,10 +623,115 @@ class POController extends Controller
     }
 
     private function execCmd63($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *63*X1X2X3Y#
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';       
+        $led1 = $led2 = $led3 = $led4 = "0";
 
+        if($thamso_length == 4){ //4 tham số
+            $arTmp = str_split($thamso);
+            $mahuong_dinhtuyen = $arTmp[0] . $arTmp[1] . $arTmp[2];
+            $hienthi_dactinh = $arTmp[3];
+            if($hienthi_dactinh == 0) {
+                $output = $mahuong_dinhtuyen;
+            }else {
+                $result = MaHuong::where(
+                    [
+                        ['user_id', $current_user_id],
+                        ['cauhinh_id', $cauhinh_active],
+                        ['mahuong_dinhtuyen', $mahuong_dinhtuyen],
+                    ]
+                )->first();
+                //var_dump($result); die('x');
+                if($result) {
+                    $led1 = $result->sochan;
+                    $led2 = $result->min_soquay;
+                    if($result->huong_id > 9) {
+                        $led3 = $result->huong_id;
+                        $led4 = "";
+                    }else {
+                        $led3 = "0";
+                        $led4 = $result->huong_id;
+                    }
+                }
+                $output = $led1 . $led2 . $led3 . $led4;
+            }
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => null,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
     }
     private function execCmd64($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD *63*X1X2X3Y#
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        $output = '';       
+        $led1 = $led2 = $led3 = $led4 = "0";
 
+        if($thamso_length == 2){
+            $arTmp = str_split($thamso);
+            $mahuong = $arTmp[1];
+            if($arTmp[0] != 0) {
+                $mahuong = $arTmp[0] . $arTmp[1];
+            }
+            $result = Huong::where(
+                [
+                    ['user_id', $current_user_id],
+                    ['cauhinh_id', $cauhinh_active],
+                    ['huong_id', $mahuong],
+                ]
+            )->first();
+            //var_dump($result); die('x');
+            if($result) {
+                $thanhphan = $result->thanhphan;
+                if(strpos($thanhphan, ",")) {
+                    $ar_tmp = explode(",", $thanhphan);
+                    if(count($ar_tmp) > 0) $led1 = $ar_tmp[0];
+                    if(count($ar_tmp) > 1) $led2 = $ar_tmp[1];
+                    if(count($ar_tmp) > 2) $led3 = $ar_tmp[2];
+                }else if(strpos($thanhphan, "-")) {
+
+                }else {
+                    $led1 = $thanhphan;                
+                }                
+                $led4 = $result->loai;
+            }
+            $output = $led1 . $led2 . $led3 . $led4;
+
+            $mesage = "Lấy số liệu thành công";
+        }else {
+            $mesage = "Tham số không chính xác";
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => null,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => $output
+        );
+        return $result;
     }
     private function execCmd65($thamso) {
         $current_user_id = Auth::user()->getKey();

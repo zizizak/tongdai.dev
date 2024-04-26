@@ -119,9 +119,17 @@
                                 </div>
                                 <div class="element">
                                     <select  class="form-select" id="khaibaoHuong_loai" name="khaibaoHuong_loai">
-                                        <?php for ($i = 1; $i <= 4; $i++) {
-                                            echo sprintf('<option value="%s" >%s</option>', $i, $i);
-                                        } ?>
+                                        <?php 
+                                        $ar_loai_huong = array(
+                                            '1' => '1-CO',
+                                            '2' => '2-E1',
+                                            '3' => '3-ĐKX',
+                                            '4' => '4-IP',
+                                        );
+                                        foreach($ar_loai_huong as $key=>$item) {
+                                            echo sprintf('<option value="%s" >%s</option>', $key, $item);
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -261,6 +269,9 @@
                 $("#khaibaoHuong_loai").val(rowData.loai);
                 $("#khaibaoHHuong_thanhphan").val(rowData.thanhphan);
                 $("#khaibaoHuong_xoa_id").val(rowData.id);
+                $("#thanhphan_huong_id").val(rowData.huong_id);
+
+                
 
                 var loai_thanhphan = rowData.loai_thanhphan;
 

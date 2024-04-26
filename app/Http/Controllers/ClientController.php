@@ -108,16 +108,51 @@ class ClientController extends Controller
         }
 
         if (session('cauhinh_active') == NULL) {
-            session(['cauhinh_active' => '0']);
+            session(['cauhinh_active' => '-1']);
+        }
+        if (session('cauhinh_active_real') == NULL) {
+            session(['cauhinh_active_real' => 0]);
+            //@todo: Hàm copy dữ liệu từ cấu hình 0 - mặc định sang cấu hình -1
+            copyCauhinhData(0, -1, $current_user_id);
         }
         if ($request->has('cauhinh_active')) {
-            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+            session(['cauhinh_active_real' => $request->input('cauhinh_active')]);
+            $input_cauhinh_active = $request->input('cauhinh_active');
+            if($request->input('cauhinh_type') == 'kichhoat') {
+                //@todo: Hàm copy dữ liệu từ cấu hình cauhinh_real_active sang cấu hình -1
+                copyCauhinhData($input_cauhinh_active, -1, $current_user_id);
+            }
+            if($request->input('cauhinh_type') == 'luu') {
+                //@todo: Hàm copy dữ liệu từ cấu hình -1  sang cấu hình cauhinh_real_active
+                if($input_cauhinh_active == 0) { //Thông báo lỗi
+                    return redirect('/admin/khaibaoPO?error=luu_cauhinh_0');
+                }
+                copyCauhinhData(-1, $input_cauhinh_active, $current_user_id);
+            }
+            return redirect('/admin/khaibaoPO');
         }
+
         $cauhinh_active = session('cauhinh_active');
+        $cauhinh_active_real = session('cauhinh_active_real');
+
+        $thuebaos = $this->getThuebaoByCard($current_user_id, $cauhinh_active, 1); //Lấy ra 3 số đầu tiên của danh bạ
+        $thuebao_1 = $thuebao_2 = $thuebao_3 = null;
+        foreach($thuebaos as $item) {
+            if($item->thuebao_id == 1) $thuebao_1 = $item;
+            if($item->thuebao_id == 2) $thuebao_2 = $item;
+            if($item->thuebao_id == 3) $thuebao_3 = $item;
+        }
+
+
+        //var_dump($thuebaos); die('x');
 
         return view('khaibaoPO', compact(
             'arCauhinh',
             'cauhinh_active',
+            'cauhinh_active_real',
+            'thuebao_1',
+            'thuebao_2',
+            'thuebao_3',
             //'bangsoquay',
             //'trungkeCOs',
             //'trungkeE1s',
@@ -139,14 +174,37 @@ class ClientController extends Controller
         }
 
         if (session('cauhinh_active') == NULL) {
-            session(['cauhinh_active' => '0']);
+            session(['cauhinh_active' => '-1']);
+        }
+       
+        if (session('cauhinh_active_real') === NULL) {
+            session(['cauhinh_active_real' => 0]);
+            //@todo: Hàm copy dữ liệu từ cấu hình 0 - mặc định sang cấu hình -1
+            copyCauhinhData(0, -1, $current_user_id);
+            die(' set cau hinh mac dinh');
         }
         if ($request->has('cauhinh_active')) {
-            session(['cauhinh_active' => $request->input('cauhinh_active')]);
+            session(['cauhinh_active_real' => $request->input('cauhinh_active')]);
+            $input_cauhinh_active = $request->input('cauhinh_active');
+            if($request->input('cauhinh_type') == 'kichhoat') {
+                //@todo: Hàm copy dữ liệu từ cấu hình cauhinh_real_active sang cấu hình -1
+                copyCauhinhData($input_cauhinh_active, -1, $current_user_id);
+            }
+            if($request->input('cauhinh_type') == 'luu') {
+                //@todo: Hàm copy dữ liệu từ cấu hình -1  sang cấu hình cauhinh_real_active
+                if($input_cauhinh_active == 0) { //Thông báo lỗi
+                    return redirect('/admin/khaibaoPM?error=luu_cauhinh_0');
+                }
+                copyCauhinhData(-1, $input_cauhinh_active, $current_user_id);
+            }
+            return redirect('/admin/khaibaoPM');
         }
         $cauhinh_active = session('cauhinh_active');
+        $cauhinh_active_real = session('cauhinh_active_real');
 
         $trungkeE1s = $this->getTrungkeE1($current_user_id, $cauhinh_active);
+        $error = $request->input('error');
+
         /*
         $bangsoquay = $this->getBangsoquay($current_user_id, $cauhinh_active);
         $trungkeCOs = $this->getTrungkeCO($current_user_id, $cauhinh_active);
@@ -159,6 +217,8 @@ class ClientController extends Controller
         return view('khaibaoPM', compact(
             'arCauhinh',
             'cauhinh_active',
+            'cauhinh_active_real',
+            'error',
             //'bangsoquay',
             //'trungkeCOs',
             'trungkeE1s',
@@ -328,7 +388,7 @@ class ClientController extends Controller
 
         $result = array(
             'result' => 'sucess',
-            'data'   => 'abc'
+            'data'   => 'task not found'
         );
 
         $task = $request->task;
@@ -554,6 +614,28 @@ class ClientController extends Controller
             );
         }
 
+        if ($task == 'UpdateThanhphanHuong') {
+            $thanhphan_huong_id = $request->thanhphan_huong_id;
+            $thanhphan = "";
+            //loai_thanhphan E1 = 1; DKX 0
+            $loai_thanhphan = 0;
+            if ($request->has('thanhphan_dkx')) {
+                $loai_thanhphan = 0;
+                $thanhphan = $request->thanhphan_dkx_giatri;
+            }else if ($request->has('thanhphan_E1')) {
+                $loai_thanhphan = 1;
+                $thanhphan = $request->thanhphan_E1_giatri;
+            }
+
+            $data = $this->UpdateThanhphanHuong($current_user_id, $cauhinh_active, $thanhphan_huong_id, $thanhphan, $loai_thanhphan);
+            $result = array(
+                'result' => 'sucess',
+                'data'   => $data,
+                'message' => 'Lưu thành công'
+            );
+        }
+
+
 
 
         return Response::json($result);
@@ -655,6 +737,7 @@ class ClientController extends Controller
             );
         }
 
+        
 
         return Response::json($result);
     }
@@ -810,6 +893,20 @@ class ClientController extends Controller
         $record->tinhcuoc = $tinhcuoc;
         $record->kieu_goivao = $kieu_goivao;
         $record->dieukhienxa = $dieukhienxa;
+        $record->save();
+
+        return $record;
+    }
+
+    private function UpdateThanhphanHuong($current_user_id, $cauhinh_active, $thanhphan_huong_id, $thanhphan, $loai_thanhphan) {
+        $record = Huong::where([
+            ['user_id', $current_user_id],
+            ['cauhinh_id', $cauhinh_active],
+            ['huong_id', $thanhphan_huong_id],
+        ])->first();
+
+        $record->thanhphan = $thanhphan;
+        $record->loai_thanhphan = $loai_thanhphan;
         $record->save();
 
         return $record;

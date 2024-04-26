@@ -403,3 +403,113 @@ a.ajax_link {
     border: none;
     background: transparent;
   }
+  .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
+
+  .img-100 {
+    max-width: 100%;
+  }
+
+  #po-output {
+    width: 76px;
+    font-size: 28px;
+    border: 1px solid #ccc;
+    text-align: center;
+    color: red;
+    position: absolute;
+    top: 46px;
+    right: 96px;
+    background: #e3e3e3;
+    border: 1px solid #313131;
+  }
+
+  .phone-list-td-1 .phone-item {
+    width: 20%;
+    margin: 5px 5%;
+    float: left;
+    padding: 0 0%;
+}
+
+.phone-list-td-2 {
+    text-align: center;
+}
+
+.phone-list-td-2 .phone-item {
+    width: 20%;
+    margin: 5px auto;
+    padding: 0 0%;
+}
+
+.phone-list-td-1 .phone-item img,
+.phone-list-td-2 .phone-item img {
+    width: 80%;
+}
+
+.keyboard-output {
+    font-size: 22px;
+    margin-bottom: 20px;
+    width: 175px;
+    line-height: 22px;
+    padding: 5px;
+    border:1px solid #ccc;
+}
+
+button.btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    background: #fff;
+    font-weight: normal;
+    border: 1px solid #ccc;
+    width: 55px;
+}
+
+.keyboard-wrap {
+    display: none;
+    width: 350px;
+    height: 500px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    background: #dfdfdf;
+    border: 1px solid #ccc;
+}
+#keyboard {
+    padding:0;
+    margin:0;
+    position:relative;
+}
+
+span.close.close-keyboard {
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.form-logout button.btn {
+    border: none;
+    width: 85px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    font-size: 14px;
+}
