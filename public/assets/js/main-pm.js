@@ -414,6 +414,9 @@ jQuery(document).ready(function($){
             dataType: 'json',
             success: function (data) {
                 console.log(data);
+                if(!data.result) {
+                    alert(data.message);
+                }
                 loadHuong(1);
             },
             error: function (data) {
@@ -493,6 +496,10 @@ jQuery(document).ready(function($){
             dataType: 'json',
             success: function (data) {
                 console.log(data);
+                if(!data.result) {
+                    alert(data.message);
+                }
+
                 loadMaHuong(1);
             },
             error: function (data) {
@@ -715,7 +722,7 @@ jQuery(document).ready(function($){
         return false;
     })
 
-    
+
 
     /** All Ajax function */
     function loadformE1() {

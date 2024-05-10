@@ -215,7 +215,42 @@ class POController extends Controller
     }
 
     private function execCmd40($thamso) {
+        //2 case
+        //Cách 1: * 40 # Lưu vào cấu hình hiện tại, lệnh này chỉ thực hiện khi cấu hình hiện tại khác cấu hình mặc định (cấu hình 0)
+        //Cách 2:* 40 * X # Lưu vào cấu hình định trước X: Cấu hình cần lưu, giá trị 1 hoặc 2.
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        $cauhinh_active_real = session('cauhinh_active_real');
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
 
+        if($thamso_length == 0){ //Lưu cấu hình hiện tại
+            if($cauhinh_active_real == 0) {
+                $mesage = "Lỗi: Không thể lưu cấu hình 0";
+            }else {
+                copyCauhinhData($cauhinh_active, $cauhinh_active_real, $current_user_id);
+                $mesage = "Lưu thành công cấu hình " . $cauhinh_active_real;
+            }
+        }else if($thamso_length == 1){ //Lưu cấu hình theo giá trị tham số
+            if($thamso == 0) {
+                $mesage = "Lỗi: Không thể lưu cấu hình 0";
+            }else {
+                copyCauhinhData($cauhinh_active, $thamso, $current_user_id);
+                $mesage = "Lưu thành công cấu hình " . $thamso;
+            }
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => ''
+        );
+        return $result;
     }
 
     //Đã có code xử lý
@@ -299,9 +334,9 @@ class POController extends Controller
             //Lưu dữ liệu
             $arTmp = str_split($thamso);
             $id_stt = $arTmp[0];
-            $x1 = $arTmp[1]; //Hướng gọi của kênh Nếu X1 = 0: 15 kênh đầu gọi ra, 15 kênh cuối gọi vào; X1 = 1: 15 kênh đầu gọi vào, 15 kênh cuối gọi ra        
+            $x1 = $arTmp[1]; //Hướng gọi của kênh Nếu X1 = 0: 15 kênh đầu gọi ra, 15 kênh cuối gọi vào; X1 = 1: 15 kênh đầu gọi vào, 15 kênh cuối gọi ra
             $clock = $arTmp[2]; //Chọn Clock Master hay Slave (0:Slave, 1: Master)
-           
+
             $vitri_batdau_goi_ra = 16;
             $vitri_batdau_goi_vao = 1;
             if($x1 = 1) {
@@ -313,7 +348,7 @@ class POController extends Controller
                 ['cauhinh_id', $cauhinh_active],
                 ['id_stt', $id_stt]
             ])->first();
-    
+
             $record->vitri_batdau_goi_ra = $vitri_batdau_goi_ra;
             $record->vitri_batdau_goi_vao = $vitri_batdau_goi_vao;
             $record->clock = $clock;
@@ -365,9 +400,9 @@ class POController extends Controller
             ])->first();
 
             //var_dump($id_stt);
-            
 
-           
+
+
             if($kieu_goi == 2) {
                 $mo_khoa = 0;
                 $kieu_goi_trung_ke = 0;
@@ -630,12 +665,14 @@ class POController extends Controller
         $mesage = "";
         $record = null;
         $sound = 'sucess';
-        $output = '';       
+        $output = '';
         $led1 = $led2 = $led3 = $led4 = "0";
 
         if($thamso_length == 4){ //4 tham số
             $arTmp = str_split($thamso);
             $mahuong_dinhtuyen = $arTmp[0] . $arTmp[1] . $arTmp[2];
+            $mahuong_dinhtuyen = (int) $mahuong_dinhtuyen;
+            //var_dump($mahuong_dinhtuyen);
             $hienthi_dactinh = $arTmp[3];
             if($hienthi_dactinh == 0) {
                 $output = $mahuong_dinhtuyen;
@@ -644,7 +681,7 @@ class POController extends Controller
                     [
                         ['user_id', $current_user_id],
                         ['cauhinh_id', $cauhinh_active],
-                        ['mahuong_dinhtuyen', $mahuong_dinhtuyen],
+                        ['mahuong_id', $mahuong_dinhtuyen],
                     ]
                 )->first();
                 //var_dump($result); die('x');
@@ -655,8 +692,9 @@ class POController extends Controller
                         $led3 = $result->huong_id;
                         $led4 = "";
                     }else {
-                        $led3 = "0";
+                        $led3 = "";
                         $led4 = $result->huong_id;
+                        if(strlen($led4) < 2) $led3 = "0";
                     }
                 }
                 $output = $led1 . $led2 . $led3 . $led4;
@@ -685,7 +723,7 @@ class POController extends Controller
         $mesage = "";
         $record = null;
         $sound = 'sucess';
-        $output = '';       
+        $output = '';
         $led1 = $led2 = $led3 = $led4 = "0";
 
         if($thamso_length == 2){
@@ -712,8 +750,8 @@ class POController extends Controller
                 }else if(strpos($thanhphan, "-")) {
 
                 }else {
-                    $led1 = $thanhphan;                
-                }                
+                    $led1 = $thanhphan;
+                }
                 $led4 = $result->loai;
             }
             $output = $led1 . $led2 . $led3 . $led4;
@@ -735,7 +773,7 @@ class POController extends Controller
     }
     private function execCmd65($thamso) {
         $current_user_id = Auth::user()->getKey();
-        $cauhinh_active = session('cauhinh_active');
+        $cauhinh_active = session('cauhinh_active_real');
         // CMD *65 #
         $thamso_length = strlen($thamso);
         $mesage = "";

@@ -27,7 +27,13 @@ if (!function_exists('formatDate')) {
 if (!function_exists('copyCauhinhData')) {
     function copyCauhinhData($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> Copy from %s to %s user id: %s", $from, $to, $user_id)); 
+        //echo sprintf("<br/> Copy from %s to %s user id: %s", $from, $to, $user_id); die('xxxx');
+
+        error_log(sprintf("<br/> Copy from %s to %s user id: %s", $from, $to, $user_id));
+
+        //1. Cau hinh
+        copyCauhinh($from, $to, $user_id);
+
         //2. Bảng số quay - bangsoquay
         copyBangSoQuay($from, $to, $user_id);
 
@@ -48,23 +54,45 @@ if (!function_exists('copyCauhinhData')) {
 
         //8. Thuê bao - thuebao
         copyThuebao($from, $to, $user_id);
-        
-        
 
         return true;
     }
 }
 
+if (!function_exists('copyCauhinh')) {
+    function copyCauhinh($from, $to, $user_id)
+    {
+        //echo sprintf("<br/> copyCauhinh from %s to %s user id: %s", $from, $to, $user_id);
+        error_log(sprintf("<br/> copyCauhinh from %s to %s user id: %s", $from, $to, $user_id));
+        $record = Cauhinh::where([
+            ['user_id', $user_id],
+            ['stt', $from],
+        ])->first();
+
+        $record_udpate = Cauhinh::where([
+            ['user_id', $user_id],
+            ['stt', $to],
+        ])->first();
+
+        $record_udpate->prefix = $record->prefix;
+        $record_udpate->sobatdau = $record->sobatdau;
+        $record_udpate->save();
+
+    }
+}
+
+
+
 if (!function_exists('copyBangSoQuay')) {
     function copyBangSoQuay($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> copyBangSoQuay from %s to %s user id: %s", $from, $to, $user_id)); 
-        //Xoa du lieu cau hinh $to        
+        error_log(sprintf("<br/> copyBangSoQuay from %s to %s user id: %s", $from, $to, $user_id));
+        //Xoa du lieu cau hinh $to
         $deleted = Bangsoquay::where([
             ['user_id', $user_id],
             ['cauhinh_id', $to],
         ])->delete();
-        
+
         //Goi DB lay ra cac ban ghi cau hinh $from
         $results = Bangsoquay::where(
             [
@@ -82,20 +110,20 @@ if (!function_exists('copyBangSoQuay')) {
                 'so_digits' => $item['so_digits'],
                 'created_at' => now()
             ]);
-        }        
+        }
     }
 }
 
 if (!function_exists('copyTrungkeCO')) {
     function copyTrungkeCO($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> copyTrungkeCO from %s to %s user id: %s", $from, $to, $user_id)); 
-        //Xoa du lieu cau hinh $to        
+        error_log(sprintf("<br/> copyTrungkeCO from %s to %s user id: %s", $from, $to, $user_id));
+        //Xoa du lieu cau hinh $to
         $deleted = TrungkeCO::where([
             ['user_id', $user_id],
             ['cauhinh_id', $to],
         ])->delete();
-        
+
         //Goi DB lay ra cac ban ghi cau hinh $from
         $results = TrungkeCO::where(
             [
@@ -105,7 +133,7 @@ if (!function_exists('copyTrungkeCO')) {
         )->get();
 
         //Duyet tung ban ghi luu vao cau hinh $to
-        foreach($results as $item) {            
+        foreach($results as $item) {
             TrungkeCO::create([
                 'user_id' => $user_id,
                 'cauhinh_id' => $to,
@@ -117,20 +145,20 @@ if (!function_exists('copyTrungkeCO')) {
                 'kieu_goivao' => $item['kieu_goivao'],
                 'created_at' => now()
             ]);
-        }        
+        }
     }
 }
 
 if (!function_exists('copyTrungkeE1')) {
     function copyTrungkeE1($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> copyTrungkeE1 from %s to %s user id: %s", $from, $to, $user_id)); 
-        //Xoa du lieu cau hinh $to        
+        error_log(sprintf("<br/> copyTrungkeE1 from %s to %s user id: %s", $from, $to, $user_id));
+        //Xoa du lieu cau hinh $to
         $deleted = TrungkeE1::where([
             ['user_id', $user_id],
             ['cauhinh_id', $to],
         ])->delete();
-        
+
         //Goi DB lay ra cac ban ghi cau hinh $from
         $results = TrungkeE1::where(
             [
@@ -140,7 +168,7 @@ if (!function_exists('copyTrungkeE1')) {
         )->get();
 
         //Duyet tung ban ghi luu vao cau hinh $to
-        foreach($results as $item) {            
+        foreach($results as $item) {
             TrungkeE1::create([
                 'user_id' => $user_id,
                 'cauhinh_id' => $to,
@@ -150,20 +178,20 @@ if (!function_exists('copyTrungkeE1')) {
                 'clock' => $item['clock'],
                 'created_at' => now()
             ]);
-        }        
+        }
     }
 }
 
 if (!function_exists('copyHuong')) {
     function copyHuong($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> copyHuong from %s to %s user id: %s", $from, $to, $user_id)); 
-        //Xoa du lieu cau hinh $to        
+        error_log(sprintf("<br/> copyHuong from %s to %s user id: %s", $from, $to, $user_id));
+        //Xoa du lieu cau hinh $to
         $deleted = Huong::where([
             ['user_id', $user_id],
             ['cauhinh_id', $to],
         ])->delete();
-        
+
         //Goi DB lay ra cac ban ghi cau hinh $from
         $results = Huong::where(
             [
@@ -173,7 +201,7 @@ if (!function_exists('copyHuong')) {
         )->get();
 
         //Duyet tung ban ghi luu vao cau hinh $to
-        foreach($results as $item) {            
+        foreach($results as $item) {
             Huong::create([
                 'user_id' => $user_id,
                 'cauhinh_id' => $to,
@@ -182,20 +210,20 @@ if (!function_exists('copyHuong')) {
                 'thanhphan' => $item['thanhphan'],
                 'created_at' => now()
             ]);
-        }     
+        }
     }
 }
 
 if (!function_exists('copyMaHuong')) {
     function copyMaHuong($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> copyMaHuong from %s to %s user id: %s", $from, $to, $user_id)); 
-        //Xoa du lieu cau hinh $to        
+        error_log(sprintf("<br/> copyMaHuong from %s to %s user id: %s", $from, $to, $user_id));
+        //Xoa du lieu cau hinh $to
         $deleted = MaHuong::where([
             ['user_id', $user_id],
             ['cauhinh_id', $to],
         ])->delete();
-        
+
         //Goi DB lay ra cac ban ghi cau hinh $from
         $results = MaHuong::where(
             [
@@ -205,7 +233,7 @@ if (!function_exists('copyMaHuong')) {
         )->get();
 
         //Duyet tung ban ghi luu vao cau hinh $to
-        foreach($results as $item) {                        
+        foreach($results as $item) {
             MaHuong::create([
                 'user_id' => $user_id,
                 'cauhinh_id' => $to,
@@ -218,20 +246,20 @@ if (!function_exists('copyMaHuong')) {
                 'created_at' => now()
             ]);
 
-        } 
+        }
     }
 }
 
 if (!function_exists('copyClass')) {
     function copyClass($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> copyClass from %s to %s user id: %s", $from, $to, $user_id)); 
-        //Xoa du lieu cau hinh $to        
+        error_log(sprintf("<br/> copyClass from %s to %s user id: %s", $from, $to, $user_id));
+        //Xoa du lieu cau hinh $to
         $deleted = TongdaiClass::where([
             ['user_id', $user_id],
             ['cauhinh_id', $to],
         ])->delete();
-        
+
         //Goi DB lay ra cac ban ghi cau hinh $from
         $results = TongdaiClass::where(
             [
@@ -241,7 +269,7 @@ if (!function_exists('copyClass')) {
         )->get();
 
         //Duyet tung ban ghi luu vao cau hinh $to
-        foreach($results as $item) {                        
+        foreach($results as $item) {
             TongdaiClass::create([
                 'user_id' => $user_id,
                 'cauhinh_id' => $to,
@@ -251,20 +279,20 @@ if (!function_exists('copyClass')) {
                 'created_at' => now()
             ]);
 
-        } 
+        }
     }
 }
 
 if (!function_exists('copyThuebao')) {
     function copyThuebao($from, $to, $user_id)
     {
-        error_log(sprintf("<br/> copyThuebao from %s to %s user id: %s", $from, $to, $user_id)); 
-        //Xoa du lieu cau hinh $to        
+        error_log(sprintf("<br/> copyThuebao from %s to %s user id: %s", $from, $to, $user_id));
+        //Xoa du lieu cau hinh $to
         $deleted = Thuebao::where([
             ['user_id', $user_id],
             ['cauhinh_id', $to],
         ])->delete();
-        
+
         //Goi DB lay ra cac ban ghi cau hinh $from
         $results = Thuebao::where(
             [
@@ -274,7 +302,7 @@ if (!function_exists('copyThuebao')) {
         )->get();
 
         //Duyet tung ban ghi luu vao cau hinh $to
-        foreach($results as $item) {                        
+        foreach($results as $item) {
             Thuebao::create([
                 'user_id' => $user_id,
                 'cauhinh_id' => $to,
@@ -287,6 +315,22 @@ if (!function_exists('copyThuebao')) {
                 'loai' => $item['loai'],
                 'created_at' => now()
             ]);
-        } 
+        }
+    }
+}
+
+
+if (!function_exists('generateSelect')) {
+    function generateSelect($name, $id, $options, $currentValue) {
+        $selectHTML = '<select class="form-control" id="' . $id . '" name="' . $name . '">';
+        foreach ($options as $option) {
+            if ($option === $currentValue) {
+                $selectHTML .= '<option selected>' . $option . '</option>';
+            } else {
+                $selectHTML .= '<option>' . $option . '</option>';
+            }
+        }
+        $selectHTML .= '</select>';
+        return $selectHTML;
     }
 }

@@ -174,8 +174,4 @@ require 'condb.php';
 </body>
 
 </html>
-<script>
-    function myFunction() {
-        location.replace("thuebaoipu.blade.php")
-    }
-</script>
+

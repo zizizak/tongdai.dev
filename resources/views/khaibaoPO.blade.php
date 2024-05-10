@@ -72,7 +72,7 @@
                                         </select>
                                     </span>
                                     <span>
-                                        <input  type="radio" name="cauhinh_type" checked="checked" value="kichhoat"/> Kích hoạt                                        
+                                        <input  type="radio" name="cauhinh_type" checked="checked" value="kichhoat"/> Kích hoạt
                                     </span>
                                     <span>
                                         <input type="submit" value="OK" style="border:1px solid #ccc;padding:5px 10px" />
@@ -84,7 +84,7 @@
 
                         <div>
                                 <div style="width:50%; float:left;">
-                                    
+
                                     <h4 style="margin-bottom:0px; margin-top:20px;">Tổng đài 1: <span id="tong-dai-1-text">{{ $thuebao_1->sodienthoai }}</span> </h4>
                                     <div id="po-output-wrap">
                                         <br/>
@@ -118,7 +118,7 @@
                                         </div>
 
 
-                                        
+
                                     </div>
                                     <div id="po-input-wrap" style="display: none;" >
                                         <h4 style="margin-bottom:5px;">Nhập chuỗi khai báo PO </h4>
@@ -130,7 +130,7 @@
                                         <div class="anh-tong-dai-po" style="background:#fff;width:100%;height:auto;margin:-20px auto 0; position: relative;overflow:hidden;">
                                             <img src="/storage/images/anh-tong-dai-PO.jpg" class="img img-100" />
                                         </div>
-                                        <div class="phone-list phone-list-td-2">                                            
+                                        <div class="phone-list phone-list-td-2">
                                             <div class="phone-item">
                                                 <a href="javascript:void(0)" id="td-2-phone-po" data-phone-number="659100" data-phone-td="2" data-phone-stt="1">
                                                 <img src="/storage/images/phone.png" class="img img-100" />
@@ -174,9 +174,9 @@
                                     <button type="button" class="btn btn-outline-secondary py-3" id="enter-cmd" onclick="document.getElementById('code').value=document.getElementById('code').value + '#';">#</button>
                                 </div>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value = '';">C</button>                                   
-                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value.slice(0, -1);">&lt;</button>                        
-                                    <button type="button" class="btn btn-outline-secondary py-3" id="action-call">Go</button>                                              
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value = '';">C</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('code').value=document.getElementById('code').value.slice(0, -1);">&lt;</button>
+                                    <button type="button" class="btn btn-outline-secondary py-3" id="action-call">Go</button>
                                 </div>
 
                                 <div>
@@ -244,6 +244,19 @@
                             if(cmd.indexOf("*50") >= 0) {
                                 location.href="/admin/khaibaoPO?cauhinh_active=" + data.thamso + "&cauhinh_type=kichhoat";
                             }
+                            if(cmd.indexOf("*41") >= 0) {
+                                var dauso = data.thamso;
+                                $("#tong-dai-1-text").html( dauso + "100");
+                                $("#td-1-phone-po").attr("data-phone-number", dauso + "100");
+                                $("#td-1-phone-po .phone-number-text").html(dauso + "100");
+
+                                $("#td-1-phone-2").attr("data-phone-number", dauso + "101");
+                                $("#td-1-phone-2 .phone-number-text").html(dauso + "101");
+
+                                $("#td-1-phone-3").attr("data-phone-number", dauso + "102");
+                                $("#td-1-phone-3 .phone-number-text").html(dauso + "102");
+                            }
+                            $("#code").val("");
                         },
                         error: function (data) {
                             console.log(data);
@@ -301,7 +314,7 @@
                         if(tong_dai == 1 && stt == 1) {
                             processCommand(cmd);
                         }else {
-                            alert("Hàm gọi máy " + phone_number + " - Tổng đài " + tong_dai + " chưa được lập trình");
+                            alert("Hàm gọi máy " + phone_number + " - Tổng đài " + tong_dai + " không được phép khai báo");
                         }
                     }else {
                         alert("Câu lệnh không đúng cú pháp, chưa thực hiện gửi tới tổng đài");
@@ -315,7 +328,7 @@
                     $(".keyboard-wrap ").hide();
                 })
 
-               
+
 
 
 

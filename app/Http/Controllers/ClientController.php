@@ -116,10 +116,13 @@ class ClientController extends Controller
             copyCauhinhData(0, -1, $current_user_id);
         }
         if ($request->has('cauhinh_active')) {
+            //var_dump($request->input('cauhinh_active'));
+
             session(['cauhinh_active_real' => $request->input('cauhinh_active')]);
             $input_cauhinh_active = $request->input('cauhinh_active');
             if($request->input('cauhinh_type') == 'kichhoat') {
                 //@todo: Hàm copy dữ liệu từ cấu hình cauhinh_real_active sang cấu hình -1
+                //die('kichhoat');
                 copyCauhinhData($input_cauhinh_active, -1, $current_user_id);
             }
             if($request->input('cauhinh_type') == 'luu') {
@@ -176,12 +179,12 @@ class ClientController extends Controller
         if (session('cauhinh_active') == NULL) {
             session(['cauhinh_active' => '-1']);
         }
-       
+
         if (session('cauhinh_active_real') === NULL) {
             session(['cauhinh_active_real' => 0]);
             //@todo: Hàm copy dữ liệu từ cấu hình 0 - mặc định sang cấu hình -1
             copyCauhinhData(0, -1, $current_user_id);
-            die(' set cau hinh mac dinh');
+            //die(' set cau hinh mac dinh');
         }
         if ($request->has('cauhinh_active')) {
             session(['cauhinh_active_real' => $request->input('cauhinh_active')]);
@@ -222,158 +225,6 @@ class ClientController extends Controller
             //'bangsoquay',
             //'trungkeCOs',
             'trungkeE1s',
-            //'huongs',
-            //'mahuongs',
-            //'tongdaiClass',
-            //'thuebaos',
-        ));
-    }
-
-    public function ipu(Request $request)
-    {
-        $current_user_id = Auth::user()->getKey();
-        $cauhinhs = $this->getCauhinh($current_user_id);
-        $arCauhinh = [];
-        foreach ($cauhinhs as $cauhinh) {
-            $arCauhinh[] = $cauhinh->stt;
-        }
-
-        if (session('cauhinh_active') == NULL) {
-            session(['cauhinh_active' => '0']);
-        }
-        if ($request->has('cauhinh_active')) {
-            session(['cauhinh_active' => $request->input('cauhinh_active')]);
-        }
-        $cauhinh_active = session('cauhinh_active');
-
-        return view('ipu', compact(
-            'arCauhinh',
-            'cauhinh_active',
-            //'bangsoquay',
-            //'trungkeCOs',
-            //'trungkeE1s',
-            //'huongs',
-            //'mahuongs',
-            //'tongdaiClass',
-            //'thuebaos',
-        ));
-    }
-
-
-    public function thuebaoipu(Request $request)
-    {
-        $current_user_id = Auth::user()->getKey();
-        $cauhinhs = $this->getCauhinh($current_user_id);
-        $arCauhinh = [];
-        foreach ($cauhinhs as $cauhinh) {
-            $arCauhinh[] = $cauhinh->stt;
-        }
-
-        if (session('cauhinh_active') == NULL) {
-            session(['cauhinh_active' => '0']);
-        }
-        if ($request->has('cauhinh_active')) {
-            session(['cauhinh_active' => $request->input('cauhinh_active')]);
-        }
-        $cauhinh_active = session('cauhinh_active');
-
-        return view('thuebaoipu', compact(
-            'arCauhinh',
-            'cauhinh_active',
-            //'bangsoquay',
-            //'trungkeCOs',
-            //'trungkeE1s',
-            //'huongs',
-            //'mahuongs',
-            //'tongdaiClass',
-            //'thuebaos',
-        ));
-    }
-
-
-    public function dialplan(Request $request)
-    {
-        $current_user_id = Auth::user()->getKey();
-        $cauhinhs = $this->getCauhinh($current_user_id);
-        $arCauhinh = [];
-        foreach ($cauhinhs as $cauhinh) {
-            $arCauhinh[] = $cauhinh->stt;
-        }
-
-        if (session('cauhinh_active') == NULL) {
-            session(['cauhinh_active' => '0']);
-        }
-        if ($request->has('cauhinh_active')) {
-            session(['cauhinh_active' => $request->input('cauhinh_active')]);
-        }
-        $cauhinh_active = session('cauhinh_active');
-
-        return view('dialplan', compact(
-            'arCauhinh',
-            'cauhinh_active',
-            //'bangsoquay',
-            //'trungkeCOs',
-            //'trungkeE1s',
-            //'huongs',
-            //'mahuongs',
-            //'tongdaiClass',
-            //'thuebaos',
-        ));
-    }
-
-    public function huonggoivaoipu(Request $request)
-    {
-        $current_user_id = Auth::user()->getKey();
-        $cauhinhs = $this->getCauhinh($current_user_id);
-        $arCauhinh = [];
-        foreach ($cauhinhs as $cauhinh) {
-            $arCauhinh[] = $cauhinh->stt;
-        }
-
-        if (session('cauhinh_active') == NULL) {
-            session(['cauhinh_active' => '0']);
-        }
-        if ($request->has('cauhinh_active')) {
-            session(['cauhinh_active' => $request->input('cauhinh_active')]);
-        }
-        $cauhinh_active = session('cauhinh_active');
-
-        return view('huonggoivaoipu', compact(
-            'arCauhinh',
-            'cauhinh_active',
-            //'bangsoquay',
-            //'trungkeCOs',
-            //'trungkeE1s',
-            //'huongs',
-            //'mahuongs',
-            //'tongdaiClass',
-            //'thuebaos',
-        ));
-    }
-
-    public function huonggoiraipu(Request $request)
-    {
-        $current_user_id = Auth::user()->getKey();
-        $cauhinhs = $this->getCauhinh($current_user_id);
-        $arCauhinh = [];
-        foreach ($cauhinhs as $cauhinh) {
-            $arCauhinh[] = $cauhinh->stt;
-        }
-
-        if (session('cauhinh_active') == NULL) {
-            session(['cauhinh_active' => '0']);
-        }
-        if ($request->has('cauhinh_active')) {
-            session(['cauhinh_active' => $request->input('cauhinh_active')]);
-        }
-        $cauhinh_active = session('cauhinh_active');
-
-        return view('huonggoiraipu', compact(
-            'arCauhinh',
-            'cauhinh_active',
-            //'bangsoquay',
-            //'trungkeCOs',
-            //'trungkeE1s',
             //'huongs',
             //'mahuongs',
             //'tongdaiClass',
@@ -527,11 +378,24 @@ class ClientController extends Controller
             $loai = $request->khaibaoHuong_loai;
             $thanhphan = $request->khaibaoHHuong_thanhphan;
             $loai_thanhphan = $request->khaibaoHHuong_loai_thanhphan;
-            $data = $this->UpdateHuong($current_user_id, $cauhinh_active, $huong_id, $loai, $thanhphan, $loai_thanhphan);
+
+            $huong = Huong::where('user_id', $current_user_id)
+                ->where('cauhinh_id', $cauhinh_active)
+                ->where('huong_id', $huong_id)
+                ->first();
+            $data = null;
+            $message = "Lưu thành công";
+            $status = true;
+            if ($huong) {
+                $message = "Lỗi: hướng đã tồn tại";
+                $status = false;
+            } else {
+                $data = $this->UpdateHuong($current_user_id, $cauhinh_active, $huong_id, $loai, $thanhphan, $loai_thanhphan);
+            }
             $result = array(
-                'result' => 'sucess',
+                'result' => $status,
                 'data'   => $data,
-                'message' => 'Lưu thành công'
+                'message' => $message
             );
         }
 
@@ -563,11 +427,24 @@ class ClientController extends Controller
             $sochan = $request->Mahuong_sochan;
             $min_soquay = $request->Mahuong_min_soquay;
             $huong_id = $request->Mahuong_huong;
-            $data = $this->UpdateMaHuong($current_user_id, $cauhinh_active, $mahuong_id, $mahuong_dinhtuyen, $sochan, $min_soquay, $huong_id);
+
+            $mahuong = MaHuong::where('user_id', $current_user_id)
+                ->where('cauhinh_id', $cauhinh_active)
+                ->where('mahuong_id', $mahuong_id)
+                ->first();
+            $data = null;
+            $message = "Lưu thành công";
+            $status = true;
+            if ($mahuong) {
+                $message = "Lỗi: mã hướng đã tồn tại";
+                $status = false;
+            } else {
+                $data = $this->UpdateMaHuong($current_user_id, $cauhinh_active, $mahuong_id, $mahuong_dinhtuyen, $sochan, $min_soquay, $huong_id);
+            }
             $result = array(
-                'result' => 'sucess',
+                'result' => $status,
                 'data'   => $data,
-                'message' => 'Lưu thành công'
+                'message' => $message
             );
         }
 
@@ -737,7 +614,7 @@ class ClientController extends Controller
             );
         }
 
-        
+
 
         return Response::json($result);
     }
