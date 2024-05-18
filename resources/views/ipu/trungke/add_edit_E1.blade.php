@@ -35,8 +35,8 @@
         </form>
     </div>
     <div class="che_do_lam_viec">
-        <form class="right">
-            <h3>Chế độ làm việc</h3>
+        <fieldset class="right">
+            <legend>Chế độ làm việc</legend>
             <div>
                 <label><input type="radio" name="rd_chedo_e1" value="xem_sua_xoa" checked=true> Xem / sửa / xóa </label><br>
                 <label><input type="radio" name="rd_chedo_e1" value="them"> Thêm</label>
@@ -44,7 +44,7 @@
             <input class="button sua" type="button" value="Sửa" id="form_sua_e1">
             <input class="button xoa"  type="button" value="Xóa" id="form_xoa_e1">
             <input class="button" type="button" value="Thêm" id="form_them_e1">
-        </form>
+        </fieldset>
     </div>
 
 </fieldset>

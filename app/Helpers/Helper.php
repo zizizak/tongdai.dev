@@ -334,3 +334,18 @@ if (!function_exists('generateSelect')) {
         return $selectHTML;
     }
 }
+
+if (!function_exists('generateSelectV2')) {
+    function generateSelectV2($name, $id, $options, $currentValue) {
+        $selectHTML = '<select class="form-control" id="' . $id . '" name="' . $name . '">';
+        foreach ($options as $key => $option) {
+            if ($key === $currentValue) {
+                $selectHTML .= '<option selected value="' . $key . '" >' . $option . '</option>';
+            } else {
+                $selectHTML .= '<option selected value="' . $key . '" >' . $option . '</option>';
+            }
+        }
+        $selectHTML .= '</select>';
+        return $selectHTML;
+    }
+}

@@ -100,8 +100,8 @@
 </div>
 
 <div class="che_do_lam_viec">
-    <form class="right">
-        <h3>Chế độ làm việc</h3>
+    <fieldset class="right">
+        <legend>Chế độ làm việc</legend>
         <div>
             <label><input type="radio" name="rd_chedo" value="xem_sua_xoa" checked=true> Xem / sửa / xóa </label><br>
             <label><input type="radio" name="rd_chedo" value="them"> Thêm</label>
@@ -109,7 +109,7 @@
         <input class="button sua" type="button" value="Sửa" id="form_sua">
         <input class="button xoa"  type="button" value="Xóa" id="form_xoa">
         <input class="button" type="button" value="Thêm" id="form_them">
-    </form>
+    </fieldset>
 </div>
 <div class="clear clearfix"></div>
 

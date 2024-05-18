@@ -146,7 +146,7 @@
                         // Khởi tạo jqxGrid với dữ liệu mới
                         $("#jqxgrid_ipu_trungke_ip").jqxGrid({
                             source: newAdapter,
-                            width:900,
+                            width:880,
                             columns: [
                                 { text: 'Tên trung kế', datafield: 'tentrungke', width: 150 },
                                 { text: 'Địa chỉ kết nối', datafield: 'diachiketnoi', width: 150 },
@@ -314,7 +314,7 @@
                         // Khởi tạo jqxGrid với dữ liệu mới
                         $("#jqxgrid_ipu_trungke_e1").jqxGrid({
                             source: newAdapter,
-                            width:900,
+                            width:880,
                             columns: [
                                 { text: 'Tên trung kế', datafield: 'tentrungke', width: 150 },
                                 { text: 'ID Luồng', datafield: 'id_luong', width: 150 },
@@ -410,14 +410,14 @@
                     type: 'post',
                     url: '/admin/ajaxipu',
                     data: {
-                        'task': 'delete_trungke_ip',
-                        'trungke_ip_id': $("#trungke_e1_id").val(),
+                        'task': 'delete_trungke_e1',
+                        'trungke_e1_id': $("#trungke_e1_id").val(),
                     },
                     dataType: 'json',
                     success: function (data) {
                         //console.log(data);
                         alert(data.message);
-                        bind_jqxgrid_ipu_trungke_ip();
+                        bind_jqxgrid_ipu_trungke_e1();
                     },
                     error: function (data) {
                         console.log(data);
