@@ -93,11 +93,87 @@ class POController extends Controller
     }
 
     private function execCmd36($thamso) {
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD * 36 * 101 3710 #   * 36 * 101 2 #
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        if($thamso_length == 4) { //* 36 * 101 2 #
+            $arTmp = str_split($thamso);
+            $sothuebao = $arTmp[0] . $arTmp[1] . $arTmp[2];
+            $quyengoi = $arTmp[3];
+            $record = Thuebao::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['socuoi', $sothuebao],
+            ])->first();
 
+            $record->class_id = $quyengoi;
+            $record->save();
+            $mesage = "Thực thi thành công.";
+        }elseif($thamso_length == 7) { //* 36 * 101 3710 #
+            $arTmp = str_split($thamso);
+            $sothuebao = $arTmp[0] . $arTmp[1] . $arTmp[2];
+            $quyengoi = $arTmp[3];
+            $quyen_hoinghi_hotline = $arTmp[4];
+            $uutien = $arTmp[5];
+            $loai = $arTmp[6];
+            $record = Thuebao::where([
+                ['user_id', $current_user_id],
+                ['cauhinh_id', $cauhinh_active],
+                ['socuoi', $sothuebao],
+            ])->first();
+
+            $record->class_id = $quyengoi;
+            $record->quyen = $quyen_hoinghi_hotline;
+            $record->uutien = $uutien;
+            $record->loai = $loai;
+            $record->save();
+            $mesage = "Thực thi thành công.";
+        }else{
+            $mesage = "Sai cú pháp";
+            $sound = 'miss';
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => ''
+        );
+        return $result;
     }
 
     private function execCmd37($thamso) {
-
+        $current_user_id = Auth::user()->getKey();
+        $cauhinh_active = session('cauhinh_active');
+        // CMD * 36 * 101 3710 #   * 36 * 101 2 #
+        $thamso_length = strlen($thamso);
+        $mesage = "";
+        $record = null;
+        $sound = 'sucess';
+        if($thamso_length == 2) { //* 36 * 101 2 #
+          $mesage = "Thực thi thành công.";
+        }elseif($thamso_length == 4) { //* 36 * 101 3710 #
+            $mesage = "Thực thi thành công.";
+        }else{
+            $mesage = "Sai cú pháp";
+            $sound = 'miss';
+        }
+        $result = array(
+            'result' => 'success',
+            'thamso' => $thamso,
+            'data'   => $record,
+            'message' => $mesage,
+            'play_sound' => 1,
+            'sound'     => $sound,
+            'output'     => ''
+        );
+        return $result;
     }
 
     //Đã có code xử lý
