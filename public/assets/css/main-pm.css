@@ -13,13 +13,19 @@
     float: right;
 }
 
-.clear, .clearfix {
+.clear,
+.clearfix {
     clear: both;
 }
 
 .window-control {
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(9, 9, 121, 1) 35%,
+        rgba(0, 212, 255, 1) 100%
+    );
 }
 p.app-name {
     font-size: 10px;
@@ -53,17 +59,17 @@ ul.window-control-nav li {
 }
 
 .window-control-nav {
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
 }
-.main-links  {
+.main-links {
     position: absolute;
     right: 12px;
-    top:-5px;
+    top: -5px;
 }
-.main-links ul{
-    padding:0;
-    margin:0;
+.main-links ul {
+    padding: 0;
+    margin: 0;
 }
 .main-links li {
     display: inline-block;
@@ -73,7 +79,7 @@ ul.window-control-nav li {
 }
 .main-links li:first-child {
     text-decoration: none;
-    color:#ff4444;
+    color: #ff4444;
 }
 .main-tab {
     margin: 12px;
@@ -102,7 +108,8 @@ ul.tab-nav li.active {
     padding: 12px;
     border: 1px solid #8a8a8a;
     border-top-color: #b6b6b6;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .tab-content-wrap .tab-content {
@@ -151,9 +158,9 @@ fieldset {
     width: 8px;
     height: 8px;
     margin: 8px 18px 13px;
-    box-shadow: 1px 1px 0px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: 1px 1px 0px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 1px 1px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.75);
 }
 
 .green {
@@ -161,9 +168,9 @@ fieldset {
     width: 12px;
     height: 12px;
     margin: 10px 16px;
-    box-shadow: 1px 1px 0px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: 1px 1px 0px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 1px 1px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.75);
 }
 
 .green.large {
@@ -174,33 +181,37 @@ fieldset {
 
 .tippy-box {
     position: relative;
-    background-color: #FFEB3B;
+    background-color: #ffeb3b;
     color: #000;
     border-radius: 0;
     font-size: 13px;
     line-height: 1.4;
     white-space: normal;
     outline: 0;
-    transition-property: transform,visibility,opacity;
+    transition-property: transform, visibility, opacity;
 }
 .tippy-arrow {
     width: 16px;
     height: 16px;
-    color: #FFEB3B;
+    color: #ffeb3b;
 }
 .element {
     display: inline-block;
-    margin:5px;
+    margin: 5px;
 }
-.input-small {width: 50px;}
+.input-small {
+    width: 50px;
+}
 .row {
-    margin:10px 10px;
+    margin: 10px 10px;
 }
 .form-button {
-    padding:5px 10px;
+    padding: 5px 10px;
     cursor: pointer;
 }
-.row-last {text-align: right;}
+.row-last {
+    text-align: right;
+}
 
 .form-fix-width div.row > .element:nth-child(1) {
     min-width: 150px;
@@ -215,11 +226,14 @@ fieldset {
     padding: 10px;
 }
 
-input[type="text"], select, button {
+input[type="text"],
+select,
+button {
     padding: 5px;
 }
 
-button, input[type="button"] {
+button,
+input[type="button"] {
     cursor: pointer;
     cursor: pointer;
     font-weight: bold;
@@ -238,8 +252,8 @@ button, input[type="button"] {
     border-radius: 4px;
 }
 .window-modal .window-control {
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, #03A9F4 0%, #03A9F4 35%, #2196F3 100%);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, #03a9f4 0%, #03a9f4 35%, #2196f3 100%);
 }
 .form-button-clear {
     background: #eb3800 !important;
@@ -260,7 +274,6 @@ button, input[type="button"] {
     margin: 1px;
     margin-left: 0;
 }
-
 
 .nav-menu-wrap {
     border: 1px solid #e5e9eb;
@@ -284,12 +297,13 @@ button, input[type="button"] {
 }
 
 .nav.nav-menu li:last-child {
-    border:none;
+    border: none;
 }
 
 h2 {
     font-size: 20px;
-    margin: 10px 0;
+    color: cornflowerblue;
+    margin: 0px 0;
     padding: 0;
 }
 
@@ -297,119 +311,118 @@ a.ajax_link {
     display: none;
 }
 
-
 /** Menu css **/
 
 .container {
     width: 100%;
     height: 100%;
-  }
+}
 
-  .tutorial {
+.tutorial {
     width: 100%;
-    margin: 0 auto;
+    margin: 0 0px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     max-width: 100%;
     border-radius: 5px;
-  }
-  .tutorial .slider {
+}
+.tutorial .slider {
     width: 100%;
     height: 300px;
-    background-color: #F03861;
-  }
-  .tutorial .information {
+    background-color: #f03861;
+}
+.tutorial .information {
     width: 100%;
     padding: 20px 50px;
     margin-bottom: 30px;
     font-family: "Open Sans", sans-serif;
-  }
-  .tutorial .information h1 {
+}
+.tutorial .information h1 {
     color: #333;
     font-size: 1.5rem;
     padding: 0px 10px;
-    border-left: 3px solid #F03861;
-  }
-  .tutorial .information h3 {
+    border-left: 3px solid #f03861;
+}
+.tutorial .information h3 {
     color: #e0e0e0;
     font-size: 1rem;
     font-weight: 300;
     padding: 0px 10px;
-    border-left: 3px solid #F03861;
-  }
-  .tutorial .information p {
+    border-left: 3px solid #f03861;
+}
+.tutorial .information p {
     padding: 10px 0px;
-  }
-  .tutorial ul {
+}
+.tutorial ul {
     font-size: 0;
     list-style-type: none;
-    margin: 0;
-    padding: 0 5px;
-  }
-  .tutorial ul li {
+    margin-left: 0px;
+    padding: 0 0px;
+}
+.tutorial ul li {
     font-family: "Open Sans", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
-    color: #333;
+    color: #010101;
     display: inline-block;
     padding: 10px 5px 10px;
     position: relative;
-  }
-  .tutorial ul li ul {
+}
+.tutorial ul li ul {
     display: none;
-  }
-  .tutorial ul li:hover {
+}
+.tutorial ul li:hover {
     cursor: pointer;
-    background-color: #f2f2f2;
-  }
-  .tutorial ul li:hover ul {
+    background-color: #f1ecec;
+}
+.tutorial ul li:hover ul {
     display: block;
     margin-top: 11px;
     width: 200px;
     left: -5px;
     position: absolute;
     z-index: 999;
-  }
-  .tutorial ul li:hover ul li {
+}
+.tutorial ul li:hover ul li {
     display: block;
-    background-color: #e7e7e7;
-  }
-  .tutorial ul li:hover ul li span {
+    background-color: #f0eaea;
+}
+.tutorial ul li:hover ul li span {
     float: right;
     color: #f9f9f9;
-    background-color: #F03861;
+    background-color: #f03861;
     padding: 2px 5px;
     text-align: center;
     font-size: 0.8rem;
     border-radius: 3px;
-  }
-  .tutorial ul li:hover ul li:hover {
-    background-color: #e0e0e0;
-  }
-  .tutorial ul li:hover ul li:hover span {
+}
+.tutorial ul li:hover ul li:hover {
+    background-color: #d8d2d2;
+}
+.tutorial ul li:hover ul li:hover span {
     background-color: #ee204e;
-  }
+}
 
-  .img {
+.img {
     max-width: 100%;
     width: 100%;
-  }
+}
 
-  .title {
-    padding:10px 0;
-  }
+.title {
+    padding: 10px 0;
+}
 
-  .form-logout button {
+.form-logout button {
     border: none;
     background: transparent;
-  }
-  .alert {
+}
+.alert {
     padding: 20px;
     background-color: #f44336;
     color: white;
-  }
-  
-  .closebtn {
+}
+
+.closebtn {
     margin-left: 15px;
     color: white;
     font-weight: bold;
@@ -418,30 +431,31 @@ a.ajax_link {
     line-height: 20px;
     cursor: pointer;
     transition: 0.3s;
-  }
-  
-  .closebtn:hover {
+}
+
+.closebtn:hover {
     color: black;
-  }
+}
 
-  .img-100 {
+.img-100 {
     max-width: 100%;
-  }
+}
 
-  #po-output {
-    width: 76px;
+#po-output {
+    width: 78px;
+    height: 35px;
     font-size: 28px;
-    border: 1px solid #ccc;
+    border: 1px solid #fc0101;
     text-align: center;
     color: red;
     position: absolute;
-    top: 46px;
-    right: 96px;
-    background: #e3e3e3;
-    border: 1px solid #313131;
-  }
+    top: 43px;
+    right: 95px;
+    background: #924949;
+    border: 1px solid #e80c0c;
+}
 
-  .phone-list-td-1 .phone-item {
+.phone-list-td-1 .phone-item {
     width: 20%;
     margin: 5px 5%;
     float: left;
@@ -469,7 +483,7 @@ a.ajax_link {
     width: 175px;
     line-height: 22px;
     padding: 5px;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
 }
 
 button.btn {
@@ -489,13 +503,13 @@ button.btn {
     position: fixed;
     right: 0;
     bottom: 0;
-    background: #dfdfdf;
+    background:#ddd2d2;
     border: 1px solid #ccc;
 }
 #keyboard {
-    padding:0;
-    margin:0;
-    position:relative;
+    padding: 0;
+    margin: 0;
+    position: relative;
 }
 
 span.close.close-keyboard {
@@ -512,4 +526,41 @@ span.close.close-keyboard {
     margin: 0;
     background: transparent;
     font-size: 14px;
+}
+.menu {
+    display: flex;
+    justify-content:space-between; /* Căn giữa các mục menu */
+    list-style: none; /* Loại bỏ dấu chấm của danh sách */
+    margin: 0;
+    padding: 0;
+
+}
+
+.menu li {
+    margin: 0 0px; /* Khoảng cách giữa các mục */
+
+}
+
+.menu a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight:bold;
+    display: block;
+    margin-left: 0px;
+    font-size: 12px;
+
+}
+/* Kiểu đèn báo */
+.indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(236, 10, 10); /* Màu mặc định khi tắt */
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+/* Khi đèn báo sáng */
+.indicator.active {
+    background-color: green; /* Màu đèn báo khi sáng */
 }

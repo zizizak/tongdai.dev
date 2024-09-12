@@ -32,7 +32,7 @@ class POController extends Controller
         // Print the entire match result
         //var_dump($matches);
         $result = array(
-            'result' => 'sucess',
+            'result' => 'success',
             'data'   => 'ajaxPO'
         );
 
@@ -56,97 +56,199 @@ class POController extends Controller
 
     }
 
-
     private function exceCmd($code, $thamso) {
-        if($code == "36") { return $this->execCmd36($thamso); }
-        elseif($code == "37") { return $this->execCmd37($thamso); }
-        elseif($code == "38") { return $this->execCmd38($thamso); }
-        elseif($code == "39") { return $this->execCmd39($thamso); }
-        elseif($code == "40") { return $this->execCmd40($thamso); }
-        elseif($code == "41") { return $this->execCmd41($thamso); }
-        elseif($code == "42") { return $this->execCmd42($thamso); }
-        elseif($code == "44") { return $this->execCmd44($thamso); }
-        elseif($code == "45") { return $this->execCmd45($thamso); }
-        elseif($code == "50") { return $this->execCmd50($thamso); }
-        elseif($code == "55") { return $this->execCmd55($thamso); }
-        elseif($code == "60") { return $this->execCmd60($thamso); }
-        elseif($code == "61") { return $this->execCmd61($thamso); }
-        elseif($code == "62") { return $this->execCmd62($thamso); }
-        elseif($code == "63") { return $this->execCmd63($thamso); }
-        elseif($code == "64") { return $this->execCmd64($thamso); }
-        elseif($code == "65") { return $this->execCmd65($thamso); }
-        elseif($code == "66") { return $this->execCmd66($thamso); }
-        elseif($code == "67") { return $this->execCmd67($thamso); }
-        elseif($code == "68") { return $this->execCmd68($thamso); }
-        elseif($code == "69") { return $this->execCmd69($thamso); }
-        else {
-            return array(
+        if($code == 14) {
+            return $this->execCmd14($thamso);
+        }else {
+            if(session('khaibaopo_is_login') == 1) {
+                switch ($code) {
+                    case "36":
+                        return $this->execCmd36($thamso);
+                    case "37":
+                        return $this->execCmd37($thamso);
+                    case "38":
+                        return $this->execCmd38($thamso);
+                    case "39":
+                        return $this->execCmd39($thamso);
+                    case "40":
+                        return $this->execCmd40($thamso);
+                    case "41":
+                        return $this->execCmd41($thamso);
+                    case "42":
+                        return $this->execCmd42($thamso);
+                    case "44":
+                        return $this->execCmd44($thamso);
+                    case "45":
+                        return $this->execCmd45($thamso);
+                    case "50":
+                        return $this->execCmd50($thamso);
+                    case "55":
+                        return $this->execCmd55($thamso);
+                    case "60":
+                        return $this->execCmd60($thamso);
+                    case "61":
+                        return $this->execCmd61($thamso);
+                    case "62":
+                        return $this->execCmd62($thamso);
+                    case "63":
+                        return $this->execCmd63($thamso);
+                    case "64":
+                        return $this->execCmd64($thamso);
+                    case "65":
+                        return $this->execCmd65($thamso);
+                    case "66":
+                        return $this->execCmd66($thamso);
+                    case "67":
+                        return $this->execCmd67($thamso);
+                    case "68":
+                        return $this->execCmd68($thamso);
+                    case "69":
+                        return $this->execCmd69($thamso);
+                    default:
+                        return array(
+                            'result' => 'success',
+                            'thamso' => $thamso,
+                            'data'   => '',
+                            'message' => 'Sai cú pháp',
+                            'play_sound' => 1,
+                            'sound'     => 'error',
+                            'output'    => ''
+                        );
+                }
+            }else {
+                return array(
+                    'result' => 'success',
+                    'thamso' => $thamso,
+                    'data'   => '',
+                    'message' => 'Chưa đăng nhập',
+                    'play_sound' => 1,
+                    'sound'     => 'error',
+                    'output'    => ''
+                );
+            }
+        }
+        die('cmd not found');
+    }
+
+    private function execCmd14($thamso) {
+        // Kiểm tra người dùng đã đăng nhập hay chưa
+        if (!Auth::check()) {
+            return [
+                'result' => 'error',
+                'message' => 'Yêu cầu đăng nhập',
+                'play_sound' => 1,
+                'sound' => 'error'
+            ];
+        }
+
+        // Kiểm tra tham số có khớp với mẫu không
+        if ($thamso == "101234567") {
+            session(['khaibaopo_is_login' => 1]);
+            return [
                 'result' => 'success',
                 'thamso' => $thamso,
-                'data'   => '',
-                'message' => 'Sai cú pháp',
+                'data'   => "",
+                'message' => "Đăng nhập thành công",
                 'play_sound' => 1,
-                'sound'     => 'miss',
+                'sound'     => 'success',
+                'user_login' => session('khaibaopo_is_login'),
                 'output'    => ''
-            );
+            ];
+        } else {
+            // Nếu sai, trả về thông báo yêu cầu đăng nhập
+            return [
+                'result' => 'error',
+                'message' => 'Sai cú pháp tham số. Vui lòng kiểm tra lại định dạng tham số theo mẫu: *14*101234567#',
+                'play_sound' => 1,
+                'sound' => 'error'
+            ];
+
         }
+
+    }
+
+
+    private function updateRecord($record, $data) {
+        $record->class_id = $data['class_id'] ?? $record->class_id;
+        $record->quyen = $data['quyen'] ?? $record->quyen;
+        $record->uutien = $data['uutien'] ?? $record->uutien;
+        $record->loai = $data['loai'] ?? $record->loai;
+        $record->save();
     }
 
     private function execCmd36($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
-        // CMD * 36 * 101 3710 #   * 36 * 101 2 #
         $thamso_length = strlen($thamso);
-        $mesage = "";
+        $message = "";
         $record = null;
-        $sound = 'sucess';
-        if($thamso_length == 4) { //* 36 * 101 2 #
+        $sound = 'success';
+
+        if ($thamso_length == 4) { // CMD *36*1012#
             $arTmp = str_split($thamso);
-            $sothuebao = $arTmp[0] . $arTmp[1] . $arTmp[2];
+            $sothuebao = implode('', array_slice($arTmp, 0, 3));
             $quyengoi = $arTmp[3];
+
             $record = Thuebao::where([
                 ['user_id', $current_user_id],
                 ['cauhinh_id', $cauhinh_active],
                 ['socuoi', $sothuebao],
             ])->first();
 
-            $record->class_id = $quyengoi;
-            $record->save();
-            $mesage = "Thực thi thành công.";
-        }elseif($thamso_length == 7) { //* 36 * 101 3710 #
+            if ($record) {
+                $this->updateRecord($record, ['class_id' => $quyengoi]);
+                $message = "Thực thi thành công.";
+            } else {
+                $message = "Bản ghi không tìm thấy.";
+                $sound = 'error';
+            }
+
+        } elseif ($thamso_length == 7) { // CMD *36*1013710#
             $arTmp = str_split($thamso);
-            $sothuebao = $arTmp[0] . $arTmp[1] . $arTmp[2];
+            $sothuebao = implode('', array_slice($arTmp, 0, 3));
             $quyengoi = $arTmp[3];
             $quyen_hoinghi_hotline = $arTmp[4];
             $uutien = $arTmp[5];
             $loai = $arTmp[6];
+
             $record = Thuebao::where([
                 ['user_id', $current_user_id],
                 ['cauhinh_id', $cauhinh_active],
                 ['socuoi', $sothuebao],
             ])->first();
 
-            $record->class_id = $quyengoi;
-            $record->quyen = $quyen_hoinghi_hotline;
-            $record->uutien = $uutien;
-            $record->loai = $loai;
-            $record->save();
-            $mesage = "Thực thi thành công.";
-        }else{
-            $mesage = "Sai cú pháp";
-            $sound = 'miss';
+            if ($record) {
+                $this->updateRecord($record, [
+                    'class_id' => $quyengoi,
+                    'quyen' => $quyen_hoinghi_hotline,
+                    'uutien' => $uutien,
+                    'loai' => $loai,
+                ]);
+                $message = "Thực thi thành công.";
+            } else {
+                $message = "Số điện thoại này không đúng.";
+                $sound = 'error';
+            }
+
+        } else {
+            $message = "Sai cú pháp";
+            $sound = 'error';
         }
+
         $result = array(
             'result' => 'success',
             'thamso' => $thamso,
             'data'   => $record,
-            'message' => $mesage,
+            'message' => $message,
             'play_sound' => 1,
             'sound'     => $sound,
-            'output'     => ''
+            'output'    => ''
         );
+
         return $result;
     }
+
+
 
     private function execCmd37($thamso) {
         $current_user_id = Auth::user()->getKey();
@@ -155,14 +257,14 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         if($thamso_length == 2) { //* 36 * 101 2 #
           $mesage = "Thực thi thành công.";
         }elseif($thamso_length == 4) { //* 36 * 101 3710 #
             $mesage = "Thực thi thành công.";
         }else{
             $mesage = "Sai cú pháp";
-            $sound = 'miss';
+            $sound = 'error';
         }
         $result = array(
             'result' => 'success',
@@ -184,7 +286,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         if($thamso_length == 0) { //*38# - xoa toan bo
             $record = MaHuong::where([
                 ['user_id', $current_user_id],
@@ -222,7 +324,7 @@ class POController extends Controller
             $mesage = "Thực thi thành công, đã thêm mã hướng.";
         }else {
             $mesage = "Sai cú pháp";
-            $sound = 'miss';
+            $sound = 'error';
         }
         $result = array(
             'result' => 'success',
@@ -237,97 +339,268 @@ class POController extends Controller
     }
 
     //Đã có code xử lý
+    // private function execCmd39($thamso) {
+    //     $current_user_id = Auth::user()->getKey();
+    //     $cauhinh_active = session('cauhinh_active');
+    //     // CMD *39# *39*y1y2# *39*y1y2x1x2x3#
+    //     $thamso_length = strlen($thamso);
+    //     $mesage = "";
+    //     $record = null;
+    //     $sound = 'success';
+    //     if($thamso_length == 0) { //*38# - xoa toan bo
+    //         $record = Huong::where([
+    //             ['user_id', $current_user_id],
+    //             ['cauhinh_id', $cauhinh_active],
+    //         ])->delete();
+    //         $mesage = "Thực thi thành công, đã xóa toàn bộ  hướng.";
+    //     }elseif($thamso_length == 2) { //*38* y1y2y3# - xoa 1 ma huong
+    //         $record = Huong::where([
+    //             ['user_id', $current_user_id],
+    //             ['cauhinh_id', $cauhinh_active],
+    //             ['huong_id', $thamso],
+    //         ])->delete();
+    //         $mesage = "Thực thi thành công, đã xóa  hướng.";
+    //     }elseif($thamso_length == 7) { //*38*y1y2y3x1x2x3x4x5x6# - them 1 ma huong
+    //         $arTmp = str_split($thamso);
+    //         $huong_id = $arTmp[0] . $arTmp[1];
+    //         $loai = $arTmp[2];
+    //         $thanhphan = $arTmp[3] . "," . $arTmp[4];
+
+    //         $result = Huong::create([
+    //             'user_id' => $current_user_id,
+    //             'cauhinh_id' => $cauhinh_active,
+    //             'huong_id' => $huong_id,
+    //             'loai' => $loai,
+    //             'thanhphan' => $thanhphan,
+    //             'created_at' => now()
+    //         ]);
+
+    //         $mesage = "Thực thi thành công, đã thêm  hướng.";
+
+    //     }else {
+    //         $mesage = "Sai cú pháp";
+    //         $sound = 'error';
+    //     }
+    //     $result = array(
+    //         'result' => 'success',
+    //         'thamso' => $thamso,
+    //         'data'   => $record,
+    //         'message' => $mesage,
+    //         'play_sound' => 1,
+    //         'sound'     => $sound,
+    //         'output'     => ''
+    //     );
+    //     return $result;
+    // }
+
     private function execCmd39($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
-        // CMD *39# *39*y1y2# *39*y1y2x1x2x3#
         $thamso_length = strlen($thamso);
-        $mesage = "";
+        $message = "";
         $record = null;
-        $sound = 'sucess';
-        if($thamso_length == 0) { //*38# - xoa toan bo
-            $record = Huong::where([
+        $sound = 'success';
+
+        if ($thamso_length == 0) { // *39# - xóa toàn bộ hướng
+            $records = Huong::where([
                 ['user_id', $current_user_id],
                 ['cauhinh_id', $cauhinh_active],
-            ])->delete();
-            $mesage = "Thực thi thành công, đã xóa toàn bộ  hướng.";
-        }elseif($thamso_length == 2) { //*38* y1y2y3# - xoa 1 ma huong
-            $record = Huong::where([
-                ['user_id', $current_user_id],
-                ['cauhinh_id', $cauhinh_active],
-                ['huong_id', $thamso],
-            ])->delete();
-            $mesage = "Thực thi thành công, đã xóa  hướng.";
-        }elseif($thamso_length == 7) { //*38*y1y2y3x1x2x3x4x5x6# - them 1 ma huong
+            ])->get();
+
+            // Kiểm tra xem có hướng nào trong bảng mã hướng không
+            $huong_ids = $records->pluck('huong_id');
+
+            $maHuongs = MaHuong::whereIn('mahuong_dinhtuyen', $huong_ids)->exists();
+
+            if ($maHuongs) {
+                $message = "Không thể xóa hướng vì nó đang tồn tại trong bảng mã hướng.";
+                $sound = 'error';
+            } else {
+                Huong::where([
+                    ['user_id', $current_user_id],
+                    ['cauhinh_id', $cauhinh_active],
+                ])->delete();
+                $message = "Thực thi thành công, đã xóa toàn bộ hướng.";
+            }
+        } elseif ($thamso_length == 2) { // *39* y1y2# - xóa 1 hướng
+            $huong_id = $thamso;
+
+            $existsInMaHuong = MaHuong::where('mahuong_dinhtuyen', $huong_id)->exists();
+
+            if ($existsInMaHuong) {
+                $message = "Không thể xóa hướng vì nó đang tồn tại trong bảng mã hướng.";
+                $sound = 'error';
+            } else {
+                $record = Huong::where([
+                    ['user_id', $current_user_id],
+                    ['cauhinh_id', $cauhinh_active],
+                    ['huong_id', $huong_id],
+                ])->delete();
+                $message = "Thực thi thành công, đã xóa hướng.";
+            }
+        } elseif ($thamso_length == 5) { // *39* y1y2x1x2# - thêm 1 hướng
             $arTmp = str_split($thamso);
-            $huong_id = $arTmp[0] . $arTmp[1];
-            $loai = $arTmp[2];
-            $thanhphan = $arTmp[3] . "," . $arTmp[4];
 
-            $result = Huong::create([
-                'user_id' => $current_user_id,
-                'cauhinh_id' => $cauhinh_active,
-                'huong_id' => $huong_id,
-                'loai' => $loai,
-                'thanhphan' => $thanhphan,
-                'created_at' => now()
-            ]);
+            if (count($arTmp) < 5) {
+                $message = "Sai cú pháp tham số. Thiếu dữ liệu.";
+                $sound = 'error';
+            } else {
+                $huong_id = $arTmp[0] . $arTmp[1]; // 2 ký tự cho huong_id
+                $loai = $arTmp[2]; // 1 ký tự cho loai
+                $thanhphan1 = $arTmp[3] . $arTmp[4]; // 2 ký tự cho thành phần 1
 
-            $mesage = "Thực thi thành công, đã thêm  hướng.";
-        }else {
-            $mesage = "Sai cú pháp";
-            $sound = 'miss';
+                $record = Huong::create([
+                    'user_id' => $current_user_id,
+                    'cauhinh_id' => $cauhinh_active,
+                    'huong_id' => $huong_id,
+                    'loai' => $loai,
+                    'thanhphan' => $thanhphan1,
+                    'created_at' => now()
+                ]);
+
+                $message = "Thực thi thành công, đã thêm 1 hướng.";
+            }
+        } elseif ($thamso_length == 7) { // *39* y1y2x1x2x3x4x5# - thêm 2 hướng
+            $arTmp = str_split($thamso);
+
+            if (count($arTmp) < 7) {
+                $message = "Sai cú pháp tham số. Thiếu dữ liệu.";
+                $sound = 'error';
+            } else {
+                $huong_id = $arTmp[0] . $arTmp[1]; // 2 ký tự cho huong_id
+                $loai = $arTmp[2]; // 1 ký tự cho loai
+                $thanhphan1 = $arTmp[3] . $arTmp[4]; // 2 ký tự cho thành phần 1
+                $thanhphan2 = $arTmp[5] . $arTmp[6]; // 2 ký tự cho thành phần 2
+
+                $record = Huong::create([
+                    'user_id' => $current_user_id,
+                    'cauhinh_id' => $cauhinh_active,
+                    'huong_id' => $huong_id,
+                    'loai' => $loai,
+                    'thanhphan' => $thanhphan1 . "," . $thanhphan2,
+                    'created_at' => now()
+                ]);
+
+                $message = "Thực thi thành công, đã thêm 2 hướng.";
+            }
+        } else {
+            $message = "Sai cú pháp";
+            $sound = 'error';
         }
-        $result = array(
+
+        $result = [
             'result' => 'success',
             'thamso' => $thamso,
             'data'   => $record,
-            'message' => $mesage,
+            'message' => $message,
             'play_sound' => 1,
             'sound'     => $sound,
-            'output'     => ''
-        );
+            'output'    => ''
+        ];
+
+        // Nếu cần trả về kết quả dưới dạng JSON, hãy bỏ qua câu lệnh return và sử dụng dòng dưới
+        // header('Content-Type: application/json');
+        // echo json_encode($result);
+
         return $result;
     }
 
+
+
+
+    // private function execCmd40($thamso) {
+    //     //2 case
+    //     //Cách 1: * 40 # Lưu vào cấu hình hiện tại, lệnh này chỉ thực hiện khi cấu hình hiện tại khác cấu hình mặc định (cấu hình 0)
+    //     //Cách 2:* 40 * X # Lưu vào cấu hình định trước X: Cấu hình cần lưu, giá trị 1 hoặc 2.
+    //     $current_user_id = Auth::user()->getKey();
+    //     $cauhinh_active = session('cauhinh_active');
+    //     $cauhinh_active_real = session('cauhinh_active_real');
+    //     $thamso_length = strlen($thamso);
+    //     $mesage = "";
+    //     $record = null;
+    //     $sound = 'success';
+
+    //     if($thamso_length == 0){ //Lưu cấu hình hiện tại
+    //         if($cauhinh_active_real == 0) {
+    //             $mesage = "Lỗi: Không thể lưu cấu hình 0";
+    //         }else {
+    //             copyCauhinhData($cauhinh_active, $cauhinh_active_real, $current_user_id);
+    //             $mesage = "Lưu thành công cấu hình " . $cauhinh_active_real;
+    //         }
+    //     }else if($thamso_length == 1){ //Lưu cấu hình theo giá trị tham số
+    //         if($thamso == 0) {
+    //             $mesage = "Lỗi: Không thể lưu cấu hình 0";
+    //         }else {
+    //             copyCauhinhData($cauhinh_active, $thamso, $current_user_id);
+    //             $mesage = "Lưu thành công cấu hình " . $thamso;
+    //         }
+    //     }
+    //     $result = array(
+    //         'result' => 'success',
+    //         'thamso' => $thamso,
+    //         'data'   => $record,
+    //         'message' => $mesage,
+    //         'play_sound' => 1,
+    //         'sound'     => $sound,
+    //         'output'     => ''
+    //     );
+    //     return $result;
+    // }
+
+
     private function execCmd40($thamso) {
-        //2 case
-        //Cách 1: * 40 # Lưu vào cấu hình hiện tại, lệnh này chỉ thực hiện khi cấu hình hiện tại khác cấu hình mặc định (cấu hình 0)
-        //Cách 2:* 40 * X # Lưu vào cấu hình định trước X: Cấu hình cần lưu, giá trị 1 hoặc 2.
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
         $cauhinh_active_real = session('cauhinh_active_real');
         $thamso_length = strlen($thamso);
-        $mesage = "";
-        $record = null;
-        $sound = 'sucess';
+        $message = "";
+        $sound = 'success';
 
-        if($thamso_length == 0){ //Lưu cấu hình hiện tại
-            if($cauhinh_active_real == 0) {
-                $mesage = "Lỗi: Không thể lưu cấu hình 0";
-            }else {
-                copyCauhinhData($cauhinh_active, $cauhinh_active_real, $current_user_id);
-                $mesage = "Lưu thành công cấu hình " . $cauhinh_active_real;
+        // Kiểm tra tham số đầu vào
+        if ($thamso_length === 0) { // Lưu cấu hình hiện tại
+            if ($cauhinh_active_real == 0) {
+                $message = "Lỗi: Không thể lưu cấu hình 0";
+            } else {
+                // Chỉ lưu nếu cấu hình hiện tại không phải là cấu hình 0
+                if ($cauhinh_active != 0) {
+                    copyCauhinhData($cauhinh_active, $cauhinh_active_real, $current_user_id);
+                    $message = "Lưu thành công cấu hình " . $cauhinh_active_real;
+                } else {
+                    $message = "Lỗi: Cấu hình hiện tại không hợp lệ để lưu";
+                }
             }
-        }else if($thamso_length == 1){ //Lưu cấu hình theo giá trị tham số
-            if($thamso == 0) {
-                $mesage = "Lỗi: Không thể lưu cấu hình 0";
-            }else {
-                copyCauhinhData($cauhinh_active, $thamso, $current_user_id);
-                $mesage = "Lưu thành công cấu hình " . $thamso;
+        } else if ($thamso_length === 1 && is_numeric($thamso)) { // Lưu cấu hình theo giá trị tham số
+            $thamso = (int) $thamso;
+            if ($thamso == 0) {
+                $message = "Lỗi: Không thể lưu cấu hình 0";
+            } else {
+                // Chỉ lưu nếu cấu hình hiện tại không phải là cấu hình 0
+                if ($cauhinh_active != 0) {
+                    copyCauhinhData($cauhinh_active, $thamso, $current_user_id);
+                    $message = "Lưu thành công cấu hình " . $thamso;
+                } else {
+                    $message = "Lỗi: Cấu hình hiện tại không hợp lệ để lưu";
+                }
             }
+        } else {
+            $message = "Tham số không chính xác";
+            $sound = 'error'; // Thay đổi âm thanh khi tham số không chính xác
         }
+
+        // Kết quả trả về
         $result = array(
             'result' => 'success',
             'thamso' => $thamso,
-            'data'   => $record,
-            'message' => $mesage,
+            'data'   => null,
+            'message' => $message,
             'play_sound' => 1,
             'sound'     => $sound,
             'output'     => ''
         );
+
         return $result;
     }
+
 
     //Đã có code xử lý
     private function execCmd41($thamso) {
@@ -337,7 +610,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
 
         if($thamso_length == 3){ //Doi 3 so dau
             $record = Cauhinh::where([
@@ -369,9 +642,9 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
 
-        if($thamso_length == 3){ //Doi 3 so dau
+        if($thamso_length == 3){ //Doi 3 so sau
             $records = Thuebao::where([
                 ['user_id', $current_user_id],
                 ['cauhinh_id', $cauhinh_active],
@@ -404,7 +677,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
 
         if($thamso_length == 3){
             //Lưu dữ liệu
@@ -451,7 +724,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
 
         if($thamso_length == 5){
             //Lưu dữ liệu
@@ -530,7 +803,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
 
         if($thamso_length == 2){ //Doi 3 so dau
             //session(['cauhinh_active' => $thamso]);
@@ -556,7 +829,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
 
         if($thamso_length == 6){ //Doi 3 so cuoi 1 thue bao cu the
             $socu = substr($thamso, 0, 3);
@@ -591,7 +864,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         $output = '';
 
         $thamso = (int)$thamso;
@@ -636,6 +909,7 @@ class POController extends Controller
             $mesage = "Lấy số liệu thành công";
         }else {
             $mesage = "Tham số không chính xác";
+            $sound = "error";
         }
         $result = array(
             'result' => 'success',
@@ -657,7 +931,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         $output = '';
 
         if($thamso_length == 1){ //Số thứ tự luồng E1
@@ -697,7 +971,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         $output = '';
 
         $thamso = (int)$thamso;
@@ -740,7 +1014,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         $output = '';
         $led1 = $led2 = $led3 = $led4 = "0";
 
@@ -798,7 +1072,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         $output = '';
         $led1 = $led2 = $led3 = $led4 = "0";
 
@@ -847,90 +1121,132 @@ class POController extends Controller
         );
         return $result;
     }
+    // private function execCmd65($thamso) {
+    //     $current_user_id = Auth::user()->getKey();
+    //     $cauhinh_active = session('cauhinh_active_real');
+    //     // CMD *65 #
+    //     $thamso_length = strlen($thamso);
+    //     $mesage = "";
+    //     $record = null;
+    //     $sound = 'success';
+    //     $output = '';
+
+    //     $thamso = (int)$thamso;
+
+    //     if($thamso_length == 0){ //không tham số
+
+    //         $output = "";
+    //         $led1 = "0";
+    //         $led2 = "0";
+    //         $led3 = "0";
+    //         $led4 = $cauhinh_active;
+
+    //         $output = $led1 . $led2 . $led3 . $led4;
+
+    //         $mesage = "Lấy số liệu thành công";
+    //     }else {
+    //         $mesage = "Tham số không chính xác";
+    //     }
+    //     $result = array(
+    //         'result' => 'success',
+    //         'thamso' => $thamso,
+    //         'data'   => null,
+    //         'message' => $mesage,
+    //         'play_sound' => 1,
+    //         'sound'     => $sound,
+    //         'output'     => $output
+    //     );
+    //     return $result;
+
+    // }
     private function execCmd65($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active_real');
-        // CMD *65 #
+
         $thamso_length = strlen($thamso);
-        $mesage = "";
-        $record = null;
-        $sound = 'sucess';
+        $message = "";
         $output = '';
+        $sound = 'success';
 
-        $thamso = (int)$thamso;
-
-        if($thamso_length == 0){ //không tham số
-
-            $output = "";
+        // Kiểm tra tham số đầu vào
+        if ($thamso_length === 0) { // Không có tham số
             $led1 = "0";
             $led2 = "0";
             $led3 = "0";
             $led4 = $cauhinh_active;
 
             $output = $led1 . $led2 . $led3 . $led4;
-
-            $mesage = "Lấy số liệu thành công";
-        }else {
-            $mesage = "Tham số không chính xác";
+            $message = "Lấy số liệu thành công";
+        } else {
+            $message = "Tham số không chính xác";
+            $sound = 'error'; // Thay đổi âm thanh khi tham số không chính xác
         }
+
+        // Kết quả trả về
         $result = array(
             'result' => 'success',
             'thamso' => $thamso,
             'data'   => null,
-            'message' => $mesage,
+            'message' => $message,
             'play_sound' => 1,
             'sound'     => $sound,
             'output'     => $output
         );
-        return $result;
 
+        return $result;
     }
+
     private function execCmd66($thamso) { //3 số đầu danh bạ
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
         // CMD *66 #
         $thamso_length = strlen($thamso);
-        $mesage = "";
+        $message = ""; // Đã sửa chính tả từ mesage thành message
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success'; // Đã sửa chính tả từ sucsess thành success
         $output = '';
 
-        $thamso = (int)$thamso;
-
-        if($thamso_length == 0){ //không tham số
+        if($thamso_length == 0) { // không tham số
 
             $record = Cauhinh::where([
                 ['user_id', $current_user_id],
                 ['stt', $cauhinh_active],
             ])->first();
 
-            $prefix = $record->prefix;
+            if ($record && isset($record->prefix)) {
+                $prefix = $record->prefix;
+                $arPrefix = str_split($prefix);
 
-            $arPrefix = str_split($prefix);
+                $output = "";
+                $led1 = "0";
+                $led2 = isset($arPrefix[0]) ? $arPrefix[0] : "0";
+                $led3 = isset($arPrefix[1]) ? $arPrefix[1] : "0";
+                $led4 = isset($arPrefix[2]) ? $arPrefix[2] : "0";
 
-            $output = "";
-            $led1 = "0";
-            $led2 = $arPrefix[0];
-            $led3 = $arPrefix[1];
-            $led4 = $arPrefix[2];
-
-            $output = $led1 . $led2 . $led3 . $led4;
-
-            $mesage = "Lấy số liệu thành công";
-        }else {
-            $mesage = "Tham số không chính xác";
+                $output = $led1 . $led2 . $led3 . $led4;
+                $message = "Lấy số liệu thành công";
+            } else {
+                $message = "Không tìm thấy cấu hình hoặc prefix không hợp lệ";
+            }
+        } else {
+            $message = "Tham số không chính xác";
         }
+
         $result = array(
             'result' => 'success',
             'thamso' => $thamso,
             'data'   => null,
-            'message' => $mesage,
+            'message' => $message,
             'play_sound' => 1,
             'sound'     => $sound,
             'output'     => $output
         );
+        // header('Content-Type: application/json');
+        // echo json_encode($result);
         return $result;
+
     }
+
     private function execCmd67($thamso) {
         $current_user_id = Auth::user()->getKey();
         $cauhinh_active = session('cauhinh_active');
@@ -938,7 +1254,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         $output = '';
 
         $thamso = (int)$thamso;
@@ -985,7 +1301,7 @@ class POController extends Controller
         $thamso_length = strlen($thamso);
         $mesage = "";
         $record = null;
-        $sound = 'sucess';
+        $sound = 'success';
         $output = '';
 
         $thamso = (int)$thamso;

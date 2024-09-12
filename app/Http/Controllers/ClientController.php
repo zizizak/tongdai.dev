@@ -41,63 +41,270 @@ class ClientController extends Controller
         ]);
     }
 
+    public function tinhnangkct()
+    {
+       // return view('trang_tinh/', []);
+
+        //Bước 1
+ $trang_tinh_view = "trang_tinh/tinhnangkct"; //Thay đổi đường dẫn tới file view
+ return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+ //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+ //return view('trang_tinh/chucnangcard', []);
+    }
+
+    public function sodokhoivanguyenlyhoatdong()
+    {
+        //return view('trang_tinh/', []);
+
+         //Bước 1
+ $trang_tinh_view = "trang_tinh/sodokhoivanguyenlyhoatdong"; //Thay đổi đường dẫn tới file view
+ return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+ //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+ //return view('trang_tinh/chucnangcard', []);
+    }
+
     public function cautruc()
     {
-        $id = 4;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
+        //return view('trang_tinh/cautruc', []);
+
+         //Bước 1
+ $trang_tinh_view = "trang_tinh/cautruc"; //Thay đổi đường dẫn tới file view
+ return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+ //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+ //return view('trang_tinh/chucnangcard', []);
     }
-    public function trienkhaithuhoi()
+    public function chucnangcard()
     {
-        $id = 1;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
-    }
-    public function cacloaicard()
-    {
-        $id = 6;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
-    }
-    public function khaibaokhoiIPU()
-    {
-        $id = 9;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/chucnangcard"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
     }
     public function pan()
     {
-        $id = 10;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
-    }
-    public function bq()
-    {
-        $id = 11;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
-    }
-    public function bd1()
-    {
-        $id = 13;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
-    }
-    public function bd2()
-    {
-        $id = 12;
-        return view('view-page', [
-            'pageObj' => Page::findOrFail($id)
-        ]);
-    }
+        //return view('trang_tinh/pan', []);
 
+
+
+         //Bước 1
+ $trang_tinh_view = "trang_tinh/pan"; //Thay đổi đường dẫn tới file view
+ return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+ //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+ //return view('trang_tinh/chucnangcard', []);
+    }
+    public function trienkhailapdat()
+    {
+       // return view('trang_tinh/trienkhailapdat', []);
+
+        //Bước 1
+ $trang_tinh_view = "trang_tinh/trienkhailapdat"; //Thay đổi đường dẫn tới file view
+ return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+ //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+ //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baoquan()
+    {
+        //return view('trang_tinh/baoquan', []);
+ //Bước 1
+ $trang_tinh_view = "trang_tinh/baoquan"; //Thay đổi đường dẫn tới file view
+ return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+ //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+ //return view('trang_tinh/chucnangcard', []);
+
+    }
+    public function baoduongcap1()
+    {
+       // return view('trang_tinh/baoduongcap1', []);
+         //Bước 1
+         $trang_tinh_view = "trang_tinh/baoduongcap1"; //Thay đổi đường dẫn tới file view
+         return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+         //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+         //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baoduongcap2()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baoduongcap2"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function giaithichcaulenh()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/giaithichcaulenh"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap1()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap1"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap2()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap2"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap3()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap3"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap4()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap4"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap5()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap5"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap6()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap6"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap7()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap7"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap8()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap8"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap9()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap9"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap10()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap10"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function baitap11()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/baitap11"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
+    public function tracnghiem()
+    {
+
+        $url = url('/') . "/tracnghiem/index.html";
+        return redirect()->away($url);
+
+    }
+    public function thuchanhkhaibao()
+    {
+        //return view('trang_tinh/baoduongcap2', []);
+
+
+        //Bước 1
+        $trang_tinh_view = "trang_tinh/thuchanhkhaibao"; //Thay đổi đường dẫn tới file view
+        return view('trang_tinh/layout_trang_tinh', compact('trang_tinh_view'));
+
+        //Bước 2: Sửa trong view bỏ các thẻ trước <body> và sau </body> để trang là 1 thành phần trong layout_trang_tinh
+        //return view('trang_tinh/chucnangcard', []);
+    }
     public function khaibaoPO(Request $request)
     {
         $current_user_id = Auth::user()->getKey();
@@ -115,24 +322,41 @@ class ClientController extends Controller
             //@todo: Hàm copy dữ liệu từ cấu hình 0 - mặc định sang cấu hình -1
             copyCauhinhData(0, -1, $current_user_id);
         }
+
+        $khaibaopo_is_login = -1;
+        //Bổ sung thêm biến lưu trữ trạng thái đăng nhập
+        if (session('khaibaopo_is_login') == NULL) {
+            session(['khaibaopo_is_login' => -1]);
+        }else{
+            $khaibaopo_is_login = session('khaibaopo_is_login');
+        }
+
         if ($request->has('cauhinh_active')) {
             //var_dump($request->input('cauhinh_active'));
 
             session(['cauhinh_active_real' => $request->input('cauhinh_active')]);
             $input_cauhinh_active = $request->input('cauhinh_active');
-            if($request->input('cauhinh_type') == 'kichhoat') {
+            if ($request->input('cauhinh_type') == 'kichhoat') {
                 //@todo: Hàm copy dữ liệu từ cấu hình cauhinh_real_active sang cấu hình -1
                 //die('kichhoat');
                 copyCauhinhData($input_cauhinh_active, -1, $current_user_id);
             }
-            if($request->input('cauhinh_type') == 'luu') {
+            if ($request->input('cauhinh_type') == 'luu') {
                 //@todo: Hàm copy dữ liệu từ cấu hình -1  sang cấu hình cauhinh_real_active
-                if($input_cauhinh_active == 0) { //Thông báo lỗi
+                if ($input_cauhinh_active == 0) { //Thông báo lỗi
                     return redirect('/admin/khaibaoPO?error=luu_cauhinh_0');
                 }
                 copyCauhinhData(-1, $input_cauhinh_active, $current_user_id);
             }
-            return redirect('/admin/khaibaoPO');
+            return redirect('/admin/khaibaoPO', compact(
+                'arCauhinh',
+                'cauhinh_active',
+                'cauhinh_active_real',
+                'thuebao_1',
+                'thuebao_2',
+                'thuebao_3',
+                'khaibaopo_is_login',
+            ));
         }
 
         $cauhinh_active = session('cauhinh_active');
@@ -140,10 +364,10 @@ class ClientController extends Controller
 
         $thuebaos = $this->getThuebaoByCard($current_user_id, $cauhinh_active, 1); //Lấy ra 3 số đầu tiên của danh bạ
         $thuebao_1 = $thuebao_2 = $thuebao_3 = null;
-        foreach($thuebaos as $item) {
-            if($item->thuebao_id == 1) $thuebao_1 = $item;
-            if($item->thuebao_id == 2) $thuebao_2 = $item;
-            if($item->thuebao_id == 3) $thuebao_3 = $item;
+        foreach ($thuebaos as $item) {
+            if ($item->thuebao_id == 1) $thuebao_1 = $item;
+            if ($item->thuebao_id == 2) $thuebao_2 = $item;
+            if ($item->thuebao_id == 3) $thuebao_3 = $item;
         }
 
 
@@ -156,6 +380,7 @@ class ClientController extends Controller
             'thuebao_1',
             'thuebao_2',
             'thuebao_3',
+            'khaibaopo_is_login',
             //'bangsoquay',
             //'trungkeCOs',
             //'trungkeE1s',
@@ -189,13 +414,13 @@ class ClientController extends Controller
         if ($request->has('cauhinh_active')) {
             session(['cauhinh_active_real' => $request->input('cauhinh_active')]);
             $input_cauhinh_active = $request->input('cauhinh_active');
-            if($request->input('cauhinh_type') == 'kichhoat') {
+            if ($request->input('cauhinh_type') == 'kichhoat') {
                 //@todo: Hàm copy dữ liệu từ cấu hình cauhinh_real_active sang cấu hình -1
                 copyCauhinhData($input_cauhinh_active, -1, $current_user_id);
             }
-            if($request->input('cauhinh_type') == 'luu') {
+            if ($request->input('cauhinh_type') == 'luu') {
                 //@todo: Hàm copy dữ liệu từ cấu hình -1  sang cấu hình cauhinh_real_active
-                if($input_cauhinh_active == 0) { //Thông báo lỗi
+                if ($input_cauhinh_active == 0) { //Thông báo lỗi
                     return redirect('/admin/khaibaoPM?error=luu_cauhinh_0');
                 }
                 copyCauhinhData(-1, $input_cauhinh_active, $current_user_id);
@@ -499,7 +724,7 @@ class ClientController extends Controller
             if ($request->has('thanhphan_dkx')) {
                 $loai_thanhphan = 0;
                 $thanhphan = $request->thanhphan_dkx_giatri;
-            }else if ($request->has('thanhphan_E1')) {
+            } else if ($request->has('thanhphan_E1')) {
                 $loai_thanhphan = 1;
                 $thanhphan = $request->thanhphan_E1_giatri;
             }
@@ -775,7 +1000,8 @@ class ClientController extends Controller
         return $record;
     }
 
-    private function UpdateThanhphanHuong($current_user_id, $cauhinh_active, $thanhphan_huong_id, $thanhphan, $loai_thanhphan) {
+    private function UpdateThanhphanHuong($current_user_id, $cauhinh_active, $thanhphan_huong_id, $thanhphan, $loai_thanhphan)
+    {
         $record = Huong::where([
             ['user_id', $current_user_id],
             ['cauhinh_id', $cauhinh_active],

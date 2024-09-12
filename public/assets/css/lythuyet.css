@@ -1,0 +1,129 @@
+body {
+    background-color: whitesmoke;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-size: 24px;
+    color: blue;
+}
+
+h3 {
+    text-transform: uppercase;
+    text-align: center;
+    /* color: white; */
+}
+
+h4,
+h5 {
+    color: rgb(23, 53, 187);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p {
+    text-indent: 40px;
+    text-align: justify;
+}
+
+table,
+th,
+td {
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-indent: 40px;
+}
+
+td {
+    text-indent: 40px;
+}
+
+img {
+    display: block;
+    margin-left: 200px;
+    margin-right: auto;
+}
+
+
+/* Reset default styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Styling for hover area */
+
+.hover-area {
+    width: 300px;
+    height: 200px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 200px;
+    /* Center text vertically */
+    transition: background-color 0.3s ease;
+    /* Transition effect for smooth color change */
+}
+
+
+/* Change color on hover */
+
+.hover-area:hover {
+    background-color: #3498db;
+    /* New background color */
+    color: #fff;
+    /* Change text color */
+}
+
+.box {
+    grid-template-columns: 1fr 1fr;
+}
+
+
+/* thành 2 cột */
+
+tr:hover {
+    background-color: rgb(222, 216, 216);
+    /* cursor: pointer; */
+}
+a:link{
+    /* color: rgb(220, 133, 20); */
+    text-decoration: none;
+}
+
+a:visited{
+    color: black;
+    text-decoration: underline;
+}
+
+a:hover{
+    color: rgb(252, 0, 34);
+    text-decoration: underline;
+}
+
+a:active{
+    color: white;
+    text-decoration: none;
+}
+.primary-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.primary-button:hover {
+    background-color: #545f6b;
+}
+.primary-button:active {
+    background-color: #004080;
+    box-shadow: 0 3px #666;
+    transform: translateY(2px);
+}

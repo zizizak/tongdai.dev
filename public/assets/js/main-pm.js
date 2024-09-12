@@ -749,9 +749,6 @@ jQuery(document).ready(function($){
 
     //Default load
 
-    bindDanhba();
-
-
 
 
 

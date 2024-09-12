@@ -452,7 +452,7 @@
                                     <span class="nav__text">Thuê bao IP</span>
                                 </a>
                                 <a href="/admin/dialplan" class="nav__link active">
-                                    <span class="nav__text">Dial Pland</span>
+                                    <span class="nav__text">Dial Plan</span>
                                 </a>
                                 <a href="#" class="nav__link active">
                                     <span class="nav__text">Trung kế IP/E1</span>
